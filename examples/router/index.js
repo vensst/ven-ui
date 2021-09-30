@@ -66,7 +66,9 @@ const router = new VueRouter({
   scrollBehavior(to, from, savedPosition) {
     try {
       let el = document.getElementsByClassName("page-container")[0];
-      el.scrollTop = 0;
+      if (el) {
+        el.scrollTop = 0;
+      }
     } catch (e) {
       console.warn(e);
     }

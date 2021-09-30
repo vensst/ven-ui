@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <ven-button @click="jumpPage('/component')">开始使用</ven-button>
+    <div class="logo">ven-ui</div>
+    <ven-button type="primary" @click="jumpPage('/component')"
+      >开始使用</ven-button
+    >
   </div>
 </template>
 
@@ -20,4 +23,18 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.home {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .logo {
+    color: #409eff;
+    font-size: 80px;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+}
+</style>
