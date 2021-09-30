@@ -75,6 +75,7 @@ export default class Node {
     this.isCurrent = false;
 
     for (let name in options) {
+      // eslint-disable-next-line no-prototype-builtins
       if (options.hasOwnProperty(name)) {
         this[name] = options[name];
       }

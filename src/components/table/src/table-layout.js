@@ -27,6 +27,7 @@ class TableLayout {
     this.gutterWidth = scrollbarWidth();
 
     for (let name in options) {
+      // eslint-disable-next-line no-prototype-builtins
       if (options.hasOwnProperty(name)) {
         this[name] = options[name];
       }
@@ -45,7 +46,7 @@ class TableLayout {
     if (height === null) return false;
     const bodyWrapper = this.table.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
-      const body = bodyWrapper.querySelector(".el-table__body");
+      const body = bodyWrapper.querySelector(".ven-table__body");
       const prevScrollY = this.scrollY;
       const scrollY = body.offsetHeight > this.bodyHeight;
       this.scrollY = scrollY;
@@ -99,7 +100,7 @@ class TableLayout {
 
     // fix issue (https://github.com/ElemeFE/element/pull/16956)
     const headerTrElm = headerWrapper
-      ? headerWrapper.querySelector(".el-table__header tr")
+      ? headerWrapper.querySelector(".ven-table__header tr")
       : null;
     const noneHeader = this.headerDisplayNone(headerTrElm);
 

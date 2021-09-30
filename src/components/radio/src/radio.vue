@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-radio"
+    class="ven-radio"
     :class="[
-      border && radioSize ? 'el-radio--' + radioSize : '',
+      border && radioSize ? 'ven-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
@@ -15,16 +15,16 @@
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span
-      class="el-radio__input"
+      class="ven-radio__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label,
       }"
     >
-      <span class="el-radio__inner"></span>
+      <span class="ven-radio__inner"></span>
       <input
         ref="radio"
-        class="el-radio__original"
+        class="ven-radio__original"
         :value="label"
         type="radio"
         aria-hidden="true"
@@ -37,7 +37,7 @@
         tabindex="-1"
       />
     </span>
-    <span class="el-radio__label" @keydown.stop>
+    <span class="ven-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{ label }}</template>
     </span>
@@ -47,7 +47,7 @@
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElRadio",
+  name: "VenRadio",
 
   mixins: [Emitter],
 
@@ -61,7 +61,7 @@ export default {
     },
   },
 
-  componentName: "ElRadio",
+  componentName: "VenRadio",
 
   props: {
     value: {},
@@ -80,11 +80,12 @@ export default {
   computed: {
     isGroup() {
       let parent = this.$parent;
+      let _that = this;
       while (parent) {
-        if (parent.$options.componentName !== "ElRadioGroup") {
+        if (parent.$options.componentName !== "VenRadioGroup") {
           parent = parent.$parent;
         } else {
-          this._radioGroup = parent;
+          _that._radioGroup = parent;
           return true;
         }
       }
@@ -96,7 +97,7 @@ export default {
       },
       set(val) {
         if (this.isGroup) {
-          this.dispatch("ElRadioGroup", "input", [val]);
+          this.dispatch("VenRadioGroup", "input", [val]);
         } else {
           this.$emit("input", val);
         }
@@ -133,7 +134,7 @@ export default {
       this.$nextTick(() => {
         this.$emit("change", this.model);
         this.isGroup &&
-          this.dispatch("ElRadioGroup", "handleChange", this.model);
+          this.dispatch("VenRadioGroup", "handleChange", this.model);
       });
     },
   },

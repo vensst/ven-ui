@@ -2,22 +2,22 @@
 import Clickoutside from "../../../utils/clickoutside";
 import Emitter from "../../../mixins/emitter";
 import Migrating from "../../../mixins/migrating";
-import ElButton from "../../button";
-import ElButtonGroup from "../../button-group";
+import VenButton from "../../button";
+import VenButtonGroup from "../../button-group";
 import { generateId } from "../../../utils/util";
 
 export default {
-  name: "ElDropdown",
+  name: "VenDropdown",
 
-  componentName: "ElDropdown",
+  componentName: "VenDropdown",
 
   mixins: [Emitter, Migrating],
 
   directives: { Clickoutside },
 
   components: {
-    ElButton,
-    ElButtonGroup,
+    VenButton,
+    VenButtonGroup,
   },
 
   provide() {
@@ -87,11 +87,11 @@ export default {
 
   watch: {
     visible(val) {
-      this.broadcast("ElDropdownMenu", "visible", val);
+      this.broadcast("VenDropdownMenu", "visible", val);
       this.$emit("visible-change", val);
     },
     focusing(val) {
-      const selfDefine = this.$el.querySelector(".el-dropdown-selfdefine");
+      const selfDefine = this.$el.querySelector(".ven-dropdown-selfdefine");
       if (selfDefine) {
         // 自定义
         if (val) {
@@ -217,7 +217,7 @@ export default {
         this.triggerElm.setAttribute(
           "class",
           (this.triggerElm.getAttribute("class") || "") +
-            " el-dropdown-selfdefine"
+            " ven-dropdown-selfdefine"
         ); // 控制
       }
     },
@@ -279,6 +279,7 @@ export default {
     },
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     let { hide, splitButton, type, dropdownSize } = this;
 
@@ -290,27 +291,27 @@ export default {
     let triggerElm = !splitButton ? (
       this.$slots.default
     ) : (
-      <el-button-group>
-        <el-button
+      <ven-button-group>
+        <ven-button
           type={type}
           size={dropdownSize}
           nativeOn-click={handleMainButtonClick}
         >
           {this.$slots.default}
-        </el-button>
-        <el-button
+        </ven-button>
+        <ven-button
           ref="trigger"
           type={type}
           size={dropdownSize}
-          class="el-dropdown__caret-button"
+          class="ven-dropdown__caret-button"
         >
-          <i class="el-dropdown__icon el-icon-arrow-down"></i>
-        </el-button>
-      </el-button-group>
+          <i class="ven-dropdown__icon ven-icon-arrow-down"></i>
+        </ven-button>
+      </ven-button-group>
     );
 
     return (
-      <div class="el-dropdown" v-clickoutside={hide}>
+      <div class="ven-dropdown" v-clickoutside={hide}>
         {triggerElm}
         {this.$slots.dropdown}
       </div>

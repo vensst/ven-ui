@@ -2,64 +2,65 @@
   <transition name="viewer-fade">
     <div
       tabindex="-1"
-      ref="el-image-viewer__wrapper"
-      class="el-image-viewer__wrapper"
+      ref="ven-image-viewer__wrapper"
+      class="ven-image-viewer__wrapper"
       :style="{ 'z-index': viewerZIndex }"
     >
-      <div class="el-image-viewer__mask" @click.self="handleMaskClick"></div>
+      <div class="ven-image-viewer__mask" @click.self="handleMaskClick"></div>
       <!-- CLOSE -->
-      <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
-        <i class="el-icon-close"></i>
+      <span class="ven-image-viewer__btn ven-image-viewer__close" @click="hide">
+        <i class="ven-icon-close"></i>
       </span>
       <!-- ARROW -->
       <template v-if="!isSingle">
         <span
-          class="el-image-viewer__btn el-image-viewer__prev"
+          class="ven-image-viewer__btn ven-image-viewer__prev"
           :class="{ 'is-disabled': !infinite && isFirst }"
           @click="prev"
         >
-          <i class="el-icon-arrow-left" />
+          <i class="ven-icon-arrow-left" />
         </span>
         <span
-          class="el-image-viewer__btn el-image-viewer__next"
+          class="ven-image-viewer__btn ven-image-viewer__next"
           :class="{ 'is-disabled': !infinite && isLast }"
           @click="next"
         >
-          <i class="el-icon-arrow-right" />
+          <i class="ven-icon-arrow-right" />
         </span>
       </template>
       <!-- ACTIONS -->
-      <div class="el-image-viewer__btn el-image-viewer__actions">
-        <div class="el-image-viewer__actions__inner">
-          <i class="el-icon-zoom-out" @click="handleActions('zoomOut')"></i>
-          <i class="el-icon-zoom-in" @click="handleActions('zoomIn')"></i>
-          <i class="el-image-viewer__actions__divider"></i>
+      <div class="ven-image-viewer__btn ven-image-viewer__actions">
+        <div class="ven-image-viewer__actions__inner">
+          <i class="ven-icon-zoom-out" @click="handleActions('zoomOut')"></i>
+          <i class="ven-icon-zoom-in" @click="handleActions('zoomIn')"></i>
+          <i class="ven-image-viewer__actions__divider"></i>
           <i :class="mode.icon" @click="toggleMode"></i>
-          <i class="el-image-viewer__actions__divider"></i>
+          <i class="ven-image-viewer__actions__divider"></i>
           <i
-            class="el-icon-refresh-left"
+            class="ven-icon-refresh-left"
             @click="handleActions('anticlocelise')"
           ></i>
           <i
-            class="el-icon-refresh-right"
+            class="ven-icon-refresh-right"
             @click="handleActions('clocelise')"
           ></i>
         </div>
       </div>
       <!-- CANVAS -->
-      <div class="el-image-viewer__canvas">
-        <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
-          ref="img"
-          class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
-          :style="imgStyle"
-          @load="handleImgLoad"
-          @error="handleImgError"
-          @mousedown="handleMouseDown"
-        />
+      <div class="ven-image-viewer__canvas">
+        <template v-for="(url, i) in urlList">
+          <img
+            v-if="i === index"
+            ref="img"
+            class="ven-image-viewer__img"
+            :key="url"
+            :src="currentImg"
+            :style="imgStyle"
+            @load="handleImgLoad"
+            @error="handleImgError"
+            @mousedown="handleMouseDown"
+          />
+        </template>
       </div>
     </div>
   </transition>
@@ -73,11 +74,11 @@ import { PopupManager } from "../../../utils/popup";
 const Mode = {
   CONTAIN: {
     name: "contain",
-    icon: "el-icon-full-screen",
+    icon: "ven-icon-full-screen",
   },
   ORIGINAL: {
     name: "original",
-    icon: "el-icon-c-scale-to-original",
+    icon: "ven-icon-c-scale-to-original",
   },
 };
 
@@ -171,7 +172,9 @@ export default {
         this.onSwitch(val);
       },
     },
+    // eslint-disable-next-line no-unused-vars
     currentImg(val) {
+      // eslint-disable-next-line no-unused-vars
       this.$nextTick((_) => {
         const $img = this.$refs.img[0];
         if (!$img.complete) {
@@ -239,6 +242,7 @@ export default {
       this._keyDownHandler = null;
       this._mouseWheelHandler = null;
     },
+    // eslint-disable-next-line no-unused-vars
     handleImgLoad(e) {
       this.loading = false;
     },
@@ -257,6 +261,7 @@ export default {
         this.transform.offsetY = offsetY + ev.pageY - startY;
       });
       on(document, "mousemove", this._dragHandler);
+      // eslint-disable-next-line no-unused-vars
       on(document, "mouseup", (ev) => {
         off(document, "mousemove", this._dragHandler);
       });
@@ -334,7 +339,7 @@ export default {
     }
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
-    this.$refs["el-image-viewer__wrapper"].focus();
+    this.$refs["ven-image-viewer__wrapper"].focus();
   },
   destroyed() {
     // if appendToBody is true, remove DOM node after destroy

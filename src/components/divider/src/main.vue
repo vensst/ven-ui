@@ -2,11 +2,15 @@
   <div
     v-bind="data.attrs"
     v-on="listeners"
-    :class="[data.staticClass, 'el-divider', `el-divider--${props.direction}`]"
+    :class="[
+      data.staticClass,
+      'ven-divider',
+      `ven-divider--${props.direction}`,
+    ]"
   >
     <div
       v-if="slots().default && props.direction !== 'vertical'"
-      :class="['el-divider__text', `is-${props.contentPosition}`]"
+      :class="['ven-divider__text', `is-${props.contentPosition}`]"
     >
       <slot />
     </div>
@@ -15,7 +19,7 @@
 
 <script>
 export default {
-  name: "ElDivider",
+  name: "VenDivider",
   props: {
     direction: {
       type: String,

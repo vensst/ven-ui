@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-upload-dragger"
+    class="ven-upload-dragger"
     :class="{
       'is-dragover': dragover,
     }"
@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: "ElUploadDrag",
+  name: "VenUploadDrag",
   props: {
     disabled: Boolean,
   },
@@ -59,7 +59,7 @@ export default {
               if (/\/\*$/.test(acceptedType)) {
                 return baseType === acceptedType.replace(/\/\*$/, "");
               }
-              if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
+              if (/^[^/]+\/[^/]+$/.test(acceptedType)) {
                 return type === acceptedType;
               }
               return false;

@@ -1,14 +1,14 @@
 <template>
-  <header class="el-header" :style="{ height }">
+  <header class="ven-header" :style="{ height }">
     <slot></slot>
   </header>
 </template>
 
 <script>
 export default {
-  name: "ElHeader",
+  name: "VenHeader",
 
-  componentName: "ElHeader",
+  componentName: "VenHeader",
 
   props: {
     height: {

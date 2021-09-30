@@ -1,13 +1,13 @@
 <template>
   <button
-    class="el-button"
+    class="ven-button"
     @click="handleClick"
     :disabled="buttonDisabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
-      type ? 'el-button--' + type : '',
-      buttonSize ? 'el-button--' + buttonSize : '',
+      type ? 'ven-button--' + type : '',
+      buttonSize ? 'ven-button--' + buttonSize : '',
       {
         'is-disabled': buttonDisabled,
         'is-loading': loading,
@@ -17,14 +17,14 @@
       },
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
+    <i class="ven-icon-loading" v-if="loading"></i>
     <i :class="icon" v-if="icon && !loading"></i>
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 <script>
 export default {
-  name: "ElButton",
+  name: "VenButton",
 
   inject: {
     elForm: {

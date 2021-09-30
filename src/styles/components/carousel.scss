@@ -22,19 +22,19 @@
     outline: none;
     padding: 0;
     margin: 0;
-    height: $--carousel-arrow-size;
-    width: $--carousel-arrow-size;
+    height: $--carousven-arrow-size;
+    width: $--carousven-arrow-size;
     cursor: pointer;
     transition: .3s;
     border-radius: 50%;
-    background-color: $--carousel-arrow-background;
+    background-color: $--carousven-arrow-background;
     color: $--color-white;
     position: absolute;
     top: 50%;
     z-index: 10;
     transform: translateY(-50%);
     text-align: center;
-    font-size: $--carousel-arrow-font-size;
+    font-size: $--carousven-arrow-font-size;
 
     @include m(left) {
       left: 16px;
@@ -45,7 +45,7 @@
     }
 
     &:hover {
-      background-color: $--carousel-arrow-hover-background;
+      background-color: $--carousven-arrow-hover-background;
     }
 
     & i {
@@ -73,15 +73,15 @@
     }
 
     @include m(outside) {
-      bottom: #{$--carousel-indicator-height + $--carousel-indicator-padding-vertical * 2};
+      bottom: #{$--carousven-indicator-height + $--carousven-indicator-padding-vertical * 2};
       text-align: center;
       position: static;
       transform: none;
-      .el-carousel__indicator:hover button {
+      .ven-carousel__indicator:hover button {
         opacity: 0.64;
       }
       button {
-        background-color: $--carousel-indicator-out-color;
+        background-color: $--carousven-indicator-out-color;
         opacity: 0.24;
       }
     }
@@ -92,14 +92,14 @@
       transform: none;
       text-align: center;
 
-      .el-carousel__button {
+      .ven-carousel__button {
         height: auto;
         width: auto;
         padding: 2px 18px;
         font-size: 12px;
       }
 
-      .el-carousel__indicator {
+      .ven-carousel__indicator {
         padding: 6px 4px;
       }
     }
@@ -115,14 +115,14 @@
 
     @include m(horizontal) {
       display: inline-block;
-      padding: $--carousel-indicator-padding-vertical $--carousel-indicator-padding-horizontal;
+      padding: $--carousven-indicator-padding-vertical $--carousven-indicator-padding-horizontal;
     }
 
     @include m(vertical) {
-      padding: $--carousel-indicator-padding-horizontal $--carousel-indicator-padding-vertical;
-      .el-carousel__button {
-        width: $--carousel-indicator-height;
-        height: #{$--carousel-indicator-width / 2};
+      padding: $--carousven-indicator-padding-horizontal $--carousven-indicator-padding-vertical;
+      .ven-carousel__button {
+        width: $--carousven-indicator-height;
+        height: #{$--carousven-indicator-width / 2};
       }
     }
 
@@ -136,8 +136,8 @@
   @include e(button) {
     display: block;
     opacity: 0.48;
-    width: $--carousel-indicator-width;
-    height: $--carousel-indicator-height;
+    width: $--carousven-indicator-width;
+    height: $--carousven-indicator-height;
     background-color: $--color-white;
     border: none;
     outline: none;
@@ -148,14 +148,14 @@
   }
 }
 
-.carousel-arrow-left-enter,
-.carousel-arrow-left-leave-active {
+.carousven-arrow-left-enter,
+.carousven-arrow-left-leave-active {
   transform: translateY(-50%) translateX(-10px);
   opacity: 0;
 }
 
-.carousel-arrow-right-enter,
-.carousel-arrow-right-leave-active {
+.carousven-arrow-right-enter,
+.carousven-arrow-right-leave-active {
   transform: translateY(-50%) translateX(10px);
   opacity: 0;
 }

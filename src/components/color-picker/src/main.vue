@@ -1,34 +1,34 @@
 <template>
   <div
     :class="[
-      'el-color-picker',
+      'ven-color-picker',
       colorDisabled ? 'is-disabled' : '',
-      colorSize ? `el-color-picker--${colorSize}` : '',
+      colorSize ? `ven-color-picker--${colorSize}` : '',
     ]"
     v-clickoutside="hide"
   >
-    <div class="el-color-picker__mask" v-if="colorDisabled"></div>
-    <div class="el-color-picker__trigger" @click="handleTrigger">
-      <span class="el-color-picker__color" :class="{ 'is-alpha': showAlpha }">
+    <div class="ven-color-picker__mask" v-if="colorDisabled"></div>
+    <div class="ven-color-picker__trigger" @click="handleTrigger">
+      <span class="ven-color-picker__color" :class="{ 'is-alpha': showAlpha }">
         <span
-          class="el-color-picker__color-inner"
+          class="ven-color-picker__color-inner"
           :style="{
             backgroundColor: displayedColor,
           }"
         ></span>
         <span
-          class="el-color-picker__empty el-icon-close"
+          class="ven-color-picker__empty ven-icon-close"
           v-if="!value && !showPanelColor"
         ></span>
       </span>
       <span
-        class="el-color-picker__icon el-icon-arrow-down"
+        class="ven-color-picker__icon ven-icon-arrow-down"
         v-show="value || showPanelColor"
       ></span>
     </div>
     <picker-dropdown
       ref="dropdown"
-      :class="['el-color-picker__panel', popperClass || '']"
+      :class="['ven-color-picker__panel', popperClass || '']"
       v-model="showPicker"
       @pick="confirmValue"
       @clear="clearValue"
@@ -47,7 +47,7 @@ import Clickoutside from "../../../utils/clickoutside";
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElColorPicker",
+  name: "VenColorPicker",
 
   mixins: [Emitter],
 
@@ -135,14 +135,14 @@ export default {
       const value = this.color.value;
       this.$emit("input", value);
       this.$emit("change", value);
-      this.dispatch("ElFormItem", "el.form.change", value);
+      this.dispatch("VenFormItem", "el.form.change", value);
       this.showPicker = false;
     },
     clearValue() {
       this.$emit("input", null);
       this.$emit("change", null);
       if (this.value !== null) {
-        this.dispatch("ElFormItem", "el.form.change", null);
+        this.dispatch("VenFormItem", "el.form.change", null);
       }
       this.showPanelColor = false;
       this.showPicker = false;
@@ -153,6 +153,7 @@ export default {
       this.resetColor();
     },
     resetColor() {
+      // eslint-disable-next-line no-unused-vars
       this.$nextTick((_) => {
         if (this.value) {
           this.color.fromString(this.value);

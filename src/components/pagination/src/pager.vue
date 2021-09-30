@@ -1,5 +1,5 @@
 <template>
-  <ul @click="onPagerClick" class="el-pager">
+  <ul @click="onPagerClick" class="ven-pager">
     <li
       :class="{ active: currentPage === 1, disabled }"
       v-if="pageCount > 0"
@@ -8,11 +8,11 @@
       1
     </li>
     <li
-      class="el-icon more btn-quickprev"
+      class="ven-icon more btn-quickprev"
       :class="[quickprevIconClass, { disabled }]"
       v-if="showPrevMore"
       @mouseenter="onMouseenter('left')"
-      @mouseleave="quickprevIconClass = 'el-icon-more'"
+      @mouseleave="quickprevIconClass = 'ven-icon-more'"
     ></li>
     <li
       v-for="pager in pagers"
@@ -23,11 +23,11 @@
       {{ pager }}
     </li>
     <li
-      class="el-icon more btn-quicknext"
+      class="ven-icon more btn-quicknext"
       :class="[quicknextIconClass, { disabled }]"
       v-if="showNextMore"
       @mouseenter="onMouseenter('right')"
-      @mouseleave="quicknextIconClass = 'el-icon-more'"
+      @mouseleave="quicknextIconClass = 'ven-icon-more'"
     ></li>
     <li
       :class="{ active: currentPage === pageCount, disabled }"
@@ -41,7 +41,7 @@
 
 <script type="text/babel">
 export default {
-  name: "ElPager",
+  name: "VenPager",
 
   props: {
     currentPage: Number,
@@ -55,11 +55,11 @@ export default {
 
   watch: {
     showPrevMore(val) {
-      if (!val) this.quickprevIconClass = "el-icon-more";
+      if (!val) this.quickprevIconClass = "ven-icon-more";
     },
 
     showNextMore(val) {
-      if (!val) this.quicknextIconClass = "el-icon-more";
+      if (!val) this.quicknextIconClass = "ven-icon-more";
     },
   },
 
@@ -102,9 +102,9 @@ export default {
     onMouseenter(direction) {
       if (this.disabled) return;
       if (direction === "left") {
-        this.quickprevIconClass = "el-icon-d-arrow-left";
+        this.quickprevIconClass = "ven-icon-d-arrow-left";
       } else {
-        this.quicknextIconClass = "el-icon-d-arrow-right";
+        this.quicknextIconClass = "ven-icon-d-arrow-right";
       }
     },
   },
@@ -152,7 +152,9 @@ export default {
         }
       }
 
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.showPrevMore = showPrevMore;
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.showNextMore = showNextMore;
 
       return array;
@@ -164,8 +166,8 @@ export default {
       current: null,
       showPrevMore: false,
       showNextMore: false,
-      quicknextIconClass: "el-icon-more",
-      quickprevIconClass: "el-icon-more",
+      quicknextIconClass: "ven-icon-more",
+      quickprevIconClass: "ven-icon-more",
     };
   },
 };

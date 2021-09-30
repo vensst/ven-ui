@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-checkbox"
+    class="ven-checkbox"
     :class="[
-      border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
+      border && checkboxSize ? 'ven-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
       { 'is-checked': isChecked },
@@ -10,7 +10,7 @@
     :id="id"
   >
     <span
-      class="el-checkbox__input"
+      class="ven-checkbox__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': isChecked,
@@ -21,10 +21,10 @@
       :role="indeterminate ? 'checkbox' : false"
       :aria-checked="indeterminate ? 'mixed' : false"
     >
-      <span class="el-checkbox__inner"></span>
+      <span class="ven-checkbox__inner"></span>
       <input
         v-if="trueLabel || falseLabel"
-        class="el-checkbox__original"
+        class="ven-checkbox__original"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :name="name"
@@ -38,7 +38,7 @@
       />
       <input
         v-else
-        class="el-checkbox__original"
+        class="ven-checkbox__original"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :disabled="isDisabled"
@@ -50,7 +50,7 @@
         @blur="focus = false"
       />
     </span>
-    <span class="el-checkbox__label" v-if="$slots.default || label">
+    <span class="ven-checkbox__label" v-if="$slots.default || label">
       <slot></slot>
       <template v-if="!$slots.default">{{ label }}</template>
     </span>
@@ -60,7 +60,7 @@
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElCheckbox",
+  name: "VenCheckbox",
 
   mixins: [Emitter],
 
@@ -73,7 +73,7 @@ export default {
     },
   },
 
-  componentName: "ElCheckbox",
+  componentName: "VenCheckbox",
 
   data() {
     return {
@@ -105,7 +105,7 @@ export default {
             (this.isLimitExceeded = true);
 
           this.isLimitExceeded === false &&
-            this.dispatch("ElCheckboxGroup", "input", [val]);
+            this.dispatch("VenCheckboxGroup", "input", [val]);
         } else {
           this.$emit("input", val);
           this.selfModel = val;
@@ -113,6 +113,7 @@ export default {
       },
     },
 
+    // eslint-disable-next-line vue/return-in-computed-property
     isChecked() {
       if ({}.toString.call(this.model) === "[object Boolean]") {
         return this.model;
@@ -126,9 +127,10 @@ export default {
     isGroup() {
       let parent = this.$parent;
       while (parent) {
-        if (parent.$options.componentName !== "ElCheckboxGroup") {
+        if (parent.$options.componentName !== "VenCheckboxGroup") {
           parent = parent.$parent;
         } else {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this._checkboxGroup = parent;
           return true;
         }
@@ -206,7 +208,7 @@ export default {
       this.$emit("change", value, ev);
       this.$nextTick(() => {
         if (this.isGroup) {
-          this.dispatch("ElCheckboxGroup", "change", [
+          this.dispatch("VenCheckboxGroup", "change", [
             this._checkboxGroup.value,
           ]);
         }
@@ -226,7 +228,7 @@ export default {
 
   watch: {
     value(value) {
-      this.dispatch("ElFormItem", "el.form.change", value);
+      this.dispatch("VenFormItem", "el.form.change", value);
     },
   },
 };

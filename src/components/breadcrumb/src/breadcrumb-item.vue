@@ -1,7 +1,7 @@
 <template>
-  <span class="el-breadcrumb__item">
+  <span class="ven-breadcrumb__item">
     <span
-      :class="['el-breadcrumb__inner', to ? 'is-link' : '']"
+      :class="['ven-breadcrumb__inner', to ? 'is-link' : '']"
       ref="link"
       role="link"
     >
@@ -9,17 +9,17 @@
     </span>
     <i
       v-if="separatorClass"
-      class="el-breadcrumb__separator"
+      class="ven-breadcrumb__separator"
       :class="separatorClass"
     ></i>
-    <span v-else class="el-breadcrumb__separator" role="presentation">{{
+    <span v-else class="ven-breadcrumb__separator" role="presentation">{{
       separator
     }}</span>
   </span>
 </template>
 <script>
 export default {
-  name: "ElBreadcrumbItem",
+  name: "VenBreadcrumbItem",
   props: {
     to: {},
     replace: Boolean,
@@ -38,6 +38,7 @@ export default {
     this.separatorClass = this.elBreadcrumb.separatorClass;
     const link = this.$refs.link;
     link.setAttribute("role", "link");
+    // eslint-disable-next-line no-unused-vars
     link.addEventListener("click", (_) => {
       const { to, $router } = this;
       if (!to || !$router) return;

@@ -170,6 +170,7 @@ export default Vue.extend({
         const selectedMap = getKeysMap(selection, rowKey);
         const dataMap = getKeysMap(data, rowKey);
         for (let key in selectedMap) {
+          // eslint-disable-next-line no-prototype-builtins
           if (selectedMap.hasOwnProperty(key) && !dataMap[key]) {
             deleted.push(selectedMap[key].row);
           }

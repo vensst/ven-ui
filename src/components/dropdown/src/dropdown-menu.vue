@@ -1,8 +1,8 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="doDestroy">
+  <transition name="ven-zoom-in-top" @after-leave="doDestroy">
     <ul
-      class="el-dropdown-menu el-popper"
-      :class="[size && `el-dropdown-menu--${size}`]"
+      class="ven-dropdown-menu ven-popper"
+      :class="[size && `ven-dropdown-menu--${size}`]"
       v-show="showPopper"
     >
       <slot></slot>
@@ -13,9 +13,9 @@
 import Popper from "../../../utils/vue-popper";
 
 export default {
-  name: "ElDropdownMenu",
+  name: "VenDropdownMenu",
 
-  componentName: "ElDropdownMenu",
+  componentName: "VenDropdownMenu",
 
   mixins: [Popper],
 

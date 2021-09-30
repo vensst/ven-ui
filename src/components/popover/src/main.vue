@@ -6,8 +6,8 @@
       @after-leave="handleAfterLeave"
     >
       <div
-        class="el-popover el-popper"
-        :class="[popperClass, content && 'el-popover--plain']"
+        class="ven-popover ven-popper"
+        :class="[popperClass, content && 'ven-popover--plain']"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"
@@ -15,11 +15,11 @@
         :id="tooltipId"
         :aria-hidden="disabled || !showPopper ? 'true' : 'false'"
       >
-        <div class="el-popover__title" v-if="title" v-text="title"></div>
+        <div class="ven-popover__title" v-if="title" v-text="title"></div>
         <slot>{{ content }}</slot>
       </div>
     </transition>
-    <span class="el-popover__reference-wrapper" ref="wrapper">
+    <span class="ven-popover__reference-wrapper" ref="wrapper">
       <slot name="reference"></slot>
     </span>
   </span>
@@ -31,7 +31,7 @@ import { addClass, removeClass } from "../../../utils/dom";
 import { generateId } from "../../../utils/util";
 
 export default {
-  name: "ElPopover",
+  name: "VenPopover",
 
   mixins: [Popper],
 
@@ -75,7 +75,7 @@ export default {
 
   computed: {
     tooltipId() {
-      return `el-popover-${generateId()}`;
+      return `ven-popover-${generateId()}`;
     },
   },
   watch: {
@@ -97,7 +97,7 @@ export default {
     }
     // 可访问性
     if (reference) {
-      addClass(reference, "el-popover__reference");
+      addClass(reference, "ven-popover__reference");
       reference.setAttribute("aria-describedby", this.tooltipId);
       reference.setAttribute("tabindex", this.tabindex); // tab序列
       popper.setAttribute("tabindex", 0);

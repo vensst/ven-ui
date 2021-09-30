@@ -1,9 +1,9 @@
 <template>
   <li
-    class="el-dropdown-menu__item"
+    class="ven-dropdown-menu__item"
     :class="{
       'is-disabled': disabled,
-      'el-dropdown-menu__item--divided': divided,
+      'ven-dropdown-menu__item--divided': divided,
     }"
     @click="handleClick"
     :aria-disabled="disabled"
@@ -17,7 +17,7 @@
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElDropdownItem",
+  name: "VenDropdownItem",
 
   mixins: [Emitter],
 
@@ -29,8 +29,9 @@ export default {
   },
 
   methods: {
+    // eslint-disable-next-line no-unused-vars
     handleClick(e) {
-      this.dispatch("ElDropdown", "menu-item-click", [this.command, this]);
+      this.dispatch("VenDropdown", "menu-item-click", [this.command, this]);
     },
   },
 };

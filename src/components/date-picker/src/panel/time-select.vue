@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="el-zoom-in-top"
+    name="ven-zoom-in-top"
     @before-enter="handleMenuEnter"
     @after-leave="$emit('dodestroy')"
   >
@@ -9,9 +9,9 @@
       v-show="visible"
       :style="{ width: width + 'px' }"
       :class="popperClass"
-      class="el-picker-panel time-select el-popper"
+      class="ven-picker-panel time-select ven-popper"
     >
-      <el-scrollbar noresize wrap-class="el-picker-panel__content">
+      <ven-scrollbar noresize wrap-class="ven-picker-panel__content">
         <div
           class="time-select-item"
           v-for="item in items"
@@ -26,13 +26,13 @@
         >
           {{ item.value }}
         </div>
-      </el-scrollbar>
+      </ven-scrollbar>
     </div>
   </transition>
 </template>
 
-<script type="text/babel">
-import ElScrollbar from "../../../scrollbar";
+<script>
+import VenScrollbar from "../../../scrollbar";
 import scrollIntoView from "../../../../utils/scroll-into-view";
 
 const parseTime = function (time) {
@@ -91,7 +91,7 @@ const nextTime = function (time, step) {
 };
 
 export default {
-  components: { ElScrollbar },
+  components: { VenScrollbar },
 
   watch: {
     value(val) {
@@ -112,7 +112,9 @@ export default {
     },
 
     scrollToOption(selector = ".selected") {
-      const menu = this.$refs.popper.querySelector(".el-picker-panel__content");
+      const menu = this.$refs.popper.querySelector(
+        ".ven-picker-panel__content"
+      );
       scrollIntoView(menu, menu.querySelector(selector));
     },
 

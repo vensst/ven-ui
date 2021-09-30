@@ -213,6 +213,7 @@ export default {
     this.update();
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     const {
       type,
@@ -232,16 +233,16 @@ export default {
     const scrollBtn = scrollable
       ? [
           <span
-            class={["el-tabs__nav-prev", scrollable.prev ? "" : "is-disabled"]}
+            class={["ven-tabs__nav-prev", scrollable.prev ? "" : "is-disabled"]}
             on-click={scrollPrev}
           >
-            <i class="el-icon-arrow-left"></i>
+            <i class="ven-icon-arrow-left"></i>
           </span>,
           <span
-            class={["el-tabs__nav-next", scrollable.next ? "" : "is-disabled"]}
+            class={["ven-tabs__nav-next", scrollable.next ? "" : "is-disabled"]}
             on-click={scrollNext}
           >
-            <i class="el-icon-arrow-right"></i>
+            <i class="ven-icon-arrow-right"></i>
           </span>,
         ]
       : null;
@@ -254,7 +255,7 @@ export default {
 
       const btnClose = closable ? (
         <span
-          class="el-icon-close"
+          class="ven-icon-close"
           on-click={(ev) => {
             onTabRemove(pane, ev);
           }}
@@ -266,7 +267,7 @@ export default {
       return (
         <div
           class={{
-            "el-tabs__item": true,
+            "ven-tabs__item": true,
             [`is-${this.rootTabs.tabPosition}`]: true,
             "is-active": pane.active,
             "is-disabled": pane.disabled,
@@ -305,16 +306,16 @@ export default {
     return (
       <div
         class={[
-          "el-tabs__nav-wrap",
+          "ven-tabs__nav-wrap",
           scrollable ? "is-scrollable" : "",
           `is-${this.rootTabs.tabPosition}`,
         ]}
       >
         {scrollBtn}
-        <div class={["el-tabs__nav-scroll"]} ref="navScroll">
+        <div class={["ven-tabs__nav-scroll"]} ref="navScroll">
           <div
             class={[
-              "el-tabs__nav",
+              "ven-tabs__nav",
               `is-${this.rootTabs.tabPosition}`,
               stretch &&
               ["top", "bottom"].indexOf(this.rootTabs.tabPosition) !== -1

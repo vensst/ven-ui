@@ -1,8 +1,8 @@
-import ElTag from "./src/tag";
+import VenTag from "./src/tag";
 
 /* istanbul ignore next */
-ElTag.install = function (Vue) {
-  Vue.component(ElTag.name, ElTag);
+VenTag.install = function (Vue) {
+  Vue.component(VenTag.name, VenTag);
 };
 
-export default ElTag;
+export default VenTag;

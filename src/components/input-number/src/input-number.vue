@@ -2,34 +2,34 @@
   <div
     @dragstart.prevent
     :class="[
-      'el-input-number',
-      inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
+      'ven-input-number',
+      inputNumberSize ? 'ven-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight },
     ]"
   >
     <span
-      class="el-input-number__decrease"
+      class="ven-input-number__decrease"
       role="button"
       v-if="controls"
       v-repeat-click="decrease"
       :class="{ 'is-disabled': minDisabled }"
       @keydown.enter="decrease"
     >
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
+      <i :class="`ven-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
     </span>
     <span
-      class="el-input-number__increase"
+      class="ven-input-number__increase"
       role="button"
       v-if="controls"
       v-repeat-click="increase"
       :class="{ 'is-disabled': maxDisabled }"
       @keydown.enter="increase"
     >
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
+      <i :class="`ven-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
     </span>
-    <el-input
+    <ven-input
       ref="input"
       :value="displayValue"
       :placeholder="placeholder"
@@ -46,16 +46,16 @@
       @input="handleInput"
       @change="handleInputChange"
     >
-    </el-input>
+    </ven-input>
   </div>
 </template>
 <script>
-import ElInput from "../../input";
+import VenInput from "../../input";
 import Focus from "../../../mixins/focus";
 import RepeatClick from "../../../directives/repeat-click";
 
 export default {
-  name: "ElInputNumber",
+  name: "VenInputNumber",
   mixins: [Focus("input")],
   inject: {
     elForm: {
@@ -69,7 +69,7 @@ export default {
     repeatClick: RepeatClick,
   },
   components: {
-    ElInput,
+    VenInput,
   },
   props: {
     step: {

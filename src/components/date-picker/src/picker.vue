@@ -1,7 +1,7 @@
 <template>
-  <el-input
-    class="el-date-editor"
-    :class="'el-date-editor--' + type"
+  <ven-input
+    class="ven-date-editor"
+    :class="'ven-date-editor--' + type"
     :readonly="!editable || readonly || type === 'dates' || type === 'week'"
     :disabled="pickerDisabled"
     :size="pickerSize"
@@ -22,25 +22,25 @@
   >
     <i
       slot="prefix"
-      class="el-input__icon"
+      class="ven-input__icon"
       :class="triggerClass"
       @click="handleFocus"
     >
     </i>
     <i
       slot="suffix"
-      class="el-input__icon"
+      class="ven-input__icon"
       @click="handleClickIcon"
       :class="[showClose ? '' + clearIcon : '']"
       v-if="haveTrigger"
     >
     </i>
-  </el-input>
+  </ven-input>
   <div
-    class="el-date-editor el-range-editor el-input__inner"
+    class="ven-date-editor ven-range-editor ven-input__inner"
     :class="[
-      'el-date-editor--' + type,
-      pickerSize ? `el-range-editor--${pickerSize}` : '',
+      'ven-date-editor--' + type,
+      pickerSize ? `ven-range-editor--${pickerSize}` : '',
       pickerDisabled ? 'is-disabled' : '',
       pickerVisible ? 'is-active' : '',
     ]"
@@ -52,7 +52,7 @@
     v-clickoutside="handleClose"
     v-else
   >
-    <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
+    <i :class="['ven-input__icon', 'ven-range__icon', triggerClass]"></i>
     <input
       autocomplete="off"
       :placeholder="startPlaceholder"
@@ -64,10 +64,10 @@
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
-      class="el-range-input"
+      class="ven-range-input"
     />
     <slot name="range-separator">
-      <span class="el-range-separator">{{ rangeSeparator }}</span>
+      <span class="ven-range-separator">{{ rangeSeparator }}</span>
     </slot>
     <input
       autocomplete="off"
@@ -80,13 +80,13 @@
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
-      class="el-range-input"
+      class="ven-range-input"
     />
     <i
       @click="handleClickIcon"
       v-if="haveTrigger"
       :class="[showClose ? '' + clearIcon : '']"
-      class="el-input__icon el-range__close-icon"
+      class="ven-input__icon ven-range__close-icon"
     >
     </i>
   </div>
@@ -103,7 +103,7 @@ import {
 } from "../../../utils/date-util";
 import Popper from "../../../utils/vue-popper";
 import Emitter from "../../../mixins/emitter";
-import ElInput from "../../input";
+import VenInput from "../../input";
 import merge from "../../../utils/merge";
 
 const NewPopper = {
@@ -373,7 +373,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: "el-icon-circle-close",
+      default: "ven-icon-circle-close",
     },
     name: {
       default: "",
@@ -411,7 +411,7 @@ export default {
     },
   },
 
-  components: { ElInput },
+  components: { VenInput },
 
   directives: { Clickoutside },
 
@@ -438,7 +438,7 @@ export default {
         this.emitChange(this.value);
         this.userInput = null;
         if (this.validateEvent) {
-          this.dispatch("ElFormItem", "el.form.blur");
+          this.dispatch("VenFormItem", "el.form.blur");
         }
         this.$emit("blur", this);
         this.blur();
@@ -464,7 +464,7 @@ export default {
         !this.pickerVisible &&
         this.validateEvent
       ) {
-        this.dispatch("ElFormItem", "el.form.change", val);
+        this.dispatch("VenFormItem", "el.form.change", val);
       }
     },
   },
@@ -505,7 +505,7 @@ export default {
     triggerClass() {
       return (
         this.prefixIcon ||
-        (this.type.indexOf("time") !== -1 ? "el-icon-time" : "el-icon-date")
+        (this.type.indexOf("time") !== -1 ? "ven-icon-time" : "ven-icon-date")
       );
     },
 
@@ -731,6 +731,7 @@ export default {
       }
     },
 
+    // eslint-disable-next-line no-unused-vars
     handleStartChange(event) {
       const value = this.parseString(this.userInput && this.userInput[0]);
       if (value) {
@@ -744,6 +745,7 @@ export default {
       }
     },
 
+    // eslint-disable-next-line no-unused-vars
     handleEndChange(event) {
       const value = this.parseString(this.userInput && this.userInput[1]);
       if (value) {
@@ -926,6 +928,7 @@ export default {
 
         for (const option in options) {
           if (
+            // eslint-disable-next-line no-prototype-builtins
             options.hasOwnProperty(option) &&
             // 忽略 time-picker 的该配置项
             option !== "selectableRange"
@@ -985,7 +988,7 @@ export default {
         this.$emit("change", val);
         this.valueOnOpen = val;
         if (this.validateEvent) {
-          this.dispatch("ElFormItem", "el.form.change", val);
+          this.dispatch("VenFormItem", "el.form.change", val);
         }
       }
     },

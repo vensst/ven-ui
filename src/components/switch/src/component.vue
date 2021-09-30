@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-switch"
+    class="ven-switch"
     :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
     role="switch"
     :aria-checked="checked"
@@ -8,7 +8,7 @@
     @click.prevent="switchValue"
   >
     <input
-      class="el-switch__input"
+      class="ven-switch__input"
       type="checkbox"
       @change="handleChange"
       ref="input"
@@ -21,8 +21,8 @@
     />
     <span
       :class="[
-        'el-switch__label',
-        'el-switch__label--left',
+        'ven-switch__label',
+        'ven-switch__label--left',
         !checked ? 'is-active' : '',
       ]"
       v-if="inactiveIconClass || inactiveText"
@@ -33,15 +33,15 @@
       }}</span>
     </span>
     <span
-      class="el-switch__core"
+      class="ven-switch__core"
       ref="core"
       :style="{ width: coreWidth + 'px' }"
     >
     </span>
     <span
       :class="[
-        'el-switch__label',
-        'el-switch__label--right',
+        'ven-switch__label',
+        'ven-switch__label--right',
         checked ? 'is-active' : '',
       ]"
       v-if="activeIconClass || activeText"
@@ -59,7 +59,7 @@ import Focus from "../../../mixins/focus";
 import Migrating from "../../../mixins/migrating";
 
 export default {
-  name: "ElSwitch",
+  name: "VenSwitch",
   mixins: [Focus("input"), Migrating, emitter],
   inject: {
     elForm: {
@@ -140,11 +140,12 @@ export default {
         this.setBackgroundColor();
       }
       if (this.validateEvent) {
-        this.dispatch("ElFormItem", "el.form.change", [this.value]);
+        this.dispatch("VenFormItem", "el.form.change", [this.value]);
       }
     },
   },
   methods: {
+    // eslint-disable-next-line no-unused-vars
     handleChange(event) {
       const val = this.checked ? this.inactiveValue : this.activeValue;
       this.$emit("input", val);

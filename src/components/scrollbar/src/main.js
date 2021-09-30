@@ -10,7 +10,7 @@ import Bar from "./bar";
 
 /* istanbul ignore next */
 export default {
-  name: "ElScrollbar",
+  name: "VenScrollbar",
 
   components: { Bar },
 
@@ -62,7 +62,7 @@ export default {
     const view = h(
       this.tag,
       {
-        class: ["el-scrollbar__view", this.viewClass],
+        class: ["ven-scrollbar__view", this.viewClass],
         style: this.viewStyle,
         ref: "resize",
       },
@@ -75,8 +75,8 @@ export default {
         onScroll={this.handleScroll}
         class={[
           this.wrapClass,
-          "el-scrollbar__wrap",
-          gutter ? "" : "el-scrollbar__wrap--hidden-default",
+          "ven-scrollbar__wrap",
+          gutter ? "" : "ven-scrollbar__wrap--hidden-default",
         ]}
       >
         {[view]}
@@ -94,14 +94,14 @@ export default {
       nodes = [
         <div
           ref="wrap"
-          class={[this.wrapClass, "el-scrollbar__wrap"]}
+          class={[this.wrapClass, "ven-scrollbar__wrap"]}
           style={style}
         >
           {[view]}
         </div>,
       ];
     }
-    return h("div", { class: "el-scrollbar" }, nodes);
+    return h("div", { class: "ven-scrollbar" }, nodes);
   },
 
   methods: {

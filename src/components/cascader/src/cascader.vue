@@ -2,8 +2,8 @@
   <div
     ref="reference"
     :class="[
-      'el-cascader',
-      realSize && `el-cascader--${realSize}`,
+      'ven-cascader',
+      realSize && `ven-cascader--${realSize}`,
       { 'is-disabled': isDisabled },
     ]"
     v-clickoutside="() => toggleDropDownVisible(false)"
@@ -12,9 +12,9 @@
     @click="() => toggleDropDownVisible(readonly ? undefined : true)"
     @keydown="handleKeyDown"
   >
-    <el-input
+    <ven-input
       ref="input"
-      v-model="multiple ? presentText : inputValue"
+      v-model="multipleVal"
       :size="realSize"
       :placeholder="placeholder"
       :readonly="readonly"
@@ -29,24 +29,24 @@
         <i
           v-if="clearBtnVisible"
           key="clear"
-          class="el-input__icon el-icon-circle-close"
+          class="ven-input__icon ven-icon-circle-close"
           @click.stop="handleClear"
         ></i>
         <i
           v-else
           key="arrow-down"
           :class="[
-            'el-input__icon',
-            'el-icon-arrow-down',
+            'ven-input__icon',
+            'ven-icon-arrow-down',
             dropDownVisible && 'is-reverse',
           ]"
           @click.stop="toggleDropDownVisible()"
         ></i>
       </template>
-    </el-input>
+    </ven-input>
 
-    <div v-if="multiple" class="el-cascader__tags">
-      <el-tag
+    <div v-if="multiple" class="ven-cascader__tags">
+      <ven-tag
         v-for="tag in presentTags"
         :key="tag.key"
         type="info"
@@ -57,12 +57,12 @@
         @close="deleteTag(tag)"
       >
         <span>{{ tag.text }}</span>
-      </el-tag>
+      </ven-tag>
       <input
         v-if="filterable && !isDisabled"
         v-model.trim="inputValue"
         type="text"
-        class="el-cascader__search-input"
+        class="ven-cascader__search-input"
         :placeholder="presentTags.length ? '' : placeholder"
         @input="(e) => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
@@ -70,13 +70,13 @@
       />
     </div>
 
-    <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
+    <transition name="ven-zoom-in-top" @after-leave="handleDropdownLeave">
       <div
         v-show="dropDownVisible"
         ref="popper"
-        :class="['el-popper', 'el-cascader__dropdown', popperClass]"
+        :class="['ven-popper', 'ven-cascader__dropdown', popperClass]"
       >
-        <el-cascader-panel
+        <ven-cascader-panel
           ref="panel"
           v-show="!filtering"
           v-model="checkedValue"
@@ -86,14 +86,14 @@
           :render-label="$scopedSlots.default"
           @expand-change="handleExpandChange"
           @close="toggleDropDownVisible(false)"
-        ></el-cascader-panel>
-        <el-scrollbar
+        ></ven-cascader-panel>
+        <ven-scrollbar
           ref="suggestionPanel"
           v-if="filterable"
           v-show="filtering"
           tag="ul"
-          class="el-cascader__suggestion-panel"
-          view-class="el-cascader__suggestion-list"
+          class="ven-cascader__suggestion-panel"
+          view-class="ven-cascader__suggestion-list"
           @keydown.native="handleSuggestionKeyDown"
         >
           <template v-if="suggestions.length">
@@ -101,22 +101,22 @@
               v-for="(item, index) in suggestions"
               :key="item.uid"
               :class="[
-                'el-cascader__suggestion-item',
+                'ven-cascader__suggestion-item',
                 item.checked && 'is-checked',
               ]"
               :tabindex="-1"
               @click="handleSuggestionClick(index)"
             >
               <span>{{ item.text }}</span>
-              <i v-if="item.checked" class="el-icon-check"></i>
+              <i v-if="item.checked" class="ven-icon-check"></i>
             </li>
           </template>
           <slot v-else name="empty">
-            <li class="el-cascader__empty-text">
+            <li class="ven-cascader__empty-text">
               {{ t("el.cascader.noMatch") }}
             </li>
           </slot>
-        </el-scrollbar>
+        </ven-scrollbar>
       </div>
     </transition>
   </div>
@@ -128,10 +128,10 @@ import Clickoutside from "../../../utils/clickoutside";
 import Emitter from "../../../mixins/emitter";
 import Locale from "../../../mixins/locale";
 import Migrating from "../../../mixins/migrating";
-import ElInput from "../../input";
-import ElTag from "../../tag";
-import ElScrollbar from "../../scrollbar";
-import ElCascaderPanel from "../../cascader-panel";
+import VenInput from "../../input";
+import VenTag from "../../tag";
+import VenScrollbar from "../../scrollbar";
+import VenCascaderPanel from "../../cascader-panel";
 import AriaUtils from "../../../utils/aria-utils";
 import { t } from "../../../locale";
 import { isEqual, isEmpty, kebabCase } from "../../../utils/util";
@@ -187,7 +187,7 @@ const InputSizeMap = {
 };
 
 export default {
-  name: "ElCascader",
+  name: "VenCascader",
 
   directives: { Clickoutside },
 
@@ -203,10 +203,10 @@ export default {
   },
 
   components: {
-    ElInput,
-    ElTag,
-    ElScrollbar,
-    ElCascaderPanel,
+    VenInput,
+    VenTag,
+    VenScrollbar,
+    VenCascaderPanel,
   },
 
   props: {
@@ -312,6 +312,14 @@ export default {
     panel() {
       return this.$refs.panel;
     },
+    multipleVal: {
+      get() {
+        return this.multiple ? this.presentText : this.inputValue;
+      },
+      set(val) {
+        this.multiple ? (this.presentText = val) : (this.inputValue = val);
+      },
+    },
   },
 
   watch: {
@@ -337,7 +345,7 @@ export default {
 
         this.$emit("input", val);
         this.$emit("change", val);
-        this.dispatch("ElFormItem", "el.form.change", [val]);
+        this.dispatch("VenFormItem", "el.form.change", [val]);
       }
     },
     options: {
@@ -354,6 +362,7 @@ export default {
         this.$nextTick(this.updateStyle);
       }
     },
+    // eslint-disable-next-line no-unused-vars
     filtering(val) {
       this.$nextTick(this.updatePopper);
     },
@@ -483,12 +492,12 @@ export default {
 
         if (filtering && suggestionPanel) {
           firstNode = suggestionPanel.$el.querySelector(
-            ".el-cascader__suggestion-item"
+            ".ven-cascader__suggestion-item"
           );
         } else {
-          const firstMenu = popper.querySelector(".el-cascader-menu");
+          const firstMenu = popper.querySelector(".ven-cascader-menu");
           firstNode = firstMenu.querySelector(
-            '.el-cascader-node[tabindex="-1"]'
+            '.ven-cascader-node[tabindex="-1"]'
           );
         }
 
@@ -591,10 +600,12 @@ export default {
           target.click();
           break;
         case KeyCode.up:
+          // eslint-disable-next-line no-case-declarations
           const prev = target.previousElementSibling;
           prev && prev.focus();
           break;
         case KeyCode.down:
+          // eslint-disable-next-line no-case-declarations
           const next = target.nextElementSibling;
           next && next.focus();
           break;
@@ -645,16 +656,16 @@ export default {
       if (this.$isServer || !$el) return;
 
       const { suggestionPanel } = this.$refs;
-      const inputInner = $el.querySelector(".el-input__inner");
+      const inputInner = $el.querySelector(".ven-input__inner");
 
       if (!inputInner) return;
 
-      const tags = $el.querySelector(".el-cascader__tags");
+      const tags = $el.querySelector(".ven-cascader__tags");
       let suggestionPanelEl = null;
 
       if (suggestionPanel && (suggestionPanelEl = suggestionPanel.$el)) {
         const suggestionList = suggestionPanelEl.querySelector(
-          ".el-cascader__suggestion-list"
+          ".ven-cascader__suggestion-list"
         );
         suggestionList.style.minWidth = inputInner.offsetWidth + "px";
       }

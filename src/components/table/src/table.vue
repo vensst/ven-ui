@@ -1,22 +1,22 @@
 <template>
   <div
-    class="el-table"
+    class="ven-table"
     :class="[
       {
-        'el-table--fit': fit,
-        'el-table--striped': stripe,
-        'el-table--border': border || isGroup,
-        'el-table--hidden': isHidden,
-        'el-table--group': isGroup,
-        'el-table--fluid-height': maxHeight,
-        'el-table--scrollable-x': layout.scrollX,
-        'el-table--scrollable-y': layout.scrollY,
-        'el-table--enable-row-hover': !store.states.isComplex,
-        'el-table--enable-row-transition':
+        'ven-table--fit': fit,
+        'ven-table--striped': stripe,
+        'ven-table--border': border || isGroup,
+        'ven-table--hidden': isHidden,
+        'ven-table--group': isGroup,
+        'ven-table--fluid-height': maxHeight,
+        'ven-table--scrollable-x': layout.scrollX,
+        'ven-table--scrollable-y': layout.scrollY,
+        'ven-table--enable-row-hover': !store.states.isComplex,
+        'ven-table--enable-row-transition':
           (store.states.data || []).length !== 0 &&
           (store.states.data || []).length < 100,
       },
-      tableSize ? `el-table--${tableSize}` : '',
+      tableSize ? `ven-table--${tableSize}` : '',
     ]"
     @mouseleave="handleMouseLeave($event)"
   >
@@ -24,7 +24,7 @@
     <div
       v-if="showHeader"
       v-mousewheel="handleHeaderFooterMousewheel"
-      class="el-table__header-wrapper"
+      class="ven-table__header-wrapper"
       ref="headerWrapper"
     >
       <table-header
@@ -39,7 +39,7 @@
       </table-header>
     </div>
     <div
-      class="el-table__body-wrapper"
+      class="ven-table__body-wrapper"
       ref="bodyWrapper"
       :class="[
         layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none',
@@ -60,17 +60,17 @@
       </table-body>
       <div
         v-if="!data || data.length === 0"
-        class="el-table__empty-block"
+        class="ven-table__empty-block"
         ref="emptyBlock"
         :style="emptyBlockStyle"
       >
-        <span class="el-table__empty-text">
+        <span class="ven-table__empty-text">
           <slot name="empty">{{ emptyText || t("el.table.emptyText") }}</slot>
         </span>
       </div>
       <div
         v-if="$slots.append"
-        class="el-table__append-wrapper"
+        class="ven-table__append-wrapper"
         ref="appendWrapper"
       >
         <slot name="append"></slot>
@@ -80,7 +80,7 @@
       v-if="showSummary"
       v-show="data && data.length > 0"
       v-mousewheel="handleHeaderFooterMousewheel"
-      class="el-table__footer-wrapper"
+      class="ven-table__footer-wrapper"
       ref="footerWrapper"
     >
       <table-footer
@@ -98,7 +98,7 @@
     <div
       v-if="fixedColumns.length > 0"
       v-mousewheel="handleFixedMousewheel"
-      class="el-table__fixed"
+      class="ven-table__fixed"
       ref="fixedWrapper"
       :style="[
         {
@@ -109,7 +109,7 @@
     >
       <div
         v-if="showHeader"
-        class="el-table__fixed-header-wrapper"
+        class="ven-table__fixed-header-wrapper"
         ref="fixedHeaderWrapper"
       >
         <table-header
@@ -123,7 +123,7 @@
         ></table-header>
       </div>
       <div
-        class="el-table__fixed-body-wrapper"
+        class="ven-table__fixed-body-wrapper"
         ref="fixedBodyWrapper"
         :style="[
           {
@@ -146,14 +146,14 @@
         </table-body>
         <div
           v-if="$slots.append"
-          class="el-table__append-gutter"
+          class="ven-table__append-gutter"
           :style="{ height: layout.appendHeight + 'px' }"
         ></div>
       </div>
       <div
         v-if="showSummary"
         v-show="data && data.length > 0"
-        class="el-table__fixed-footer-wrapper"
+        class="ven-table__fixed-footer-wrapper"
         ref="fixedFooterWrapper"
       >
         <table-footer
@@ -171,7 +171,7 @@
     <div
       v-if="rightFixedColumns.length > 0"
       v-mousewheel="handleFixedMousewheel"
-      class="el-table__fixed-right"
+      class="ven-table__fixed-right"
       ref="rightFixedWrapper"
       :style="[
         {
@@ -185,7 +185,7 @@
     >
       <div
         v-if="showHeader"
-        class="el-table__fixed-header-wrapper"
+        class="ven-table__fixed-header-wrapper"
         ref="rightFixedHeaderWrapper"
       >
         <table-header
@@ -199,7 +199,7 @@
         ></table-header>
       </div>
       <div
-        class="el-table__fixed-body-wrapper"
+        class="ven-table__fixed-body-wrapper"
         ref="rightFixedBodyWrapper"
         :style="[
           {
@@ -222,14 +222,14 @@
         </table-body>
         <div
           v-if="$slots.append"
-          class="el-table__append-gutter"
+          class="ven-table__append-gutter"
           :style="{ height: layout.appendHeight + 'px' }"
         ></div>
       </div>
       <div
         v-if="showSummary"
         v-show="data && data.length > 0"
-        class="el-table__fixed-footer-wrapper"
+        class="ven-table__fixed-footer-wrapper"
         ref="rightFixedFooterWrapper"
       >
         <table-footer
@@ -246,7 +246,7 @@
     </div>
     <div
       v-if="rightFixedColumns.length > 0"
-      class="el-table__fixed-right-patch"
+      class="ven-table__fixed-right-patch"
       ref="rightFixedPatch"
       :style="{
         width: layout.scrollY ? layout.gutterWidth + 'px' : '0',
@@ -254,15 +254,15 @@
       }"
     ></div>
     <div
-      class="el-table__column-resize-proxy"
+      class="ven-table__column-resize-proxy"
       ref="resizeProxy"
       v-show="resizeProxyVisible"
     ></div>
   </div>
 </template>
 
-<script type="text/babel">
-import ElCheckbox from "../../checkbox";
+<script>
+import VenCheckbox from "../../checkbox";
 import { debounce, throttle } from "throttle-debounce";
 import {
   addResizeListener,
@@ -281,7 +281,7 @@ import { parseHeight } from "./util";
 let tableIdSeed = 1;
 
 export default {
-  name: "ElTable",
+  name: "VenTable",
 
   mixins: [Locale, Migrating],
 
@@ -390,7 +390,8 @@ export default {
     TableHeader,
     TableFooter,
     TableBody,
-    ElCheckbox,
+    // eslint-disable-next-line vue/no-unused-components
+    VenCheckbox,
   },
 
   methods: {
@@ -707,7 +708,7 @@ export default {
   },
 
   created() {
-    this.tableId = "el-table_" + tableIdSeed++;
+    this.tableId = "ven-table_" + tableIdSeed++;
     this.debouncedUpdateLayout = debounce(50, () => this.doLayout());
   },
 

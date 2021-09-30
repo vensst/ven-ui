@@ -1,7 +1,7 @@
 <template>
-  <transition name="el-notification-fade">
+  <transition name="ven-notification-fade">
     <div
-      :class="['el-notification', customClass, horizontalClass]"
+      :class="['ven-notification', customClass, horizontalClass]"
       v-show="visible"
       :style="positionStyle"
       @mouseenter="clearTimer()"
@@ -10,24 +10,24 @@
       role="alert"
     >
       <i
-        class="el-notification__icon"
+        class="ven-notification__icon"
         :class="[typeClass, iconClass]"
         v-if="type || iconClass"
       >
       </i>
       <div
-        class="el-notification__group"
+        class="ven-notification__group"
         :class="{ 'is-with-icon': typeClass || iconClass }"
       >
-        <h2 class="el-notification__title" v-text="title"></h2>
-        <div class="el-notification__content" v-show="message">
+        <h2 class="ven-notification__title" v-text="title"></h2>
+        <div class="ven-notification__content" v-show="message">
           <slot>
             <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
             <p v-else v-html="message"></p>
           </slot>
         </div>
         <div
-          class="el-notification__closeBtn el-icon-close"
+          class="ven-notification__closeBtn ven-icon-close"
           v-if="showClose"
           @click.stop="close"
         ></div>
@@ -36,7 +36,7 @@
   </transition>
 </template>
 
-<script type="text/babel">
+<script>
 let typeMap = {
   success: "success",
   info: "info",
@@ -68,7 +68,7 @@ export default {
   computed: {
     typeClass() {
       return this.type && typeMap[this.type]
-        ? `el-icon-${typeMap[this.type]}`
+        ? `ven-icon-${typeMap[this.type]}`
         : "";
     },
 

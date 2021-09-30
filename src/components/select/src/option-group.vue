@@ -1,23 +1,23 @@
 <template>
-  <ul class="el-select-group__wrap" v-show="visible">
-    <li class="el-select-group__title">{{ label }}</li>
+  <ul class="ven-select-group__wrap" v-show="visible">
+    <li class="ven-select-group__title">{{ label }}</li>
     <li>
-      <ul class="el-select-group">
+      <ul class="ven-select-group">
         <slot></slot>
       </ul>
     </li>
   </ul>
 </template>
 
-<script type="text/babel">
+<script>
 import Emitter from "../../../mixins/emitter";
 
 export default {
   mixins: [Emitter],
 
-  name: "ElOptionGroup",
+  name: "VenOptionGroup",
 
-  componentName: "ElOptionGroup",
+  componentName: "VenOptionGroup",
 
   props: {
     label: String,
@@ -35,7 +35,7 @@ export default {
 
   watch: {
     disabled(val) {
-      this.broadcast("ElOption", "handleGroupDisabled", val);
+      this.broadcast("VenOption", "handleGroupDisabled", val);
     },
   },
 
@@ -54,7 +54,7 @@ export default {
 
   mounted() {
     if (this.disabled) {
-      this.broadcast("ElOption", "handleGroupDisabled", this.disabled);
+      this.broadcast("VenOption", "handleGroupDisabled", this.disabled);
     }
   },
 };

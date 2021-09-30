@@ -1,6 +1,6 @@
 <template>
   <li
-    class="el-menu-item"
+    class="ven-menu-item"
     role="menuitem"
     tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
@@ -14,9 +14,9 @@
     @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
   >
-    <el-tooltip
+    <ven-tooltip
       v-if="
-        parentMenu.$options.componentName === 'ElMenu' &&
+        parentMenu.$options.componentName === 'VenMenu' &&
         rootMenu.collapse &&
         $slots.title
       "
@@ -38,7 +38,7 @@
       >
         <slot></slot>
       </div>
-    </el-tooltip>
+    </ven-tooltip>
     <template v-else>
       <slot></slot>
       <slot name="title"></slot>
@@ -47,17 +47,17 @@
 </template>
 <script>
 import Menu from "./menu-mixin";
-import ElTooltip from "../../tooltip";
+import VenTooltip from "../../tooltip";
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElMenuItem",
+  name: "VenMenuItem",
 
-  componentName: "ElMenuItem",
+  componentName: "VenMenuItem",
 
   mixins: [Menu, Emitter],
 
-  components: { ElTooltip },
+  components: { VenTooltip },
 
   props: {
     index: {
@@ -114,7 +114,7 @@ export default {
     },
     handleClick() {
       if (!this.disabled) {
-        this.dispatch("ElMenu", "item-click", this);
+        this.dispatch("VenMenu", "item-click", this);
         this.$emit("click", this);
       }
     },

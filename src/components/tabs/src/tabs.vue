@@ -2,7 +2,7 @@
 import TabNav from "./tab-nav";
 
 export default {
-  name: "ElTabs",
+  name: "VenTabs",
 
   components: {
     TabNav,
@@ -43,9 +43,11 @@ export default {
     value(value) {
       this.setCurrentName(value);
     },
+    // eslint-disable-next-line no-unused-vars
     currentName(value) {
       if (this.$refs.nav) {
         this.$nextTick(() => {
+          // eslint-disable-next-line no-unused-vars
           this.$refs.nav.$nextTick((_) => {
             this.$refs.nav.scrollToActiveTab();
           });
@@ -61,7 +63,7 @@ export default {
           (vnode) =>
             vnode.tag &&
             vnode.componentOptions &&
-            vnode.componentOptions.Ctor.options.name === "ElTabPane"
+            vnode.componentOptions.Ctor.options.name === "VenTabPane"
         );
         // update indeed
         const panes = paneSlots.map(
@@ -120,6 +122,7 @@ export default {
     },
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     let {
       type,
@@ -137,7 +140,7 @@ export default {
     const newButton =
       editable || addable ? (
         <span
-          class="el-tabs__new-tab"
+          class="ven-tabs__new-tab"
           on-click={handleTabAdd}
           tabindex="0"
           on-keydown={(ev) => {
@@ -146,7 +149,7 @@ export default {
             }
           }}
         >
-          <i class="el-icon-plus"></i>
+          <i class="ven-icon-plus"></i>
         </span>
       ) : null;
 
@@ -163,20 +166,20 @@ export default {
       ref: "nav",
     };
     const header = (
-      <div class={["el-tabs__header", `is-${tabPosition}`]}>
+      <div class={["ven-tabs__header", `is-${tabPosition}`]}>
         {newButton}
         <tab-nav {...navData}></tab-nav>
       </div>
     );
-    const panels = <div class="el-tabs__content">{this.$slots.default}</div>;
+    const panels = <div class="ven-tabs__content">{this.$slots.default}</div>;
 
     return (
       <div
         class={{
-          "el-tabs": true,
-          "el-tabs--card": type === "card",
-          [`el-tabs--${tabPosition}`]: true,
-          "el-tabs--border-card": type === "border-card",
+          "ven-tabs": true,
+          "ven-tabs--card": type === "card",
+          [`ven-tabs--${tabPosition}`]: true,
+          "ven-tabs--border-card": type === "border-card",
         }}
       >
         {tabPosition !== "bottom" ? [header, panels] : [panels, header]}

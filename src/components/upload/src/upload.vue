@@ -105,6 +105,7 @@ export default {
                 });
               }
               for (const p in rawFile) {
+                // eslint-disable-next-line no-prototype-builtins
                 if (rawFile.hasOwnProperty(p)) {
                   processedFile[p] = rawFile[p];
                 }
@@ -180,7 +181,7 @@ export default {
     },
   },
 
-  render(h) {
+  render() {
     let {
       handleClick,
       drag,
@@ -195,14 +196,14 @@ export default {
     } = this;
     const data = {
       class: {
-        "el-upload": true,
+        "ven-upload": true,
       },
       on: {
         click: handleClick,
         keydown: handleKeydown,
       },
     };
-    data.class[`el-upload--${listType}`] = true;
+    data.class[`ven-upload--${listType}`] = true;
     return (
       <div {...data} tabindex="0">
         {drag ? (
@@ -213,7 +214,7 @@ export default {
           this.$slots.default
         )}
         <input
-          class="el-upload__input"
+          class="ven-upload__input"
           type="file"
           ref="input"
           name={name}

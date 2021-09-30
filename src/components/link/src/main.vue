@@ -1,8 +1,8 @@
 <template>
   <a
     :class="[
-      'el-link',
-      type ? `el-link--${type}` : '',
+      'ven-link',
+      type ? `ven-link--${type}` : '',
       disabled && 'is-disabled',
       underline && !disabled && 'is-underline',
     ]"
@@ -12,7 +12,7 @@
   >
     <i :class="icon" v-if="icon"></i>
 
-    <span v-if="$slots.default" class="el-link--inner">
+    <span v-if="$slots.default" class="ven-link--inner">
       <slot></slot>
     </span>
 
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "ElLink",
+  name: "VenLink",
 
   props: {
     type: {

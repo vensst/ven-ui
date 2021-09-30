@@ -1,13 +1,13 @@
 <template>
   <div
-    class="el-autocomplete"
+    class="ven-autocomplete"
     v-clickoutside="close"
     aria-haspopup="listbox"
     role="combobox"
     :aria-expanded="suggestionVisible"
     :aria-owns="id"
   >
-    <el-input
+    <ven-input
       ref="input"
       v-bind="[$props, $attrs]"
       @input="handleInput"
@@ -32,8 +32,8 @@
       <template slot="suffix" v-if="$slots.suffix">
         <slot name="suffix"></slot>
       </template>
-    </el-input>
-    <el-autocomplete-suggestions
+    </ven-input>
+    <ven-autocomplete-suggestions
       visible-arrow
       :class="[popperClass ? popperClass : '']"
       :popper-options="popperOptions"
@@ -55,31 +55,32 @@
           {{ item[valueKey] }}
         </slot>
       </li>
-    </el-autocomplete-suggestions>
+    </ven-autocomplete-suggestions>
   </div>
 </template>
 <script>
 import debounce from "throttle-debounce/debounce";
-import ElInput from "../../input";
+import VenInput from "../../input";
 import Clickoutside from "../../../utils/clickoutside";
-import ElAutocompleteSuggestions from "./autocomplete-suggestions.vue";
+import VenAutocompleteSuggestions from "./autocomplete-suggestions.vue";
 import Emitter from "../../../mixins/emitter";
 import Migrating from "../../../mixins/migrating";
 import { generateId } from "../../../utils/util";
 import Focus from "../../../mixins/focus";
 
 export default {
-  name: "ElAutocomplete",
+  name: "VenAutocomplete",
 
   mixins: [Emitter, Focus("input"), Migrating],
 
   inheritAttrs: false,
 
-  componentName: "ElAutocomplete",
+  componentName: "VenAutocomplete",
 
   components: {
-    ElInput,
-    ElAutocompleteSuggestions,
+    VenInput,
+    // eslint-disable-next-line vue/no-unused-components
+    VenAutocompleteSuggestions,
   },
 
   directives: { Clickoutside },
@@ -150,14 +151,14 @@ export default {
       return (isValidData || this.loading) && this.activated;
     },
     id() {
-      return `el-autocomplete-${generateId()}`;
+      return `ven-autocomplete-${generateId()}`;
     },
   },
   watch: {
     suggestionVisible(val) {
       let $input = this.getInput();
       if ($input) {
-        this.broadcast("ElAutocompleteSuggestions", "visible", [
+        this.broadcast("VenAutocompleteSuggestions", "visible", [
           val,
           $input.offsetWidth,
         ]);
@@ -220,6 +221,7 @@ export default {
       this.activated = false;
       this.$emit("clear");
     },
+    // eslint-disable-next-line no-unused-vars
     close(e) {
       this.activated = false;
     },
@@ -233,6 +235,7 @@ export default {
         this.select(this.suggestions[this.highlightedIndex]);
       } else if (this.selectWhenUnmatched) {
         this.$emit("select", { value: this.value });
+        // eslint-disable-next-line no-unused-vars
         this.$nextTick((_) => {
           this.suggestions = [];
           this.highlightedIndex = -1;
@@ -242,6 +245,7 @@ export default {
     select(item) {
       this.$emit("input", item[this.valueKey]);
       this.$emit("select", item);
+      // eslint-disable-next-line no-unused-vars
       this.$nextTick((_) => {
         this.suggestions = [];
         this.highlightedIndex = -1;
@@ -259,10 +263,10 @@ export default {
         index = this.suggestions.length - 1;
       }
       const suggestion = this.$refs.suggestions.$el.querySelector(
-        ".el-autocomplete-suggestion__wrap"
+        ".ven-autocomplete-suggestion__wrap"
       );
       const suggestionList = suggestion.querySelectorAll(
-        ".el-autocomplete-suggestion__list li"
+        ".ven-autocomplete-suggestion__list li"
       );
 
       let highlightItem = suggestionList[index];

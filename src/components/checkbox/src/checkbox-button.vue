@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-checkbox-button"
+    class="ven-checkbox-button"
     :class="[
-      size ? 'el-checkbox-button--' + size : '',
+      size ? 'ven-checkbox-button--' + size : '',
       { 'is-disabled': isDisabled },
       { 'is-checked': isChecked },
       { 'is-focus': focus },
@@ -13,7 +13,7 @@
   >
     <input
       v-if="trueLabel || falseLabel"
-      class="el-checkbox-button__original"
+      class="ven-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="isDisabled"
@@ -26,7 +26,7 @@
     />
     <input
       v-else
-      class="el-checkbox-button__original"
+      class="ven-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="isDisabled"
@@ -38,7 +38,7 @@
     />
 
     <span
-      class="el-checkbox-button__inner"
+      class="ven-checkbox-button__inner"
       v-if="$slots.default || label"
       :style="isChecked ? activeStyle : null"
     >
@@ -50,7 +50,7 @@
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElCheckboxButton",
+  name: "VenCheckboxButton",
 
   mixins: [Emitter],
 
@@ -102,7 +102,7 @@ export default {
             (this.isLimitExceeded = true);
 
           this.isLimitExceeded === false &&
-            this.dispatch("ElCheckboxGroup", "input", [val]);
+            this.dispatch("VenCheckboxGroup", "input", [val]);
         } else if (this.value !== undefined) {
           this.$emit("input", val);
         } else {
@@ -111,6 +111,7 @@ export default {
       },
     },
 
+    // eslint-disable-next-line vue/return-in-computed-property
     isChecked() {
       if ({}.toString.call(this.model) === "[object Boolean]") {
         return this.model;
@@ -124,7 +125,7 @@ export default {
     _checkboxGroup() {
       let parent = this.$parent;
       while (parent) {
-        if (parent.$options.componentName !== "ElCheckboxGroup") {
+        if (parent.$options.componentName !== "VenCheckboxGroup") {
           parent = parent.$parent;
         } else {
           return parent;
@@ -195,7 +196,7 @@ export default {
       this.$emit("change", value, ev);
       this.$nextTick(() => {
         if (this._checkboxGroup) {
-          this.dispatch("ElCheckboxGroup", "change", [
+          this.dispatch("VenCheckboxGroup", "change", [
             this._checkboxGroup.value,
           ]);
         }

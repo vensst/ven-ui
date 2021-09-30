@@ -1,9 +1,9 @@
 <template>
   <form
-    class="el-form"
+    class="ven-form"
     :class="[
-      labelPosition ? 'el-form--label-' + labelPosition : '',
-      { 'el-form--inline': inline },
+      labelPosition ? 'ven-form--label-' + labelPosition : '',
+      { 'ven-form--inline': inline },
     ]"
   >
     <slot></slot>
@@ -13,9 +13,9 @@
 import objectAssign from "../../../utils/merge";
 
 export default {
-  name: "ElForm",
+  name: "VenForm",
 
-  componentName: "ElForm",
+  componentName: "VenForm",
 
   provide() {
     return {

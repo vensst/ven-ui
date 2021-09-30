@@ -1,18 +1,18 @@
 <script>
-import ElScrollbar from "../../scrollbar";
+import VenScrollbar from "../../scrollbar";
 import CascaderNode from "./cascader-node.vue";
 import Locale from "../../../mixins/locale";
 import { generateId } from "../../../utils/util";
 
 export default {
-  name: "ElCascaderMenu",
+  name: "VenCascaderMenu",
 
   mixins: [Locale],
 
   inject: ["panel"],
 
   components: {
-    ElScrollbar,
+    VenScrollbar,
     CascaderNode,
   },
 
@@ -77,13 +77,15 @@ export default {
       hoverZone.innerHTML = "";
     },
 
+    // eslint-disable-next-line no-unused-vars
     renderEmptyText(h) {
       return (
-        <div class="el-cascader-menu__empty-text">
+        <div class="ven-cascader-menu__empty-text">
           {this.t("el.cascader.noData")}
         </div>
       );
     },
+    // eslint-disable-next-line no-unused-vars
     renderNodeList(h) {
       const { menuId } = this;
       const { isHoverMenu } = this.panel;
@@ -110,7 +112,7 @@ export default {
       return [
         ...nodes,
         isHoverMenu ? (
-          <svg ref="hoverZone" class="el-cascader-menu__hover-zone"></svg>
+          <svg ref="hoverZone" class="ven-cascader-menu__hover-zone"></svg>
         ) : null,
       ];
     },
@@ -127,20 +129,20 @@ export default {
     }
 
     return (
-      <el-scrollbar
+      <ven-scrollbar
         tag="ul"
         role="menu"
         id={menuId}
-        class="el-cascader-menu"
-        wrap-class="el-cascader-menu__wrap"
+        class="ven-cascader-menu"
+        wrap-class="ven-cascader-menu__wrap"
         view-class={{
-          "el-cascader-menu__list": true,
+          "ven-cascader-menu__list": true,
           "is-empty": isEmpty,
         }}
         {...events}
       >
         {isEmpty ? this.renderEmptyText(h) : this.renderNodeList(h)}
-      </el-scrollbar>
+      </ven-scrollbar>
     );
   },
 };

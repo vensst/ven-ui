@@ -21,17 +21,18 @@ export default {
     },
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     const { size, move, bar } = this;
 
     return (
       <div
-        class={["el-scrollbar__bar", "is-" + bar.key]}
+        class={["ven-scrollbar__bar", "is-" + bar.key]}
         onMousedown={this.clickTrackHandler}
       >
         <div
           ref="thumb"
-          class="el-scrollbar__thumb"
+          class="ven-scrollbar__thumb"
           onMousedown={this.clickThumbHandler}
           style={renderThumbStyle({ size, move, bar })}
         ></div>
@@ -92,6 +93,7 @@ export default {
         (thumbPositionPercentage * this.wrap[this.bar.scrollSize]) / 100;
     },
 
+    // eslint-disable-next-line no-unused-vars
     mouseUpDocumentHandler(e) {
       this.cursorDown = false;
       this[this.bar.axis] = 0;

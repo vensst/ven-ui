@@ -1,7 +1,7 @@
 @import "../mixins/mixins";
 @import "../common/var";
-@import "components/button";
-@import "components/button-group";
+@import "../components/button";
+@import "../components/button-group";
 
 @include b(calendar) {
   background-color:#fff;
@@ -63,7 +63,7 @@
     border-left: $--calendar-border;
   }
 
-  tr.el-calendar-table__row--hide-border td {
+  tr.ven-calendar-table__row--hide-border td {
     border-top: none;
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <table @click="handleYearTableClick" class="el-year-table">
+  <table @click="handleYearTableClick" class="ven-year-table">
     <tbody>
       <tr>
         <td class="available" :class="getCellStyle(startYear + 0)">
@@ -43,7 +43,7 @@
   </table>
 </template>
 
-<script type="text/babel">
+<script>
 import { hasClass } from "../../../../utils/dom";
 import {
   isDate,

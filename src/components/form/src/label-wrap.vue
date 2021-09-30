@@ -20,7 +20,7 @@ export default {
         }
       }
       return (
-        <div class="el-form-item__label-wrap" style={style}>
+        <div class="ven-form-item__label-wrap" style={style}>
           {slots}
         </div>
       );

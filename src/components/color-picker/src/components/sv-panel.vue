@@ -1,14 +1,14 @@
 <template>
   <div
-    class="el-color-svpanel"
+    class="ven-color-svpanel"
     :style="{
       backgroundColor: background,
     }"
   >
-    <div class="el-color-svpanel__white"></div>
-    <div class="el-color-svpanel__black"></div>
+    <div class="ven-color-svpanel__white"></div>
+    <div class="ven-color-svpanel__black"></div>
     <div
-      class="el-color-svpanel__cursor"
+      class="ven-color-svpanel__cursor"
       :style="{
         top: cursorTop + 'px',
         left: cursorLeft + 'px',
@@ -23,7 +23,7 @@
 import draggable from "../draggable";
 
 export default {
-  name: "el-sl-panel",
+  name: "ven-sl-panel",
 
   props: {
     color: {

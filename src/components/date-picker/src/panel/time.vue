@@ -1,8 +1,12 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
-    <div v-show="visible" class="el-time-panel el-popper" :class="popperClass">
+  <transition name="ven-zoom-in-top" @after-leave="$emit('dodestroy')">
+    <div
+      v-show="visible"
+      class="ven-time-panel ven-popper"
+      :class="popperClass"
+    >
       <div
-        class="el-time-panel__content"
+        class="ven-time-panel__content"
         :class="{ 'has-seconds': showSeconds }"
       >
         <time-spinner
@@ -16,17 +20,17 @@
         >
         </time-spinner>
       </div>
-      <div class="el-time-panel__footer">
+      <div class="ven-time-panel__footer">
         <button
           type="button"
-          class="el-time-panel__btn cancel"
+          class="ven-time-panel__btn cancel"
           @click="handleCancel"
         >
           {{ t("el.datepicker.cancel") }}
         </button>
         <button
           type="button"
-          class="el-time-panel__btn"
+          class="ven-time-panel__btn"
           :class="{ confirm: !disabled }"
           @click="handleConfirm()"
         >
@@ -37,7 +41,7 @@
   </transition>
 </template>
 
-<script type="text/babel">
+<script>
 import {
   limitTimeRange,
   isDate,
@@ -79,6 +83,7 @@ export default {
 
       this.date = date;
       if (this.visible && this.needInitAdjust) {
+        // eslint-disable-next-line no-unused-vars
         this.$nextTick((_) => this.adjustSpinners());
         this.needInitAdjust = false;
       }

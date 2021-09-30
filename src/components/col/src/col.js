@@ -1,5 +1,5 @@
 export default {
-  name: "ElCol",
+  name: "VenCol",
 
   props: {
     span: {
@@ -23,7 +23,7 @@ export default {
   computed: {
     gutter() {
       let parent = this.$parent;
-      while (parent && parent.$options.componentName !== "ElRow") {
+      while (parent && parent.$options.componentName !== "VenRow") {
         parent = parent.$parent;
       }
       return parent ? parent.gutter : 0;
@@ -42,22 +42,22 @@ export default {
       if (this[prop] || this[prop] === 0) {
         classList.push(
           prop !== "span"
-            ? `el-col-${prop}-${this[prop]}`
-            : `el-col-${this[prop]}`
+            ? `ven-col-${prop}-${this[prop]}`
+            : `ven-col-${this[prop]}`
         );
       }
     });
 
     ["xs", "sm", "md", "lg", "xl"].forEach((size) => {
       if (typeof this[size] === "number") {
-        classList.push(`el-col-${size}-${this[size]}`);
+        classList.push(`ven-col-${size}-${this[size]}`);
       } else if (typeof this[size] === "object") {
         let props = this[size];
         Object.keys(props).forEach((prop) => {
           classList.push(
             prop !== "span"
-              ? `el-col-${size}-${prop}-${props[prop]}`
-              : `el-col-${size}-${props[prop]}`
+              ? `ven-col-${size}-${prop}-${props[prop]}`
+              : `ven-col-${size}-${props[prop]}`
           );
         });
       }
@@ -66,7 +66,7 @@ export default {
     return h(
       this.tag,
       {
-        class: ["el-col", classList],
+        class: ["ven-col", classList],
         style,
       },
       this.$slots.default

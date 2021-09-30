@@ -1,15 +1,15 @@
 <template>
   <div
-    class="el-tree"
+    class="ven-tree"
     :class="{
-      'el-tree--highlight-current': highlightCurrent,
+      'ven-tree--highlight-current': highlightCurrent,
       'is-dragging': !!dragState.draggingNode,
       'is-drop-not-allow': !dragState.allowDrop,
       'is-drop-inner': dragState.dropType === 'inner',
     }"
     role="tree"
   >
-    <el-tree-node
+    <ven-tree-node
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
@@ -19,13 +19,13 @@
       :render-content="renderContent"
       @node-expand="handleNodeExpand"
     >
-    </el-tree-node>
-    <div class="el-tree__empty-block" v-if="isEmpty">
-      <span class="el-tree__empty-text">{{ emptyText }}</span>
+    </ven-tree-node>
+    <div class="ven-tree__empty-block" v-if="isEmpty">
+      <span class="ven-tree__empty-text">{{ emptyText }}</span>
     </div>
     <div
       v-show="dragState.showDropIndicator"
-      class="el-tree__drop-indicator"
+      class="ven-tree__drop-indicator"
       ref="dropIndicator"
     ></div>
   </div>
@@ -34,18 +34,18 @@
 <script>
 import TreeStore from "./model/tree-store";
 import { getNodeKey, findNearestComponent } from "./model/util";
-import ElTreeNode from "./tree-node.vue";
+import VenTreeNode from "./tree-node.vue";
 import { t } from "../../../locale";
 import emitter from "../../../mixins/emitter";
 import { addClass, removeClass } from "../../../utils/dom";
 
 export default {
-  name: "ElTree",
+  name: "VenTree",
 
   mixins: [emitter],
 
   components: {
-    ElTreeNode,
+    VenTreeNode,
   },
 
   data() {
@@ -283,7 +283,7 @@ export default {
     },
 
     handleNodeExpand(nodeData, node, instance) {
-      this.broadcast("ElTreeNode", "tree-node-expand", node);
+      this.broadcast("VenTreeNode", "tree-node-expand", node);
       this.$emit("node-expand", nodeData, node, instance);
     },
 
@@ -310,7 +310,7 @@ export default {
 
     handleKeydown(ev) {
       const currentItem = ev.target;
-      if (currentItem.className.indexOf("el-tree-node") === -1) return;
+      if (currentItem.className.indexOf("ven-tree-node") === -1) return;
       const keyCode = ev.keyCode;
       this.treeItems = this.$el.querySelectorAll(
         ".is-focusable[role=treeitem]"
@@ -380,13 +380,15 @@ export default {
         // setData is required for draggable to work in FireFox
         // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
         event.dataTransfer.setData("text/plain", "");
+        // eslint-disable-next-line no-empty
       } catch (e) {}
       dragState.draggingNode = treeNode;
       this.$emit("node-drag-start", treeNode.node, event);
     });
 
+    // eslint-disable-next-line no-unused-vars
     this.$on("tree-node-drag-over", (event, treeNode) => {
-      const dropNode = findNearestComponent(event.target, "ElTreeNode");
+      const dropNode = findNearestComponent(event.target, "VenTreeNode");
       const oldDropNode = dragState.dropNode;
       if (oldDropNode && oldDropNode !== dropNode) {
         removeClass(oldDropNode.$el, "is-drop-inner");
@@ -474,7 +476,7 @@ export default {
       }
 
       const iconPosition = dropNode.$el
-        .querySelector(".el-tree-node__expand-icon")
+        .querySelector(".ven-tree-node__expand-icon")
         .getBoundingClientRect();
       const dropIndicator = this.$refs.dropIndicator;
       if (dropType === "before") {

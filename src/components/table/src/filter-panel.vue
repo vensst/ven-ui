@@ -1,27 +1,27 @@
 <template>
-  <transition name="el-zoom-in-top">
+  <transition name="ven-zoom-in-top">
     <div
-      class="el-table-filter"
+      class="ven-table-filter"
       v-if="multiple"
       v-clickoutside="handleOutsideClick"
       v-show="showPopper"
     >
-      <div class="el-table-filter__content">
-        <el-scrollbar wrap-class="el-table-filter__wrap">
-          <el-checkbox-group
-            class="el-table-filter__checkbox-group"
+      <div class="ven-table-filter__content">
+        <ven-scrollbar wrap-class="ven-table-filter__wrap">
+          <ven-checkbox-group
+            class="ven-table-filter__checkbox-group"
             v-model="filteredValue"
           >
-            <el-checkbox
+            <ven-checkbox
               v-for="filter in filters"
               :key="filter.value"
               :label="filter.value"
-              >{{ filter.text }}</el-checkbox
+              >{{ filter.text }}</ven-checkbox
             >
-          </el-checkbox-group>
-        </el-scrollbar>
+          </ven-checkbox-group>
+        </ven-scrollbar>
       </div>
-      <div class="el-table-filter__bottom">
+      <div class="ven-table-filter__bottom">
         <button
           @click="handleConfirm"
           :class="{ 'is-disabled': filteredValue.length === 0 }"
@@ -33,14 +33,14 @@
       </div>
     </div>
     <div
-      class="el-table-filter"
+      class="ven-table-filter"
       v-else
       v-clickoutside="handleOutsideClick"
       v-show="showPopper"
     >
-      <ul class="el-table-filter__list">
+      <ul class="ven-table-filter__list">
         <li
-          class="el-table-filter__list-item"
+          class="ven-table-filter__list-item"
           :class="{
             'is-active': filterValue === undefined || filterValue === null,
           }"
@@ -49,7 +49,7 @@
           {{ t("el.table.clearFilter") }}
         </li>
         <li
-          class="el-table-filter__list-item"
+          class="ven-table-filter__list-item"
           v-for="filter in filters"
           :label="filter.value"
           :key="filter.value"
@@ -69,12 +69,12 @@ import { PopupManager } from "../../../utils/popup";
 import Locale from "../../../mixins/locale";
 import Clickoutside from "../../../utils/clickoutside";
 import Dropdown from "./dropdown";
-import ElCheckbox from "../../checkbox";
-import ElCheckboxGroup from "../../checkbox-group";
-import ElScrollbar from "../../scrollbar";
+import VenCheckbox from "../../checkbox";
+import VenCheckboxGroup from "../../checkbox-group";
+import VenScrollbar from "../../scrollbar";
 
 export default {
-  name: "ElTableFilterPanel",
+  name: "VenTableFilterPanel",
 
   mixins: [Popper, Locale],
 
@@ -83,9 +83,9 @@ export default {
   },
 
   components: {
-    ElCheckbox,
-    ElCheckboxGroup,
-    ElScrollbar,
+    VenCheckbox,
+    VenCheckboxGroup,
+    VenScrollbar,
   },
 
   props: {

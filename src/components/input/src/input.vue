@@ -1,16 +1,16 @@
 <template>
   <div
     :class="[
-      type === 'textarea' ? 'el-textarea' : 'el-input',
-      inputSize ? 'el-input--' + inputSize : '',
+      type === 'textarea' ? 'ven-textarea' : 'ven-input',
+      inputSize ? 'ven-input--' + inputSize : '',
       {
         'is-disabled': inputDisabled,
         'is-exceed': inputExceed,
-        'el-input-group': $slots.prepend || $slots.append,
-        'el-input-group--append': $slots.append,
-        'el-input-group--prepend': $slots.prepend,
-        'el-input--prefix': $slots.prefix || prefixIcon,
-        'el-input--suffix':
+        'ven-input-group': $slots.prepend || $slots.append,
+        'ven-input-group--append': $slots.append,
+        'ven-input-group--prepend': $slots.prepend,
+        'ven-input--prefix': $slots.prefix || prefixIcon,
+        'ven-input--suffix':
           $slots.suffix || suffixIcon || clearable || showPassword,
       },
     ]"
@@ -19,13 +19,13 @@
   >
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend">
+      <div class="ven-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
       <input
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
-        class="el-input__inner"
+        class="ven-input__inner"
         v-bind="$attrs"
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :disabled="inputDisabled"
@@ -42,51 +42,51 @@
         :aria-label="label"
       />
       <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
+      <span class="ven-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
-        <i class="el-input__icon" v-if="prefixIcon" :class="prefixIcon"> </i>
+        <i class="ven-input__icon" v-if="prefixIcon" :class="prefixIcon"> </i>
       </span>
       <!-- 后置内容 -->
-      <span class="el-input__suffix" v-if="getSuffixVisible()">
-        <span class="el-input__suffix-inner">
+      <span class="ven-input__suffix" v-if="getSuffixVisible()">
+        <span class="ven-input__suffix-inner">
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
-            <i class="el-input__icon" v-if="suffixIcon" :class="suffixIcon">
+            <i class="ven-input__icon" v-if="suffixIcon" :class="suffixIcon">
             </i>
           </template>
           <i
             v-if="showClear"
-            class="el-input__icon el-icon-circle-close el-input__clear"
+            class="ven-input__icon ven-icon-circle-close ven-input__clear"
             @mousedown.prevent
             @click="clear"
           ></i>
           <i
             v-if="showPwdVisible"
-            class="el-input__icon el-icon-view el-input__clear"
+            class="ven-input__icon ven-icon-view ven-input__clear"
             @click="handlePasswordVisible"
           ></i>
-          <span v-if="isWordLimitVisible" class="el-input__count">
-            <span class="el-input__count-inner">
+          <span v-if="isWordLimitVisible" class="ven-input__count">
+            <span class="ven-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
             </span>
           </span>
         </span>
         <i
-          class="el-input__icon"
+          class="ven-input__icon"
           v-if="validateState"
-          :class="['el-input__validateIcon', validateIcon]"
+          :class="['ven-input__validateIcon', validateIcon]"
         >
         </i>
       </span>
       <!-- 后置元素 -->
-      <div class="el-input-group__append" v-if="$slots.append">
+      <div class="ven-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
       </div>
     </template>
     <textarea
       v-else
       :tabindex="tabindex"
-      class="el-textarea__inner"
+      class="ven-textarea__inner"
       @compositionstart="handleCompositionStart"
       @compositionupdate="handleCompositionUpdate"
       @compositionend="handleCompositionEnd"
@@ -105,7 +105,7 @@
     </textarea>
     <span
       v-if="isWordLimitVisible && type === 'textarea'"
-      class="el-input__count"
+      class="ven-input__count"
       >{{ textLength }}/{{ upperLimit }}</span
     >
   </div>
@@ -118,9 +118,9 @@ import merge from "../../../utils/merge";
 import { isKorean } from "../../../utils/shared";
 
 export default {
-  name: "ElInput",
+  name: "VenInput",
 
-  componentName: "ElInput",
+  componentName: "VenInput",
 
   mixins: [emitter, Migrating],
 
@@ -167,6 +167,7 @@ export default {
     /** @Deprecated in next major version */
     autoComplete: {
       type: String,
+      // eslint-disable-next-line no-unused-vars
       validator(val) {
         process.env.NODE_ENV !== "production" &&
           console.warn(
@@ -209,9 +210,9 @@ export default {
     },
     validateIcon() {
       return {
-        validating: "el-icon-loading",
-        success: "el-icon-circle-check",
-        error: "el-icon-circle-close",
+        validating: "ven-icon-loading",
+        success: "ven-icon-circle-check",
+        error: "ven-icon-circle-close",
       }[this.validateState];
     },
     textareaStyle() {
@@ -275,12 +276,12 @@ export default {
     value(val) {
       this.$nextTick(this.resizeTextarea);
       if (this.validateEvent) {
-        this.dispatch("ElFormItem", "el.form.change", [val]);
+        this.dispatch("VenFormItem", "el.form.change", [val]);
       }
     },
     // native input value is set explicitly
     // do not use v-model / :value in template
-    // see: https://github.com/ElemeFE/element/issues/14521
+
     nativeInputValue() {
       this.setNativeInputValue();
     },
@@ -318,7 +319,7 @@ export default {
       this.focused = false;
       this.$emit("blur", event);
       if (this.validateEvent) {
-        this.dispatch("ElFormItem", "el.form.blur", [this.value]);
+        this.dispatch("VenFormItem", "el.form.blur", [this.value]);
       }
     },
     select() {
@@ -369,10 +370,8 @@ export default {
     },
     handleInput(event) {
       // should not emit input during composition
-      // see: https://github.com/ElemeFE/element/issues/10516
       if (this.isComposing) return;
 
-      // hack for https://github.com/ElemeFE/element/issues/8548
       // should remove the following line when we don't support IE
       if (event.target.value === this.nativeInputValue) return;
 
@@ -387,7 +386,7 @@ export default {
     },
     calcIconOffset(place) {
       let elList = [].slice.call(
-        this.$el.querySelectorAll(`.el-input__${place}`) || []
+        this.$el.querySelectorAll(`.ven-input__${place}`) || []
       );
       if (!elList.length) return;
       let el = null;
@@ -406,7 +405,7 @@ export default {
       const pendant = pendantMap[place];
       if (this.$slots[pendant]) {
         el.style.transform = `translateX(${place === "suffix" ? "-" : ""}${
-          this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth
+          this.$el.querySelector(`.ven-input-group__${pendant}`).offsetWidth
         }px)`;
       } else {
         el.removeAttribute("style");

@@ -1,7 +1,7 @@
 <template>
   <component
     :is="_elTag"
-    class="el-radio-group"
+    class="ven-radio-group"
     role="radiogroup"
     @keydown="handleKeydown"
   >
@@ -18,9 +18,9 @@ const keyCode = Object.freeze({
   DOWN: 40,
 });
 export default {
-  name: "ElRadioGroup",
+  name: "VenRadioGroup",
 
-  componentName: "ElRadioGroup",
+  componentName: "VenRadioGroup",
 
   inject: {
     elFormItem: {
@@ -104,8 +104,9 @@ export default {
     },
   },
   watch: {
+    // eslint-disable-next-line no-unused-vars
     value(value) {
-      this.dispatch("ElFormItem", "el.form.change", [this.value]);
+      this.dispatch("VenFormItem", "el.form.change", [this.value]);
     },
   },
 };

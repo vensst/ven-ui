@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['el-cascader-panel', border && 'is-bordered']"
+    :class="['ven-cascader-panel', border && 'is-bordered']"
     @keydown="handleKeyDown"
   >
     <cascader-menu
@@ -49,7 +49,7 @@ const getSibling = (el, distance) => {
   const { parentNode } = el;
   if (parentNode) {
     const siblings = parentNode.querySelectorAll(
-      '.el-cascader-node[tabindex="-1"]'
+      '.ven-cascader-node[tabindex="-1"]'
     );
     const index = Array.prototype.indexOf.call(siblings, el);
     return siblings[index + distance] || null;
@@ -57,6 +57,7 @@ const getSibling = (el, distance) => {
   return null;
 };
 
+// eslint-disable-next-line no-unused-vars
 const getMenuIndex = (el, distance) => {
   if (!el) return;
   const pieces = el.id.split("-");
@@ -81,7 +82,7 @@ const checkNode = (el) => {
 };
 
 export default {
-  name: "ElCascaderPanel",
+  name: "VenCascaderPanel",
 
   components: {
     CascaderMenu,
@@ -232,27 +233,31 @@ export default {
 
       switch (keyCode) {
         case KeyCode.up:
+          // eslint-disable-next-line no-case-declarations
           const prev = getSibling(target, -1);
           focusNode(prev);
           break;
         case KeyCode.down:
+          // eslint-disable-next-line no-case-declarations
           const next = getSibling(target, 1);
           focusNode(next);
           break;
         case KeyCode.left:
+          // eslint-disable-next-line no-case-declarations
           const preMenu = this.$refs.menu[getMenuIndex(target) - 1];
           if (preMenu) {
             const expandedNode = preMenu.$el.querySelector(
-              '.el-cascader-node[aria-expanded="true"]'
+              '.ven-cascader-node[aria-expanded="true"]'
             );
             focusNode(expandedNode);
           }
           break;
         case KeyCode.right:
+          // eslint-disable-next-line no-case-declarations
           const nextMenu = this.$refs.menu[getMenuIndex(target) + 1];
           if (nextMenu) {
             const firstNode = nextMenu.$el.querySelector(
-              '.el-cascader-node[tabindex="-1"]'
+              '.ven-cascader-node[tabindex="-1"]'
             );
             focusNode(firstNode);
           }
@@ -352,10 +357,10 @@ export default {
       menus.forEach((menu) => {
         const menuElement = menu.$el;
         if (menuElement) {
-          const container = menuElement.querySelector(".el-scrollbar__wrap");
+          const container = menuElement.querySelector(".ven-scrollbar__wrap");
           const activeNode =
-            menuElement.querySelector(".el-cascader-node.is-active") ||
-            menuElement.querySelector(".el-cascader-node.in-active-path");
+            menuElement.querySelector(".ven-cascader-node.is-active") ||
+            menuElement.querySelector(".ven-cascader-node.in-active-path");
           scrollIntoView(container, activeNode);
         }
       });

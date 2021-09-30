@@ -1,8 +1,8 @@
-import ElDropdown from "./src/dropdown";
+import VenDropdown from "./src/dropdown";
 
 /* istanbul ignore next */
-ElDropdown.install = function (Vue) {
-  Vue.component(ElDropdown.name, ElDropdown);
+VenDropdown.install = function (Vue) {
+  Vue.component(VenDropdown.name, VenDropdown);
 };
 
-export default ElDropdown;
+export default VenDropdown;

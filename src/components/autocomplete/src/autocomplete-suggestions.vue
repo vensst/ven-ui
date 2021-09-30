@@ -1,35 +1,36 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="doDestroy">
+  <transition name="ven-zoom-in-top" @after-leave="doDestroy">
     <div
       v-show="showPopper"
-      class="el-autocomplete-suggestion el-popper"
+      class="ven-autocomplete-suggestion ven-popper"
       :class="{ 'is-loading': !parent.hideLoading && parent.loading }"
       :style="{ width: dropdownWidth }"
       role="region"
     >
-      <el-scrollbar
+      <ven-scrollbar
         tag="ul"
-        wrap-class="el-autocomplete-suggestion__wrap"
-        view-class="el-autocomplete-suggestion__list"
+        wrap-class="ven-autocomplete-suggestion__wrap"
+        view-class="ven-autocomplete-suggestion__list"
       >
         <li v-if="!parent.hideLoading && parent.loading">
-          <i class="el-icon-loading"></i>
+          <i class="ven-icon-loading"></i>
         </li>
         <slot v-else> </slot>
-      </el-scrollbar>
+      </ven-scrollbar>
     </div>
   </transition>
 </template>
 <script>
 import Popper from "../../../utils/vue-popper";
 import Emitter from "../../../mixins/emitter";
-import ElScrollbar from "../../scrollbar";
+import VenScrollbar from "../../scrollbar";
 
 export default {
-  components: { ElScrollbar },
+  // eslint-disable-next-line vue/no-unused-components
+  components: { VenScrollbar },
   mixins: [Popper, Emitter],
 
-  componentName: "ElAutocompleteSuggestions",
+  componentName: "VenAutocompleteSuggestions",
 
   data() {
     return {
@@ -51,11 +52,12 @@ export default {
 
   methods: {
     select(item) {
-      this.dispatch("ElAutocomplete", "item-click", item);
+      this.dispatch("VenAutocomplete", "item-click", item);
     },
   },
 
   updated() {
+    // eslint-disable-next-line no-unused-vars
     this.$nextTick((_) => {
       this.popperJS && this.updatePopper();
     });
@@ -67,7 +69,7 @@ export default {
       this.$parent.$refs.input.$refs.input ||
       this.$parent.$refs.input.$refs.textarea;
     this.referenceList = this.$el.querySelector(
-      ".el-autocomplete-suggestion__list"
+      ".ven-autocomplete-suggestion__list"
     );
     this.referenceList.setAttribute("role", "listbox");
     this.referenceList.setAttribute("id", this.id);

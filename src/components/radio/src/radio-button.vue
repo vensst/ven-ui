@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-radio-button"
+    class="ven-radio-button"
     :class="[
-      size ? 'el-radio-button--' + size : '',
+      size ? 'ven-radio-button--' + size : '',
       { 'is-active': value === label },
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
@@ -14,7 +14,7 @@
     @keydown.space.stop.prevent="value = isDisabled ? value : label"
   >
     <input
-      class="el-radio-button__orig-radio"
+      class="ven-radio-button__orig-radio"
       :value="label"
       type="radio"
       v-model="value"
@@ -26,7 +26,7 @@
       @blur="focus = false"
     />
     <span
-      class="el-radio-button__inner"
+      class="ven-radio-button__inner"
       :style="value === label ? activeStyle : null"
       @keydown.stop
     >
@@ -39,7 +39,7 @@
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElRadioButton",
+  name: "VenRadioButton",
 
   mixins: [Emitter],
 
@@ -74,7 +74,7 @@ export default {
     _radioGroup() {
       let parent = this.$parent;
       while (parent) {
-        if (parent.$options.componentName !== "ElRadioGroup") {
+        if (parent.$options.componentName !== "VenRadioGroup") {
           parent = parent.$parent;
         } else {
           return parent;
@@ -119,7 +119,7 @@ export default {
   methods: {
     handleChange() {
       this.$nextTick(() => {
-        this.dispatch("ElRadioGroup", "handleChange", this.value);
+        this.dispatch("VenRadioGroup", "handleChange", this.value);
       });
     },
   },

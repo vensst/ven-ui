@@ -9,7 +9,7 @@ export const cellStarts = {
     minWidth: 48,
     realWidth: 48,
     order: "",
-    className: "el-table-column--selection",
+    className: "ven-table-column--selection",
   },
   expand: {
     width: 48,
@@ -30,7 +30,7 @@ export const cellForced = {
   selection: {
     renderHeader: function (h, { store }) {
       return (
-        <el-checkbox
+        <ven-checkbox
           disabled={store.states.data && store.states.data.length === 0}
           indeterminate={
             store.states.selection.length > 0 && !this.isAllSelected
@@ -42,7 +42,7 @@ export const cellForced = {
     },
     renderCell: function (h, { row, column, store, $index }) {
       return (
-        <el-checkbox
+        <ven-checkbox
           nativeOn-click={(event) => event.stopPropagation()}
           value={store.isSelected(row)}
           disabled={
@@ -82,9 +82,9 @@ export const cellForced = {
       return column.label || "";
     },
     renderCell: function (h, { row, store }) {
-      const classes = ["el-table__expand-icon"];
+      const classes = ["ven-table__expand-icon"];
       if (store.states.expandRows.indexOf(row) > -1) {
-        classes.push("el-table__expand-icon--expanded");
+        classes.push("ven-table__expand-icon--expanded");
       }
       const callback = function (e) {
         e.stopPropagation();
@@ -92,13 +92,13 @@ export const cellForced = {
       };
       return (
         <div class={classes} on-click={callback}>
-          <i class="el-icon el-icon-arrow-right"></i>
+          <i class="ven-icon ven-icon-arrow-right"></i>
         </div>
       );
     },
     sortable: false,
     resizable: false,
-    className: "el-table__expand-column",
+    className: "ven-table__expand-column",
   },
 };
 
@@ -121,19 +121,19 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
   if (treeNode.indent) {
     ele.push(
       <span
-        class="el-table__indent"
+        class="ven-table__indent"
         style={{ "padding-left": treeNode.indent + "px" }}
       ></span>
     );
   }
   if (typeof treeNode.expanded === "boolean" && !treeNode.noLazyChildren) {
     const expandClasses = [
-      "el-table__expand-icon",
-      treeNode.expanded ? "el-table__expand-icon--expanded" : "",
+      "ven-table__expand-icon",
+      treeNode.expanded ? "ven-table__expand-icon--expanded" : "",
     ];
-    let iconClasses = ["el-icon-arrow-right"];
+    let iconClasses = ["ven-icon-arrow-right"];
     if (treeNode.loading) {
-      iconClasses = ["el-icon-loading"];
+      iconClasses = ["ven-icon-loading"];
     }
     ele.push(
       <div class={expandClasses} on-click={callback}>
@@ -141,7 +141,7 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
       </div>
     );
   } else {
-    ele.push(<span class="el-table__placeholder"></span>);
+    ele.push(<span class="ven-table__placeholder"></span>);
   }
   return ele;
 }

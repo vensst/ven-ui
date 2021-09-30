@@ -1,12 +1,12 @@
 import Pager from "./pager.vue";
-import ElSelect from "../../select";
-import ElOption from "../../option";
-import ElInput from "../../input";
+import VenSelect from "../../select";
+import VenOption from "../../option";
+import VenInput from "../../input";
 import Locale from "../../../mixins/locale";
 import { valueEquals } from "../../../utils/util";
 
 export default {
-  name: "ElPagination",
+  name: "VenPagination",
 
   props: {
     pageSize: {
@@ -68,6 +68,7 @@ export default {
     };
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     const layout = this.layout;
     if (!layout) return null;
@@ -80,10 +81,10 @@ export default {
     let template = (
       <div
         class={[
-          "el-pagination",
+          "ven-pagination",
           {
             "is-background": this.background,
-            "el-pagination--small": this.small,
+            "ven-pagination--small": this.small,
           },
         ]}
       ></div>
@@ -106,7 +107,7 @@ export default {
       total: <total></total>,
     };
     const components = layout.split(",").map((item) => item.trim());
-    const rightWrapper = <div class="el-pagination__rightwrapper"></div>;
+    const rightWrapper = <div class="ven-pagination__rightwrapper"></div>;
     let haveRightWrapper = false;
 
     template.children = template.children || [];
@@ -133,6 +134,7 @@ export default {
 
   components: {
     Prev: {
+      // eslint-disable-next-line no-unused-vars
       render(h) {
         return (
           <button
@@ -146,7 +148,7 @@ export default {
             {this.$parent.prevText ? (
               <span>{this.$parent.prevText}</span>
             ) : (
-              <i class="el-icon el-icon-arrow-left"></i>
+              <i class="ven-icon ven-icon-arrow-left"></i>
             )}
           </button>
         );
@@ -154,6 +156,7 @@ export default {
     },
 
     Next: {
+      // eslint-disable-next-line no-unused-vars
       render(h) {
         return (
           <button
@@ -170,7 +173,7 @@ export default {
             {this.$parent.nextText ? (
               <span>{this.$parent.nextText}</span>
             ) : (
-              <i class="el-icon el-icon-arrow-right"></i>
+              <i class="ven-icon ven-icon-arrow-right"></i>
             )}
           </button>
         );
@@ -199,10 +202,11 @@ export default {
         },
       },
 
+      // eslint-disable-next-line no-unused-vars
       render(h) {
         return (
-          <span class="el-pagination__sizes">
-            <el-select
+          <span class="ven-pagination__sizes">
+            <ven-select
               value={this.$parent.internalPageSize}
               popperClass={this.$parent.popperClass || ""}
               size="mini"
@@ -210,19 +214,19 @@ export default {
               disabled={this.$parent.disabled}
             >
               {this.pageSizes.map((item) => (
-                <el-option
+                <ven-option
                   value={item}
                   label={item + this.t("el.pagination.pagesize")}
-                ></el-option>
+                ></ven-option>
               ))}
-            </el-select>
+            </ven-select>
           </span>
         );
       },
 
       components: {
-        ElSelect,
-        ElOption,
+        VenSelect,
+        VenOption,
       },
 
       methods: {
@@ -240,7 +244,7 @@ export default {
     Jumper: {
       mixins: [Locale],
 
-      components: { ElInput },
+      components: { VenInput },
 
       data() {
         return {
@@ -274,12 +278,13 @@ export default {
         },
       },
 
+      // eslint-disable-next-line no-unused-vars
       render(h) {
         return (
-          <span class="el-pagination__jump">
+          <span class="ven-pagination__jump">
             {this.t("el.pagination.goto")}
-            <el-input
-              class="el-pagination__editor is-in-pagination"
+            <ven-input
+              class="ven-pagination__editor is-in-pagination"
               min={1}
               max={this.$parent.internalPageCount}
               value={
@@ -302,9 +307,10 @@ export default {
     Total: {
       mixins: [Locale],
 
+      // eslint-disable-next-line no-unused-vars
       render(h) {
         return typeof this.$parent.total === "number" ? (
-          <span class="el-pagination__total">
+          <span class="ven-pagination__total">
             {this.t("el.pagination.total", { total: this.$parent.total })}
           </span>
         ) : (

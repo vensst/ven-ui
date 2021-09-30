@@ -1,54 +1,54 @@
 @import "../common/var";
 @import "../mixins/mixins";
 
-[class*="el-col-"] {
+[class*="ven-col-"] {
   float: left;
   box-sizing: border-box;
 }
 
-.el-col-0 {
+.ven-col-0 {
   display: none;
 }
 
 @for $i from 0 through 24 {
-  .el-col-#{$i} {
+  .ven-col-#{$i} {
     width: (1 / 24 * $i * 100) * 1%;
   }
 
-  .el-col-offset-#{$i} {
+  .ven-col-offset-#{$i} {
     margin-left: (1 / 24 * $i * 100) * 1%;
   }
 
-  .el-col-pull-#{$i} {
+  .ven-col-pull-#{$i} {
     position: relative;
     right: (1 / 24 * $i * 100) * 1%;
   }
 
-  .el-col-push-#{$i} {
+  .ven-col-push-#{$i} {
     position: relative;
     left: (1 / 24 * $i * 100) * 1%;
   }
 }
 
 @include res(xs) {
-  .el-col-xs-0 {
+  .ven-col-xs-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-xs-#{$i} {
+    .ven-col-xs-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xs-offset-#{$i} {
+    .ven-col-xs-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xs-pull-#{$i} {
+    .ven-col-xs-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xs-push-#{$i} {
+    .ven-col-xs-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -56,24 +56,24 @@
 }
 
 @include res(sm) {
-  .el-col-sm-0 {
+  .ven-col-sm-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-sm-#{$i} {
+    .ven-col-sm-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-sm-offset-#{$i} {
+    .ven-col-sm-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-sm-pull-#{$i} {
+    .ven-col-sm-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-sm-push-#{$i} {
+    .ven-col-sm-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -81,24 +81,24 @@
 }
 
 @include res(md) {
-  .el-col-md-0 {
+  .ven-col-md-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-md-#{$i} {
+    .ven-col-md-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-md-offset-#{$i} {
+    .ven-col-md-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-md-pull-#{$i} {
+    .ven-col-md-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-md-push-#{$i} {
+    .ven-col-md-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -106,24 +106,24 @@
 }
 
 @include res(lg) {
-  .el-col-lg-0 {
+  .ven-col-lg-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-lg-#{$i} {
+    .ven-col-lg-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-lg-offset-#{$i} {
+    .ven-col-lg-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-lg-pull-#{$i} {
+    .ven-col-lg-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-lg-push-#{$i} {
+    .ven-col-lg-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -131,24 +131,24 @@
 }
 
 @include res(xl) {
-  .el-col-xl-0 {
+  .ven-col-xl-0 {
     display: none;
   }
   @for $i from 0 through 24 {
-    .el-col-xl-#{$i} {
+    .ven-col-xl-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xl-offset-#{$i} {
+    .ven-col-xl-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xl-pull-#{$i} {
+    .ven-col-xl-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .el-col-xl-push-#{$i} {
+    .ven-col-xl-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }

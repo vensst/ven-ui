@@ -1,12 +1,12 @@
 <template>
-  <main class="el-main">
+  <main class="ven-main">
     <slot></slot>
   </main>
 </template>
 
 <script>
 export default {
-  name: "ElMain",
-  componentName: "ElMain",
+  name: "VenMain",
+  componentName: "VenMain",
 };
 </script>

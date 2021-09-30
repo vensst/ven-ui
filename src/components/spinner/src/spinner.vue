@@ -1,7 +1,7 @@
 <template>
-  <span class="el-spinner">
+  <span class="ven-spinner">
     <svg
-      class="el-spinner-inner"
+      class="ven-spinner-inner"
       viewBox="0 0 50 50"
       :style="{ width: radius / 2 + 'px', height: radius / 2 + 'px' }"
     >
@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-  name: "ElSpinner",
+  name: "VenSpinner",
   props: {
     type: String,
     radius: {

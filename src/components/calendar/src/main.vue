@@ -1,25 +1,36 @@
 <template>
-  <div class="el-calendar">
-    <div class="el-calendar__header">
-      <div class="el-calendar__title">
+  <div class="ven-calendar">
+    <div class="ven-calendar__header">
+      <div class="ven-calendar__title">
         {{ i18nDate }}
       </div>
-      <div class="el-calendar__button-group" v-if="validatedRange.length === 0">
-        <el-button-group>
-          <el-button type="plain" size="mini" @click="selectDate('prev-month')">
+      <div
+        class="ven-calendar__button-group"
+        v-if="validatedRange.length === 0"
+      >
+        <ven-button-group>
+          <ven-button
+            type="plain"
+            size="mini"
+            @click="selectDate('prev-month')"
+          >
             {{ t("el.datepicker.prevMonth") }}
-          </el-button>
-          <el-button type="plain" size="mini" @click="selectDate('today')">
+          </ven-button>
+          <ven-button type="plain" size="mini" @click="selectDate('today')">
             {{ t("el.datepicker.today") }}
-          </el-button>
-          <el-button type="plain" size="mini" @click="selectDate('next-month')">
+          </ven-button>
+          <ven-button
+            type="plain"
+            size="mini"
+            @click="selectDate('next-month')"
+          >
             {{ t("el.datepicker.nextMonth") }}
-          </el-button>
-        </el-button-group>
+          </ven-button>
+        </ven-button-group>
       </div>
     </div>
     <div
-      class="el-calendar__body"
+      class="ven-calendar__body"
       v-if="validatedRange.length === 0"
       key="no-range"
     >
@@ -30,7 +41,7 @@
         @pick="pickDay"
       />
     </div>
-    <div v-else class="el-calendar__body" key="has-range">
+    <div v-else class="ven-calendar__body" key="has-range">
       <date-table
         v-for="(range, index) in validatedRange"
         :key="index"
@@ -48,8 +59,8 @@
 <script>
 import Locale from "../../../mixins/locale";
 import fecha from "../../../utils/date";
-import ElButton from "../../button";
-import ElButtonGroup from "../../button-group";
+import VenButton from "../../button";
+import VenButtonGroup from "../../button-group";
 import DateTable from "./date-table";
 import { validateRangeInOneMonth } from "../../../utils/date-util";
 
@@ -66,14 +77,14 @@ const weekDays = [
 const oneDay = 86400000;
 
 export default {
-  name: "ElCalendar",
+  name: "VenCalendar",
 
   mixins: [Locale],
 
   components: {
     DateTable,
-    ElButton,
-    ElButtonGroup,
+    VenButton,
+    VenButtonGroup,
   },
 
   props: {
@@ -149,7 +160,7 @@ export default {
       }.`;
       if (date.getDay() !== expected) {
         console.warn(
-          "[ElementCalendar]",
+          "[VenementCalendar]",
           message,
           "Invalid range will be ignored."
         );

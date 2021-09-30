@@ -4,20 +4,20 @@
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave"
   >
-    <div class="el-carousel__container" :style="{ height: height }">
-      <transition v-if="arrowDisplay" name="carousel-arrow-left">
+    <div class="ven-carousel__container" :style="{ height: height }">
+      <transition v-if="arrowDisplay" name="carousven-arrow-left">
         <button
           type="button"
           v-show="(arrow === 'always' || hover) && (loop || activeIndex > 0)"
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
-          class="el-carousel__arrow el-carousel__arrow--left"
+          class="ven-carousel__arrow ven-carousel__arrow--left"
         >
-          <i class="el-icon-arrow-left"></i>
+          <i class="ven-icon-arrow-left"></i>
         </button>
       </transition>
-      <transition v-if="arrowDisplay" name="carousel-arrow-right">
+      <transition v-if="arrowDisplay" name="carousven-arrow-right">
         <button
           type="button"
           v-show="
@@ -27,9 +27,9 @@
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
-          class="el-carousel__arrow el-carousel__arrow--right"
+          class="ven-carousel__arrow ven-carousel__arrow--right"
         >
-          <i class="el-icon-arrow-right"></i>
+          <i class="ven-icon-arrow-right"></i>
         </button>
       </transition>
       <slot></slot>
@@ -39,14 +39,14 @@
         v-for="(item, index) in items"
         :key="index"
         :class="[
-          'el-carousel__indicator',
-          'el-carousel__indicator--' + direction,
+          'ven-carousel__indicator',
+          'ven-carousel__indicator--' + direction,
           { 'is-active': index === activeIndex },
         ]"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)"
       >
-        <button class="el-carousel__button">
+        <button class="ven-carousel__button">
           <span v-if="hasLabel">{{ item.label }}</span>
         </button>
       </li>
@@ -62,7 +62,7 @@ import {
 } from "../../../utils/resize-event";
 
 export default {
-  name: "ElCarousel",
+  name: "VenCarousel",
 
   props: {
     initialIndex: {
@@ -125,23 +125,23 @@ export default {
     },
 
     carouselClasses() {
-      const classes = ["el-carousel", "el-carousel--" + this.direction];
+      const classes = ["ven-carousel", "ven-carousven--" + this.direction];
       if (this.type === "card") {
-        classes.push("el-carousel--card");
+        classes.push("ven-carousven--card");
       }
       return classes;
     },
 
     indicatorsClasses() {
       const classes = [
-        "el-carousel__indicators",
-        "el-carousel__indicators--" + this.direction,
+        "ven-carousel__indicators",
+        "ven-carousel__indicators--" + this.direction,
       ];
       if (this.hasLabel) {
-        classes.push("el-carousel__indicators--labels");
+        classes.push("ven-carousel__indicators--labels");
       }
       if (this.indicatorPosition === "outside" || this.type === "card") {
-        classes.push("el-carousel__indicators--outside");
+        classes.push("ven-carousel__indicators--outside");
       }
       return classes;
     },
@@ -218,7 +218,7 @@ export default {
 
     updateItems() {
       this.items = this.$children.filter(
-        (child) => child.$options.name === "ElCarouselItem"
+        (child) => child.$options.name === "VenCarouselItem"
       );
     },
 

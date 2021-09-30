@@ -1,8 +1,8 @@
 <template>
-  <div class="el-color-hue-slider" :class="{ 'is-vertical': vertical }">
-    <div class="el-color-hue-slider__bar" @click="handleClick" ref="bar"></div>
+  <div class="ven-color-hue-slider" :class="{ 'is-vertical': vertical }">
+    <div class="ven-color-hue-slider__bar" @click="handleClick" ref="bar"></div>
     <div
-      class="el-color-hue-slider__thumb"
+      class="ven-color-hue-slider__thumb"
       :style="{
         left: thumbLeft + 'px',
         top: thumbTop + 'px',
@@ -16,7 +16,7 @@
 import draggable from "../draggable";
 
 export default {
-  name: "el-color-hue-slider",
+  name: "ven-color-hue-slider",
 
   props: {
     color: {

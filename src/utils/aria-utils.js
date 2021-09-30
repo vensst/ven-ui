@@ -58,6 +58,7 @@ aria.Utils.attemptFocus = function (element) {
   aria.Utils.IgnoreUtilFocusChanges = true;
   try {
     element.focus();
+    // eslint-disable-next-line no-empty
   } catch (e) {}
   aria.Utils.IgnoreUtilFocusChanges = false;
   return document.activeElement === element;

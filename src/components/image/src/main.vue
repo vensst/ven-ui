@@ -1,22 +1,22 @@
 <template>
-  <div class="el-image">
+  <div class="ven-image">
     <slot v-if="loading" name="placeholder">
-      <div class="el-image__placeholder"></div>
+      <div class="ven-image__placeholder"></div>
     </slot>
     <slot v-else-if="error" name="error">
-      <div class="el-image__error">{{ t("el.image.error") }}</div>
+      <div class="ven-image__error">{{ t("el.image.error") }}</div>
     </slot>
     <img
       v-else
-      class="el-image__inner"
+      class="ven-image__inner"
       v-bind="$attrs"
       v-on="$listeners"
       @click="clickHandler"
       :src="src"
       :style="imageStyle"
       :class="{
-        'el-image__inner--center': alignCenter,
-        'el-image__preview': preview,
+        'ven-image__inner--center': alignCenter,
+        'ven-image__preview': preview,
       }"
     />
     <template v-if="preview">
@@ -52,7 +52,7 @@ const ObjectFit = {
 let prevOverflow = "";
 
 export default {
-  name: "ElImage",
+  name: "VenImage",
 
   mixins: [Locale],
   inheritAttrs: false,
@@ -117,6 +117,7 @@ export default {
   },
 
   watch: {
+    // eslint-disable-next-line no-unused-vars
     src(val) {
       this.show && this.loadImage();
     },

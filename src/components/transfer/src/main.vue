@@ -1,5 +1,5 @@
 <template>
-  <div class="el-transfer">
+  <div class="ven-transfer">
     <transfer-panel
       v-bind="$props"
       ref="leftPanel"
@@ -11,25 +11,25 @@
     >
       <slot name="left-footer"></slot>
     </transfer-panel>
-    <div class="el-transfer__buttons">
-      <el-button
+    <div class="ven-transfer__buttons">
+      <ven-button
         type="primary"
-        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
+        :class="['ven-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToLeft"
         :disabled="rightChecked.length === 0"
       >
-        <i class="el-icon-arrow-left"></i>
+        <i class="ven-icon-arrow-left"></i>
         <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
-      </el-button>
-      <el-button
+      </ven-button>
+      <ven-button
         type="primary"
-        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
+        :class="['ven-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToRight"
         :disabled="leftChecked.length === 0"
       >
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
-        <i class="el-icon-arrow-right"></i>
-      </el-button>
+        <i class="ven-icon-arrow-right"></i>
+      </ven-button>
     </div>
     <transfer-panel
       v-bind="$props"
@@ -46,20 +46,20 @@
 </template>
 
 <script>
-import ElButton from "../../button";
+import VenButton from "../../button";
 import Emitter from "../../../mixins/emitter";
 import Locale from "../../../mixins/locale";
 import TransferPanel from "./transfer-panel.vue";
 import Migrating from "../../../mixins/migrating";
 
 export default {
-  name: "ElTransfer",
+  name: "VenTransfer",
 
   mixins: [Emitter, Locale, Migrating],
 
   components: {
     TransferPanel,
-    ElButton,
+    VenButton,
   },
 
   props: {
@@ -170,7 +170,7 @@ export default {
 
   watch: {
     value(val) {
-      this.dispatch("ElFormItem", "el.form.change", val);
+      this.dispatch("VenFormItem", "el.form.change", val);
     },
   },
 

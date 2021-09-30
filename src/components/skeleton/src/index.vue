@@ -2,16 +2,17 @@
   <div>
     <template v-if="uiLoading">
       <div
-        :class="['el-skeleton', animated ? 'is-animated' : '']"
+        :class="['ven-skeleton', animated ? 'is-animated' : '']"
         v-bind="$attrs"
       >
+        <!--eslint-disable-next-line vue/no-unused-vars-->
         <template v-for="i in count">
           <slot v-if="loading" name="template">
-            <el-skeleton-item
+            <ven-skeleton-item
               v-for="item in rows"
               :key="item"
               :class="{
-                'el-skeleton__paragraph': item !== 1,
+                'ven-skeleton__paragraph': item !== 1,
                 'is-first': item === 1,
                 'is-last': item === rows && rows > 1,
               }"
@@ -28,7 +29,7 @@
 </template>
 <script>
 export default {
-  name: "ElSkeleton",
+  name: "VenSkeleton",
   props: {
     animated: {
       type: Boolean,

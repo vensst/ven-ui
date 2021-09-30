@@ -38,7 +38,7 @@ const getClientHeight = (el) => {
   return getPositionSize(el, "clientHeight");
 };
 
-const scope = "ElInfiniteScroll";
+const scope = "VenInfiniteScroll";
 const attributes = {
   delay: {
     type: Number,

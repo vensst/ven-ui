@@ -1,9 +1,9 @@
 @import "../mixins/mixins";
 @import "../mixins/utils";
 @import "../common/var";
-@import "components/input";
-@import "components/scrollbar";
-@import "components/popper";
+@import "../components/input";
+@import "../components/scrollbar";
+@import "../components/popper";
 
 @include b(autocomplete) {
   position: relative;
@@ -73,7 +73,7 @@
       }
     }
 
-    & .el-icon-loading {
+    & .ven-icon-loading {
       vertical-align: middle;
     }
   }

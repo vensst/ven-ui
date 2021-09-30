@@ -12,20 +12,20 @@ npm i element-steps -D
 ## Usage
 ```javascript
 import Vue from 'vue'
-import ElStep from 'element-steps'
+import VenStep from 'element-steps'
 import 'element-theme-chalk/dist/step.css'
 
-Vue.use(ElStep)
+Vue.use(VenStep)
 ```
 
 or
 
 ```javascript
 import Vue from 'vue'
-import { ElSteps, ElStep } from 'element-steps'
+import { VenSteps, VenStep } from 'element-steps'
 
-Vue.component('el-steps', ElSteps)
-Vue.component('el-step', ElStep)
+Vue.component('ven-steps', VenSteps)
+Vue.component('ven-step', VenStep)
 ```
 
 ### Steps Attributes

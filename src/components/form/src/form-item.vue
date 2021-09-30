@@ -1,16 +1,16 @@
 <template>
   <div
-    class="el-form-item"
+    class="ven-form-item"
     :class="[
       {
-        'el-form-item--feedback': elForm && elForm.statusIcon,
+        'ven-form-item--feedback': elForm && elForm.statusIcon,
         'is-error': validateState === 'error',
         'is-validating': validateState === 'validating',
         'is-success': validateState === 'success',
         'is-required': isRequired || required,
         'is-no-asterisk': elForm && elForm.hideRequiredAsterisk,
       },
-      sizeClass ? 'el-form-item--' + sizeClass : '',
+      sizeClass ? 'ven-form-item--' + sizeClass : '',
     ]"
   >
     <label-wrap
@@ -19,25 +19,25 @@
     >
       <label
         :for="labelFor"
-        class="el-form-item__label"
+        class="ven-form-item__label"
         :style="labelStyle"
         v-if="label || $slots.label"
       >
         <slot name="label">{{ label + form.labelSuffix }}</slot>
       </label>
     </label-wrap>
-    <div class="el-form-item__content" :style="contentStyle">
+    <div class="ven-form-item__content" :style="contentStyle">
       <slot></slot>
-      <transition name="el-zoom-in-top">
+      <transition name="ven-zoom-in-top">
         <slot
           v-if="validateState === 'error' && showMessage && form.showMessage"
           name="error"
           :error="validateMessage"
         >
           <div
-            class="el-form-item__error"
+            class="ven-form-item__error"
             :class="{
-              'el-form-item__error--inline':
+              'ven-form-item__error--inline':
                 typeof inlineMessage === 'boolean'
                   ? inlineMessage
                   : (elForm && elForm.inlineMessage) || false,
@@ -57,9 +57,9 @@ import objectAssign from "../../../utils/merge";
 import { noop, getPropByPath } from "../../../utils/util";
 import LabelWrap from "./label-wrap";
 export default {
-  name: "ElFormItem",
+  name: "VenFormItem",
 
-  componentName: "ElFormItem",
+  componentName: "VenFormItem",
 
   mixins: [emitter],
 
@@ -142,8 +142,9 @@ export default {
     form() {
       let parent = this.$parent;
       let parentName = parent.$options.componentName;
-      while (parentName !== "ElForm") {
-        if (parentName === "ElFormItem") {
+      while (parentName !== "VenForm") {
+        if (parentName === "VenFormItem") {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.isNested = true;
         }
         parent = parent.$parent;
@@ -271,7 +272,7 @@ export default {
         this.validateDisabled = false;
       });
 
-      this.broadcast("ElTimeSelect", "fieldReset", this.initialValue);
+      this.broadcast("VenTimeSelect", "fieldReset", this.initialValue);
     },
     getRules() {
       let formRules = this.form.rules;
@@ -326,7 +327,7 @@ export default {
   },
   mounted() {
     if (this.prop) {
-      this.dispatch("ElForm", "el.form.addField", [this]);
+      this.dispatch("VenForm", "el.form.addField", [this]);
 
       let initialValue = this.fieldValue;
       if (Array.isArray(initialValue)) {
@@ -340,7 +341,7 @@ export default {
     }
   },
   beforeDestroy() {
-    this.dispatch("ElForm", "el.form.removeField", [this]);
+    this.dispatch("VenForm", "el.form.removeField", [this]);
   },
 };
 </script>

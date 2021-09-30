@@ -1,8 +1,8 @@
-import ElTimelineItem from "../timeline/src/item";
+import VenTimelineItem from "../timeline/src/item";
 
 /* istanbul ignore next */
-ElTimelineItem.install = function (Vue) {
-  Vue.component(ElTimelineItem.name, ElTimelineItem);
+VenTimelineItem.install = function (Vue) {
+  Vue.component(VenTimelineItem.name, VenTimelineItem);
 };
 
-export default ElTimelineItem;
+export default VenTimelineItem;

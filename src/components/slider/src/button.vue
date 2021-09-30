@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-slider__button-wrapper"
+    class="ven-slider__button-wrapper"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="onButtonDown"
@@ -16,7 +16,7 @@
     @keydown.down.prevent="onLeftKeyDown"
     @keydown.up.prevent="onRightKeyDown"
   >
-    <el-tooltip
+    <ven-tooltip
       placement="top"
       ref="tooltip"
       :popper-class="tooltipClass"
@@ -24,21 +24,21 @@
     >
       <span slot="content">{{ formatValue }}</span>
       <div
-        class="el-slider__button"
+        class="ven-slider__button"
         :class="{ hover: hovering, dragging: dragging }"
       ></div>
-    </el-tooltip>
+    </ven-tooltip>
   </div>
 </template>
 
 <script>
-import ElTooltip from "../../tooltip";
+import VenTooltip from "../../tooltip";
 
 export default {
-  name: "ElSliderButton",
+  name: "VenSliderButton",
 
   components: {
-    ElTooltip,
+    VenTooltip,
   },
 
   props: {

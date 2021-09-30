@@ -1,21 +1,21 @@
 <template>
-  <div class="el-transfer-panel">
-    <p class="el-transfer-panel__header">
-      <el-checkbox
+  <div class="ven-transfer-panel">
+    <p class="ven-transfer-panel__header">
+      <ven-checkbox
         v-model="allChecked"
         @change="handleAllCheckedChange"
         :indeterminate="isIndeterminate"
       >
         {{ title }}
         <span>{{ checkedSummary }}</span>
-      </el-checkbox>
+      </ven-checkbox>
     </p>
 
     <div
-      :class="['el-transfer-panel__body', hasFooter ? 'is-with-footer' : '']"
+      :class="['ven-transfer-panel__body', hasFooter ? 'is-with-footer' : '']"
     >
-      <el-input
-        class="el-transfer-panel__filter"
+      <ven-input
+        class="ven-transfer-panel__filter"
         v-model="query"
         size="small"
         :placeholder="placeholder"
@@ -25,66 +25,66 @@
       >
         <i
           slot="prefix"
-          :class="['el-input__icon', 'el-icon-' + inputIcon]"
+          :class="['ven-input__icon', 'ven-icon-' + inputIcon]"
           @click="clearQuery"
         ></i>
-      </el-input>
-      <el-checkbox-group
+      </ven-input>
+      <ven-checkbox-group
         v-model="checked"
         v-show="!hasNoMatch && data.length > 0"
         :class="{ 'is-filterable': filterable }"
-        class="el-transfer-panel__list"
+        class="ven-transfer-panel__list"
       >
-        <el-checkbox
-          class="el-transfer-panel__item"
+        <ven-checkbox
+          class="ven-transfer-panel__item"
           :label="item[keyProp]"
           :disabled="item[disabledProp]"
           :key="item[keyProp]"
           v-for="item in filteredData"
         >
           <option-content :option="item"></option-content>
-        </el-checkbox>
-      </el-checkbox-group>
-      <p class="el-transfer-panel__empty" v-show="hasNoMatch">
+        </ven-checkbox>
+      </ven-checkbox-group>
+      <p class="ven-transfer-panel__empty" v-show="hasNoMatch">
         {{ t("el.transfer.noMatch") }}
       </p>
       <p
-        class="el-transfer-panel__empty"
+        class="ven-transfer-panel__empty"
         v-show="data.length === 0 && !hasNoMatch"
       >
         {{ t("el.transfer.noData") }}
       </p>
     </div>
-    <p class="el-transfer-panel__footer" v-if="hasFooter">
+    <p class="ven-transfer-panel__footer" v-if="hasFooter">
       <slot></slot>
     </p>
   </div>
 </template>
 
 <script>
-import ElCheckboxGroup from "../../checkbox-group";
-import ElCheckbox from "../../checkbox";
-import ElInput from "../../input";
+import VenCheckboxGroup from "../../checkbox-group";
+import VenCheckbox from "../../checkbox";
+import VenInput from "../../input";
 import Locale from "../../../mixins/locale";
 
 export default {
   mixins: [Locale],
 
-  name: "ElTransferPanel",
+  name: "VenTransferPanel",
 
-  componentName: "ElTransferPanel",
+  componentName: "VenTransferPanel",
 
   components: {
-    ElCheckboxGroup,
-    ElCheckbox,
-    ElInput,
+    VenCheckboxGroup,
+    VenCheckbox,
+    VenInput,
     OptionContent: {
       props: {
         option: Object,
       },
       render(h) {
         const getParent = (vm) => {
-          if (vm.$options.componentName === "ElTransferPanel") {
+          if (vm.$options.componentName === "VenTransferPanel") {
             return vm;
           } else if (vm.$parent) {
             return getParent(vm.$parent);
@@ -94,15 +94,17 @@ export default {
         };
         const panel = getParent(this);
         const transfer = panel.$parent || panel;
-        return panel.renderContent ? (
-          panel.renderContent(h, this.option)
-        ) : transfer.$scopedSlots.default ? (
-          transfer.$scopedSlots.default({ option: this.option })
-        ) : (
-          <span>
-            {this.option[panel.labelProp] || this.option[panel.keyProp]}
-          </span>
-        );
+        if (panel.renderContent) {
+          return panel.renderContent(h, this.option);
+        } else if (transfer.$scopedSlots.default) {
+          return transfer.$scopedSlots.default({ option: this.option });
+        } else {
+          return (
+            <span>
+              {this.option[panel.labelProp] || this.option[panel.keyProp]}
+            </span>
+          );
+        }
       },
     },
   },

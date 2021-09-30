@@ -1,10 +1,10 @@
 <template>
-  <i :class="'el-icon-' + name"></i>
+  <i :class="'ven-icon-' + name"></i>
 </template>
 
 <script>
 export default {
-  name: "ElIcon",
+  name: "VenIcon",
 
   props: {
     name: String,

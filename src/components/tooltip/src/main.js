@@ -5,7 +5,7 @@ import { generateId } from "../../../utils/util";
 import Vue from "vue";
 
 export default {
-  name: "ElTooltip",
+  name: "VenTooltip",
 
   mixins: [Popper],
 
@@ -31,7 +31,7 @@ export default {
     },
     transition: {
       type: String,
-      default: "el-fade-in-linear",
+      default: "ven-fade-in-linear",
     },
     popperOptions: {
       default() {
@@ -57,7 +57,7 @@ export default {
 
   data() {
     return {
-      tooltipId: `el-tooltip-${generateId()}`,
+      tooltipId: `ven-tooltip-${generateId()}`,
       timeoutPending: null,
       focusing: false,
     };
@@ -67,6 +67,7 @@ export default {
 
     this.popperVM = new Vue({
       data: { node: "" },
+      // eslint-disable-next-line no-unused-vars
       render(h) {
         return this.node;
       },
@@ -75,6 +76,7 @@ export default {
     this.debounceClose = debounce(200, () => this.handleClosePopper());
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     if (this.popperVM) {
       this.popperVM.node = (
@@ -93,7 +95,7 @@ export default {
             aria-hidden={this.disabled || !this.showPopper ? "true" : "false"}
             v-show={!this.disabled && this.showPopper}
             class={[
-              "el-tooltip__popper",
+              "ven-tooltip__popper",
               "is-" + this.effect,
               this.popperClass,
             ]}
@@ -135,7 +137,6 @@ export default {
       on(this.referenceElm, "blur", this.handleBlur);
       on(this.referenceElm, "click", this.removeFocusing);
     }
-    // fix issue https://github.com/ElemeFE/element/issues/14424
     if (this.value && this.popperVM) {
       this.popperVM.$nextTick(() => {
         if (this.value) {
@@ -177,9 +178,9 @@ export default {
 
     addTooltipClass(prev) {
       if (!prev) {
-        return "el-tooltip";
+        return "ven-tooltip";
       } else {
-        return "el-tooltip " + prev.replace("el-tooltip", "");
+        return "ven-tooltip " + prev.replace("ven-tooltip", "");
       }
     },
 

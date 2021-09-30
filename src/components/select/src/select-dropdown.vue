@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-select-dropdown el-popper"
+    class="ven-select-dropdown ven-popper"
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
     :style="{ minWidth: minWidth }"
   >
@@ -8,13 +8,13 @@
   </div>
 </template>
 
-<script type="text/babel">
+<script>
 import Popper from "../../../utils/vue-popper";
 
 export default {
-  name: "ElSelectDropdown",
+  name: "VenSelectDropdown",
 
-  componentName: "ElSelectDropdown",
+  componentName: "VenSelectDropdown",
 
   mixins: [Popper],
 

@@ -1,35 +1,35 @@
 <template>
-  <transition name="el-alert-fade">
+  <transition name="ven-alert-fade">
     <div
-      class="el-alert"
+      class="ven-alert"
       :class="[typeClass, center ? 'is-center' : '', 'is-' + effect]"
       v-show="visible"
       role="alert"
     >
       <i
-        class="el-alert__icon"
+        class="ven-alert__icon"
         :class="[iconClass, isBigIcon]"
         v-if="showIcon"
       ></i>
-      <div class="el-alert__content">
+      <div class="ven-alert__content">
         <span
-          class="el-alert__title"
+          class="ven-alert__title"
           :class="[isBoldTitle]"
           v-if="title || $slots.title"
         >
           <slot name="title">{{ title }}</slot>
         </span>
-        <p class="el-alert__description" v-if="$slots.default && !description">
+        <p class="ven-alert__description" v-if="$slots.default && !description">
           <slot></slot>
         </p>
-        <p class="el-alert__description" v-if="description && !$slots.default">
+        <p class="ven-alert__description" v-if="description && !$slots.default">
           {{ description }}
         </p>
         <i
-          class="el-alert__closebtn"
+          class="ven-alert__closebtn"
           :class="{
             'is-customed': closeText !== '',
-            'el-icon-close': closeText === '',
+            'ven-icon-close': closeText === '',
           }"
           v-show="closable"
           @click="close()"
@@ -40,15 +40,15 @@
   </transition>
 </template>
 
-<script type="text/babel">
+<script>
 const TYPE_CLASSES_MAP = {
-  success: "el-icon-success",
-  warning: "el-icon-warning",
-  error: "el-icon-error",
+  success: "ven-icon-success",
+  warning: "ven-icon-warning",
+  error: "ven-icon-error",
 };
 export default {
-  name: "ElAlert",
-
+  name: "VenAlert",
+  componentName: "VenAlert",
   props: {
     title: {
       type: String,
@@ -96,11 +96,11 @@ export default {
 
   computed: {
     typeClass() {
-      return `el-alert--${this.type}`;
+      return `ven-alert--${this.type}`;
     },
 
     iconClass() {
-      return TYPE_CLASSES_MAP[this.type] || "el-icon-info";
+      return TYPE_CLASSES_MAP[this.type] || "ven-icon-info";
     },
 
     isBigIcon() {

@@ -26,10 +26,11 @@ LoadingConstructor.prototype.close = function () {
   }
   afterLeave(
     this,
+    // eslint-disable-next-line no-unused-vars
     (_) => {
       const target = this.fullscreen || this.body ? document.body : this.target;
-      removeClass(target, "el-loading-parent--relative");
-      removeClass(target, "el-loading-parent--hidden");
+      removeClass(target, "ven-loading-parent--relative");
+      removeClass(target, "ven-loading-parent--hidden");
       if (this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
       }
@@ -95,10 +96,10 @@ const Loading = (options = {}) => {
     instance.originalPosition !== "absolute" &&
     instance.originalPosition !== "fixed"
   ) {
-    addClass(parent, "el-loading-parent--relative");
+    addClass(parent, "ven-loading-parent--relative");
   }
   if (options.fullscreen && options.lock) {
-    addClass(parent, "el-loading-parent--hidden");
+    addClass(parent, "ven-loading-parent--hidden");
   }
   parent.appendChild(instance.$el);
   Vue.nextTick(() => {

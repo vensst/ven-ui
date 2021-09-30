@@ -48,6 +48,7 @@ loadingDirective.install = (Vue) => {
     } else {
       afterLeave(
         el.instance,
+        // eslint-disable-next-line no-unused-vars
         (_) => {
           if (!el.instance.hiding) return;
           el.domVisible = false;
@@ -55,8 +56,8 @@ loadingDirective.install = (Vue) => {
             binding.modifiers.fullscreen || binding.modifiers.body
               ? document.body
               : el;
-          removeClass(target, "el-loading-parent--relative");
-          removeClass(target, "el-loading-parent--hidden");
+          removeClass(target, "ven-loading-parent--relative");
+          removeClass(target, "ven-loading-parent--hidden");
           el.instance.hiding = false;
         },
         300,
@@ -80,10 +81,10 @@ loadingDirective.install = (Vue) => {
         el.originalPosition !== "absolute" &&
         el.originalPosition !== "fixed"
       ) {
-        addClass(parent, "el-loading-parent--relative");
+        addClass(parent, "ven-loading-parent--relative");
       }
       if (binding.modifiers.fullscreen && binding.modifiers.lock) {
-        addClass(parent, "el-loading-parent--hidden");
+        addClass(parent, "ven-loading-parent--hidden");
       }
       el.domVisible = true;
 

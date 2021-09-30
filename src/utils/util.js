@@ -229,6 +229,7 @@ export function rafThrottle(fn) {
   return function (...args) {
     if (locked) return;
     locked = true;
+    // eslint-disable-next-line no-unused-vars
     window.requestAnimationFrame((_) => {
       fn.apply(this, args);
       locked = false;

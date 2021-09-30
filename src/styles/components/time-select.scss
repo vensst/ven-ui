@@ -1,15 +1,15 @@
 @import "../common/var";
 @import "../date-picker/picker";
 @import "../date-picker/date-picker";
-@import "components/scrollbar";
-@import "components/popper";
+@import "../components/scrollbar";
+@import "../components/popper";
 
 .time-select {
   margin: 5px 0;
   min-width: 0;
 }
 
-.time-select .el-picker-panel__content {
+.time-select .ven-picker-panel__content {
   max-height: 200px;
   margin: 0;
 }

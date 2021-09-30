@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-tabs__active-bar"
+    class="ven-tabs__active-bar"
     :class="`is-${rootTabs.tabPosition}`"
     :style="barStyle"
   ></div>
@@ -32,6 +32,7 @@ export default {
             .toLowerCase()
             .replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
         };
+        // eslint-disable-next-line no-unused-vars
         this.tabs.every((tab, index) => {
           let $el = arrayFind(
             this.$parent.$refs.tabs || [],

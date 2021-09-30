@@ -1,19 +1,19 @@
 <template>
   <div
-    class="el-collapse-item"
+    class="ven-collapse-item"
     :class="{ 'is-active': isActive, 'is-disabled': disabled }"
   >
     <div
       role="tab"
       :aria-expanded="isActive"
-      :aria-controls="`el-collapse-content-${id}`"
-      :aria-describedby="`el-collapse-content-${id}`"
+      :aria-controls="`ven-collapse-content-${id}`"
+      :aria-describedby="`ven-collapse-content-${id}`"
     >
       <div
-        class="el-collapse-item__header"
+        class="ven-collapse-item__header"
         @click="handleHeaderClick"
         role="button"
-        :id="`el-collapse-head-${id}`"
+        :id="`ven-collapse-head-${id}`"
         :tabindex="disabled ? undefined : 0"
         @keyup.space.enter.stop="handleEnterClick"
         :class="{
@@ -25,41 +25,41 @@
       >
         <slot name="title">{{ title }}</slot>
         <i
-          class="el-collapse-item__arrow el-icon-arrow-right"
+          class="ven-collapse-item__arrow ven-icon-arrow-right"
           :class="{ 'is-active': isActive }"
         >
         </i>
       </div>
     </div>
-    <el-collapse-transition>
+    <ven-collapse-transition>
       <div
-        class="el-collapse-item__wrap"
+        class="ven-collapse-item__wrap"
         v-show="isActive"
         role="tabpanel"
         :aria-hidden="!isActive"
-        :aria-labelledby="`el-collapse-head-${id}`"
-        :id="`el-collapse-content-${id}`"
+        :aria-labelledby="`ven-collapse-head-${id}`"
+        :id="`ven-collapse-content-${id}`"
       >
-        <div class="el-collapse-item__content">
+        <div class="ven-collapse-item__content">
           <slot></slot>
         </div>
       </div>
-    </el-collapse-transition>
+    </ven-collapse-transition>
   </div>
 </template>
 <script>
-import ElCollapseTransition from "../../../transitions/collapse-transition";
+import VenCollapseTransition from "../../../transitions/collapse-transition";
 import Emitter from "../../../mixins/emitter";
 import { generateId } from "../../../utils/util";
 
 export default {
-  name: "ElCollapseItem",
+  name: "VenCollapseItem",
 
-  componentName: "ElCollapseItem",
+  componentName: "VenCollapseItem",
 
   mixins: [Emitter],
 
-  components: { ElCollapseTransition },
+  components: { VenCollapseTransition },
 
   data() {
     return {
@@ -105,12 +105,12 @@ export default {
     },
     handleHeaderClick() {
       if (this.disabled) return;
-      this.dispatch("ElCollapse", "item-click", this);
+      this.dispatch("VenCollapse", "item-click", this);
       this.focusing = false;
       this.isClick = true;
     },
     handleEnterClick() {
-      this.dispatch("ElCollapse", "item-click", this);
+      this.dispatch("VenCollapse", "item-click", this);
     },
   },
 };

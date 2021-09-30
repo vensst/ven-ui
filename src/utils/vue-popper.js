@@ -105,6 +105,7 @@ export default {
       options.offset = this.offset;
       options.arrowOffset = this.arrowOffset;
       this.popperJS = new PopperJS(reference, popper, options);
+      // eslint-disable-next-line no-unused-vars
       this.popperJS.onCreate((_) => {
         this.$emit("created", this);
         this.resetTransformOrigin();

@@ -1,35 +1,35 @@
 <template>
-  <el-popover v-bind="$attrs" v-model="visible" trigger="click">
-    <div class="el-popconfirm">
-      <p class="el-popconfirm__main">
+  <ven-popover v-bind="$attrs" v-model="visible" trigger="click">
+    <div class="ven-popconfirm">
+      <p class="ven-popconfirm__main">
         <i
           v-if="!hideIcon"
           :class="icon"
-          class="el-popconfirm__icon"
+          class="ven-popconfirm__icon"
           :style="{ color: iconColor }"
         ></i>
         {{ title }}
       </p>
-      <div class="el-popconfirm__action">
-        <el-button size="mini" :type="cancelButtonType" @click="cancel">
+      <div class="ven-popconfirm__action">
+        <ven-button size="mini" :type="cancelButtonType" @click="cancel">
           {{ displayCancelButtonText }}
-        </el-button>
-        <el-button size="mini" :type="confirmButtonType" @click="confirm">
+        </ven-button>
+        <ven-button size="mini" :type="confirmButtonType" @click="confirm">
           {{ displayConfirmButtonText }}
-        </el-button>
+        </ven-button>
       </div>
     </div>
     <slot name="reference" slot="reference"></slot>
-  </el-popover>
+  </ven-popover>
 </template>
 
 <script>
-import ElPopover from "../../popover";
-import ElButton from "../../button";
+import VenPopover from "../../popover";
+import VenButton from "../../button";
 import { t } from "../../../locale";
 
 export default {
-  name: "ElPopconfirm",
+  name: "VenPopconfirm",
   props: {
     title: {
       type: String,
@@ -50,7 +50,7 @@ export default {
     },
     icon: {
       type: String,
-      default: "el-icon-question",
+      default: "ven-icon-question",
     },
     iconColor: {
       type: String,
@@ -62,8 +62,8 @@ export default {
     },
   },
   components: {
-    ElPopover,
-    ElButton,
+    VenPopover,
+    VenButton,
   },
   data() {
     return {

@@ -2,7 +2,7 @@
   <table
     @click="handleMonthTableClick"
     @mousemove="handleMouseMove"
-    class="el-month-table"
+    class="ven-month-table"
   >
     <tbody>
       <tr v-for="(row, key) in rows" :key="key">
@@ -18,7 +18,7 @@
   </table>
 </template>
 
-<script type="text/babel">
+<script>
 import Locale from "../../../../mixins/locale";
 import {
   isDate,

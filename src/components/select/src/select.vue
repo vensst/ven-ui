@@ -1,18 +1,18 @@
 <template>
   <div
-    class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '']"
+    class="ven-select"
+    :class="[selectSize ? 'ven-select--' + selectSize : '']"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose"
   >
     <div
-      class="el-select__tags"
+      class="ven-select__tags"
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }"
     >
       <span v-if="collapseTags && selected.length">
-        <el-tag
+        <ven-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
@@ -20,22 +20,22 @@
           @close="deleteTag($event, selected[0])"
           disable-transitions
         >
-          <span class="el-select__tags-text">{{
+          <span class="ven-select__tags-text">{{
             selected[0].currentLabel
           }}</span>
-        </el-tag>
-        <el-tag
+        </ven-tag>
+        <ven-tag
           v-if="selected.length > 1"
           :closable="false"
           :size="collapseTagSize"
           type="info"
           disable-transitions
         >
-          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
-        </el-tag>
+          <span class="ven-select__tags-text">+ {{ selected.length - 1 }}</span>
+        </ven-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
-        <el-tag
+        <ven-tag
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!selectDisabled"
@@ -45,13 +45,13 @@
           @close="deleteTag($event, item)"
           disable-transitions
         >
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
-        </el-tag>
+          <span class="ven-select__tags-text">{{ item.currentLabel }}</span>
+        </ven-tag>
       </transition-group>
 
       <input
         type="text"
-        class="el-select__input"
+        class="ven-select__input"
         :class="[selectSize ? `is-${selectSize}` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
@@ -79,7 +79,7 @@
         ref="input"
       />
     </div>
-    <el-input
+    <ven-input
       ref="reference"
       v-model="selectedLabel"
       type="text"
@@ -112,41 +112,41 @@
         <i
           v-show="!showClose"
           :class="[
-            'el-select__caret',
-            'el-input__icon',
-            'el-icon-' + iconClass,
+            'ven-select__caret',
+            'ven-input__icon',
+            'ven-icon-' + iconClass,
           ]"
         ></i>
         <i
           v-if="showClose"
-          class="el-select__caret el-input__icon el-icon-circle-close"
+          class="ven-select__caret ven-input__icon ven-icon-circle-close"
           @click="handleClearClick"
         ></i>
       </template>
-    </el-input>
+    </ven-input>
     <transition
-      name="el-zoom-in-top"
+      name="ven-zoom-in-top"
       @before-enter="handleMenuEnter"
       @after-leave="doDestroy"
     >
-      <el-select-menu
+      <ven-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false"
       >
-        <el-scrollbar
+        <ven-scrollbar
           tag="ul"
-          wrap-class="el-select-dropdown__wrap"
-          view-class="el-select-dropdown__list"
+          wrap-class="ven-select-dropdown__wrap"
+          view-class="ven-select-dropdown__list"
           ref="scrollbar"
           :class="{
             'is-empty': !allowCreate && query && filteredOptionsCount === 0,
           }"
           v-show="options.length > 0 && !loading"
         >
-          <el-option :value="query" created v-if="showNewOption"> </el-option>
+          <ven-option :value="query" created v-if="showNewOption"> </ven-option>
           <slot></slot>
-        </el-scrollbar>
+        </ven-scrollbar>
         <template
           v-if="
             emptyText &&
@@ -154,24 +154,24 @@
           "
         >
           <slot name="empty" v-if="$slots.empty"></slot>
-          <p class="el-select-dropdown__empty" v-else>
+          <p class="ven-select-dropdown__empty" v-else>
             {{ emptyText }}
           </p>
         </template>
-      </el-select-menu>
+      </ven-select-menu>
     </transition>
   </div>
 </template>
 
-<script type="text/babel">
+<script>
 import Emitter from "../../../mixins/emitter";
 import Focus from "../../../mixins/focus";
 import Locale from "../../../mixins/locale";
-import ElInput from "../../input";
-import ElSelectMenu from "./select-dropdown.vue";
-import ElOption from "./option.vue";
-import ElTag from "../../tag";
-import ElScrollbar from "../../scrollbar";
+import VenInput from "../../input";
+import VenSelectMenu from "./select-dropdown.vue";
+import VenOption from "./option.vue";
+import VenTag from "../../tag";
+import VenScrollbar from "../../scrollbar";
 import debounce from "throttle-debounce/debounce";
 import Clickoutside from "../../../utils/clickoutside";
 import {
@@ -186,9 +186,9 @@ import { isKorean } from "../../../utils/shared";
 export default {
   mixins: [Emitter, Locale, Focus("reference"), NavigationMixin],
 
-  name: "ElSelect",
+  name: "VenSelect",
 
-  componentName: "ElSelect",
+  componentName: "VenSelect",
 
   inject: {
     elForm: {
@@ -295,11 +295,11 @@ export default {
   },
 
   components: {
-    ElInput,
-    ElSelectMenu,
-    ElOption,
-    ElTag,
-    ElScrollbar,
+    VenInput,
+    VenSelectMenu,
+    VenOption,
+    VenTag,
+    VenScrollbar,
   },
 
   directives: { Clickoutside },
@@ -317,6 +317,7 @@ export default {
     /** @Deprecated in next major version */
     autoComplete: {
       type: String,
+      // eslint-disable-next-line no-unused-vars
       validator(val) {
         process.env.NODE_ENV !== "production" &&
           console.warn(
@@ -420,13 +421,13 @@ export default {
         this.inputLength = 20;
       }
       if (!valueEquals(val, oldVal)) {
-        this.dispatch("ElFormItem", "el.form.change", val);
+        this.dispatch("VenFormItem", "el.form.change", val);
       }
     },
 
     visible(val) {
       if (!val) {
-        this.broadcast("ElSelectDropdown", "destroyPopper");
+        this.broadcast("VenSelectDropdown", "destroyPopper");
         if (this.$refs.input) {
           this.$refs.input.blur();
         }
@@ -465,7 +466,7 @@ export default {
           }
         }
       } else {
-        this.broadcast("ElSelectDropdown", "updatePopper");
+        this.broadcast("VenSelectDropdown", "updatePopper");
         if (this.filterable) {
           this.query = this.remote ? "" : this.selectedLabel;
           this.handleQueryChange(this.query);
@@ -473,8 +474,8 @@ export default {
             this.$refs.input.focus();
           } else {
             if (!this.remote) {
-              this.broadcast("ElOption", "queryChange", "");
-              this.broadcast("ElOptionGroup", "queryChange");
+              this.broadcast("VenOption", "queryChange", "");
+              this.broadcast("VenOptionGroup", "queryChange");
             }
 
             if (this.selectedLabel) {
@@ -490,7 +491,7 @@ export default {
     options() {
       if (this.$isServer) return;
       this.$nextTick(() => {
-        this.broadcast("ElSelectDropdown", "updatePopper");
+        this.broadcast("VenSelectDropdown", "updatePopper");
       });
       if (this.multiple) {
         this.resetInputHeight();
@@ -514,6 +515,7 @@ export default {
       const text = event.target.value;
       if (event.type === "compositionend") {
         this.isOnComposition = false;
+        // eslint-disable-next-line no-unused-vars
         this.$nextTick((_) => this.handleQueryChange(text));
       } else {
         const lastCharacter = text[text.length - 1] || "";
@@ -532,7 +534,7 @@ export default {
       }
       this.previousQuery = val;
       this.$nextTick(() => {
-        if (this.visible) this.broadcast("ElSelectDropdown", "updatePopper");
+        if (this.visible) this.broadcast("VenSelectDropdown", "updatePopper");
       });
       this.hoverIndex = -1;
       if (this.multiple && this.filterable) {
@@ -548,11 +550,11 @@ export default {
         this.remoteMethod(val);
       } else if (typeof this.filterMethod === "function") {
         this.filterMethod(val);
-        this.broadcast("ElOptionGroup", "queryChange");
+        this.broadcast("VenOptionGroup", "queryChange");
       } else {
         this.filteredOptionsCount = this.optionsCount;
-        this.broadcast("ElOption", "queryChange", val);
-        this.broadcast("ElOptionGroup", "queryChange");
+        this.broadcast("VenOption", "queryChange", val);
+        this.broadcast("VenOptionGroup", "queryChange");
       }
       if (
         this.defaultFirstOption &&
@@ -568,7 +570,7 @@ export default {
         Array.isArray(option) && option[0] ? option[0].$el : option.$el;
       if (this.$refs.popper && target) {
         const menu = this.$refs.popper.$el.querySelector(
-          ".el-select-dropdown__wrap"
+          ".ven-select-dropdown__wrap"
         );
         scrollIntoView(menu, target);
       }
@@ -745,7 +747,7 @@ export default {
                 sizeInMap
               ) + "px";
         if (this.visible && this.emptyText !== false) {
-          this.broadcast("ElSelectDropdown", "updatePopper");
+          this.broadcast("VenSelectDropdown", "updatePopper");
         }
       });
     },

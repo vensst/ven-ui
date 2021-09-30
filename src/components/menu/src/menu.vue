@@ -1,56 +1,55 @@
-<script type="text/jsx">
-import emitter from '../../../mixins/emitter';
-import Migrating from '../../../mixins/migrating';
-import Menubar from '../../../utils/menu/aria-menubar';
-import { addClass, removeClass, hasClass } from '../../../utils/dom';
+<script>
+import emitter from "../../../mixins/emitter";
+import Migrating from "../../../mixins/migrating";
+import Menubar from "../../../utils/menu/aria-menubar";
+import { addClass, removeClass, hasClass } from "../../../utils/dom";
 
 export default {
-  name: 'ElMenu',
+  name: "VenMenu",
 
-  render (h) {
+  // eslint-disable-next-line no-unused-vars
+  render(h) {
     const component = (
       <ul
         role="menubar"
-        key={ +this.collapse }
-        style={{ backgroundColor: this.backgroundColor || '' }}
+        key={+this.collapse}
+        style={{ backgroundColor: this.backgroundColor || "" }}
         class={{
-          'el-menu--horizontal': this.mode === 'horizontal',
-          'el-menu--collapse': this.collapse,
-          "el-menu": true
+          "ven-menu--horizontal": this.mode === "horizontal",
+          "ven-menu--collapse": this.collapse,
+          "ven-menu": true,
         }}
       >
-        { this.$slots.default }
+        {this.$slots.default}
       </ul>
     );
 
     if (this.collapseTransition) {
       return (
-        <el-menu-collapse-transition>
-          { component }
-        </el-menu-collapse-transition>
+        <ven-menu-collapse-transition>{component}</ven-menu-collapse-transition>
       );
     } else {
       return component;
     }
   },
 
-  componentName: 'ElMenu',
+  componentName: "VenMenu",
 
   mixins: [emitter, Migrating],
 
   provide() {
     return {
-      rootMenu: this
+      rootMenu: this,
     };
   },
 
   components: {
-    'el-menu-collapse-transition': {
+    "ven-menu-collapse-transition": {
       functional: true,
       render(createElement, context) {
         const data = {
           props: {
-            mode: 'out-in'
+            mode: "out-in",
           },
           on: {
             beforeEnter(el) {
@@ -58,60 +57,60 @@ export default {
             },
 
             enter(el) {
-              addClass(el, 'el-opacity-transition');
+              addClass(el, "ven-opacity-transition");
               el.style.opacity = 1;
             },
 
             afterEnter(el) {
-              removeClass(el, 'el-opacity-transition');
-              el.style.opacity = '';
+              removeClass(el, "ven-opacity-transition");
+              el.style.opacity = "";
             },
 
             beforeLeave(el) {
               if (!el.dataset) el.dataset = {};
 
-              if (hasClass(el, 'el-menu--collapse')) {
-                removeClass(el, 'el-menu--collapse');
+              if (hasClass(el, "ven-menu--collapse")) {
+                removeClass(el, "ven-menu--collapse");
                 el.dataset.oldOverflow = el.style.overflow;
                 el.dataset.scrollWidth = el.clientWidth;
-                addClass(el, 'el-menu--collapse');
+                addClass(el, "ven-menu--collapse");
               } else {
-                addClass(el, 'el-menu--collapse');
+                addClass(el, "ven-menu--collapse");
                 el.dataset.oldOverflow = el.style.overflow;
                 el.dataset.scrollWidth = el.clientWidth;
-                removeClass(el, 'el-menu--collapse');
+                removeClass(el, "ven-menu--collapse");
               }
 
-              el.style.width = el.scrollWidth + 'px';
-              el.style.overflow = 'hidden';
+              el.style.width = el.scrollWidth + "px";
+              el.style.overflow = "hidden";
             },
 
             leave(el) {
-              addClass(el, 'horizontal-collapse-transition');
-              el.style.width = el.dataset.scrollWidth + 'px';
-            }
-          }
+              addClass(el, "horizontal-collapse-transition");
+              el.style.width = el.dataset.scrollWidth + "px";
+            },
+          },
         };
-        return createElement('transition', data, context.children);
-      }
-    }
+        return createElement("transition", data, context.children);
+      },
+    },
   },
 
   props: {
     mode: {
       type: String,
-      default: 'vertical'
+      default: "vertical",
     },
     defaultActive: {
       type: String,
-      default: ''
+      default: "",
     },
     defaultOpeneds: Array,
     uniqueOpened: Boolean,
     router: Boolean,
     menuTrigger: {
       type: String,
-      default: 'hover'
+      default: "hover",
     },
     collapse: Boolean,
     backgroundColor: String,
@@ -119,31 +118,39 @@ export default {
     activeTextColor: String,
     collapseTransition: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
       activeIndex: this.defaultActive,
-      openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
+      openedMenus:
+        this.defaultOpeneds && !this.collapse
+          ? this.defaultOpeneds.slice(0)
+          : [],
       items: {},
-      submenus: {}
+      submenus: {},
     };
   },
   computed: {
     hoverBackground() {
-      return this.backgroundColor ? this.mixColor(this.backgroundColor, 0.2) : '';
+      return this.backgroundColor
+        ? this.mixColor(this.backgroundColor, 0.2)
+        : "";
     },
     isMenuPopup() {
-      return this.mode === 'horizontal' || (this.mode === 'vertical' && this.collapse);
-    }
+      return (
+        this.mode === "horizontal" ||
+        (this.mode === "vertical" && this.collapse)
+      );
+    },
   },
   watch: {
-    defaultActive(value){
-      if(!this.items[value]){
-        this.activeIndex = null
+    defaultActive(value) {
+      if (!this.items[value]) {
+        this.activeIndex = null;
       }
-      this.updateActiveIndex(value)
+      this.updateActiveIndex(value);
     },
 
     defaultOpeneds(value) {
@@ -154,12 +161,15 @@ export default {
 
     collapse(value) {
       if (value) this.openedMenus = [];
-      this.broadcast('ElSubmenu', 'toggle-collapse', value);
-    }
+      this.broadcast("VenSubmenu", "toggle-collapse", value);
+    },
   },
   methods: {
     updateActiveIndex(val) {
-      const item = this.items[val] || this.items[this.activeIndex] || this.items[this.defaultActive];
+      const item =
+        this.items[val] ||
+        this.items[this.activeIndex] ||
+        this.items[this.defaultActive];
       if (item) {
         this.activeIndex = item.index;
         this.initOpenedMenu();
@@ -171,45 +181,49 @@ export default {
     getMigratingConfig() {
       return {
         props: {
-          'theme': 'theme is removed.'
-        }
+          theme: "theme is removed.",
+        },
       };
     },
     getColorChannels(color) {
-      color = color.replace('#', '');
+      color = color.replace("#", "");
       if (/^[0-9a-fA-F]{3}$/.test(color)) {
-        color = color.split('');
+        color = color.split("");
         for (let i = 2; i >= 0; i--) {
           color.splice(i, 0, color[i]);
         }
-        color = color.join('');
+        color = color.join("");
       }
       if (/^[0-9a-fA-F]{6}$/.test(color)) {
         return {
           red: parseInt(color.slice(0, 2), 16),
           green: parseInt(color.slice(2, 4), 16),
-          blue: parseInt(color.slice(4, 6), 16)
+          blue: parseInt(color.slice(4, 6), 16),
         };
       } else {
         return {
           red: 255,
           green: 255,
-          blue: 255
+          blue: 255,
         };
       }
     },
     mixColor(color, percent) {
       let { red, green, blue } = this.getColorChannels(color);
-      if (percent > 0) { // shade given color
+      if (percent > 0) {
+        // shade given color
         red *= 1 - percent;
         green *= 1 - percent;
         blue *= 1 - percent;
-      } else { // tint given color
+      } else {
+        // tint given color
         red += (255 - red) * percent;
         green += (255 - green) * percent;
         blue += (255 - blue) * percent;
       }
-      return `rgb(${ Math.round(red) }, ${ Math.round(green) }, ${ Math.round(blue) })`;
+      return `rgb(${Math.round(red)}, ${Math.round(green)}, ${Math.round(
+        blue
+      )})`;
     },
     addItem(item) {
       this.$set(this.items, item.index, item);
@@ -229,7 +243,7 @@ export default {
       // 将不在该菜单路径下的其余菜单收起
       // collapse all menu that are not under current menu item
       if (this.uniqueOpened) {
-        this.openedMenus = openedMenus.filter(index => {
+        this.openedMenus = openedMenus.filter((index) => {
           return indexPath.indexOf(index) !== -1;
         });
       }
@@ -247,10 +261,10 @@ export default {
 
       if (isOpened) {
         this.closeMenu(index);
-        this.$emit('close', index, indexPath);
+        this.$emit("close", index, indexPath);
       } else {
         this.openMenu(index, indexPath);
-        this.$emit('open', index, indexPath);
+        this.$emit("open", index, indexPath);
       }
     },
     handleItemClick(item) {
@@ -262,9 +276,9 @@ export default {
         this.activeIndex = item.index;
       }
 
-      this.$emit('select', index, indexPath, item);
+      this.$emit("select", index, indexPath, item);
 
-      if (this.mode === 'horizontal' || this.collapse) {
+      if (this.mode === "horizontal" || this.collapse) {
         this.openedMenus = [];
       }
 
@@ -272,10 +286,8 @@ export default {
         this.routeToItem(item, (error) => {
           this.activeIndex = oldActiveIndex;
           if (error) {
-            // vue-router 3.1.0+ push/replace cause NavigationDuplicated error
-            // https://github.com/ElemeFE/element/issues/17044
-            if (error.name === 'NavigationDuplicated') return
-            console.error(error)
+            if (error.name === "NavigationDuplicated") return;
+            console.error(error);
           }
         });
       }
@@ -285,13 +297,13 @@ export default {
     initOpenedMenu() {
       const index = this.activeIndex;
       const activeItem = this.items[index];
-      if (!activeItem || this.mode === 'horizontal' || this.collapse) return;
+      if (!activeItem || this.mode === "horizontal" || this.collapse) return;
 
       let indexPath = activeItem.indexPath;
 
       // 展开该菜单项的路径上所有子菜单
       // expand all submenus of the menu item
-      indexPath.forEach(index => {
+      indexPath.forEach((index) => {
         let submenu = this.submenus[index];
         submenu && this.openMenu(index, submenu.indexPath);
       });
@@ -306,20 +318,20 @@ export default {
     },
     open(index) {
       const { indexPath } = this.submenus[index.toString()];
-      indexPath.forEach(i => this.openMenu(i, indexPath));
+      indexPath.forEach((i) => this.openMenu(i, indexPath));
     },
     close(index) {
       this.closeMenu(index);
-    }
+    },
   },
   mounted() {
     this.initOpenedMenu();
-    this.$on('item-click', this.handleItemClick);
-    this.$on('submenu-click', this.handleSubmenuClick);
-    if (this.mode === 'horizontal') {
+    this.$on("item-click", this.handleItemClick);
+    this.$on("submenu-click", this.handleSubmenuClick);
+    if (this.mode === "horizontal") {
         new Menubar(this.$el); // eslint-disable-line
     }
-    this.$watch('items', this.updateActiveIndex);
-  }
+    this.$watch("items", this.updateActiveIndex);
+  },
 };
 </script>

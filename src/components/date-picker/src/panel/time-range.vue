@@ -1,18 +1,18 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+  <transition name="ven-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-time-range-picker el-picker-panel el-popper"
+      class="ven-time-range-picker ven-picker-panel ven-popper"
       :class="popperClass"
     >
-      <div class="el-time-range-picker__content">
-        <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">
+      <div class="ven-time-range-picker__content">
+        <div class="ven-time-range-picker__cell">
+          <div class="ven-time-range-picker__header">
             {{ t("el.datepicker.startTime") }}
           </div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
-            class="el-time-range-picker__body el-time-panel__content"
+            class="ven-time-range-picker__body ven-time-panel__content"
           >
             <time-spinner
               ref="minSpinner"
@@ -26,13 +26,13 @@
             </time-spinner>
           </div>
         </div>
-        <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">
+        <div class="ven-time-range-picker__cell">
+          <div class="ven-time-range-picker__header">
             {{ t("el.datepicker.endTime") }}
           </div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
-            class="el-time-range-picker__body el-time-panel__content"
+            class="ven-time-range-picker__body ven-time-panel__content"
           >
             <time-spinner
               ref="maxSpinner"
@@ -47,17 +47,17 @@
           </div>
         </div>
       </div>
-      <div class="el-time-panel__footer">
+      <div class="ven-time-panel__footer">
         <button
           type="button"
-          class="el-time-panel__btn cancel"
+          class="ven-time-panel__btn cancel"
           @click="handleCancel()"
         >
           {{ t("el.datepicker.cancel") }}
         </button>
         <button
           type="button"
-          class="el-time-panel__btn confirm"
+          class="ven-time-panel__btn confirm"
           @click="handleConfirm()"
           :disabled="btnDisabled"
         >
@@ -68,7 +68,7 @@
   </transition>
 </template>
 
-<script type="text/babel">
+<script>
 import {
   parseDate,
   limitTimeRange,

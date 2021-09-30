@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ElTag",
+  name: "VenTag",
   props: {
     text: String,
     closable: Boolean,
@@ -31,13 +31,14 @@ export default {
       return this.size || (this.$ELEMENT || {}).size;
     },
   },
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     const { type, tagSize, hit, effect } = this;
     const classes = [
-      "el-tag",
-      type ? `el-tag--${type}` : "",
-      tagSize ? `el-tag--${tagSize}` : "",
-      effect ? `el-tag--${effect}` : "",
+      "ven-tag",
+      type ? `ven-tag--${type}` : "",
+      tagSize ? `ven-tag--${tagSize}` : "",
+      effect ? `ven-tag--${effect}` : "",
       hit && "is-hit",
     ];
     const tagEl = (
@@ -49,7 +50,7 @@ export default {
         {this.$slots.default}
         {this.closable && (
           <i
-            class="el-tag__close el-icon-close"
+            class="ven-tag__close ven-icon-close"
             on-click={this.handleClose}
           ></i>
         )}
@@ -59,7 +60,7 @@ export default {
     return this.disableTransitions ? (
       tagEl
     ) : (
-      <transition name="el-zoom-in-center">{tagEl}</transition>
+      <transition name="ven-zoom-in-center">{tagEl}</transition>
     );
   },
 };

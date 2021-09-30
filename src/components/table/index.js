@@ -1,8 +1,8 @@
-import ElTable from "./src/table";
+import VenTable from "./src/table";
 
 /* istanbul ignore next */
-ElTable.install = function (Vue) {
-  Vue.component(ElTable.name, ElTable);
+VenTable.install = function (Vue) {
+  Vue.component(VenTable.name, VenTable);
 };
 
-export default ElTable;
+export default VenTable;

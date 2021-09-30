@@ -1,5 +1,5 @@
 <script>
-import ElCollapseTransition from "../../../transitions/collapse-transition";
+import VenCollapseTransition from "../../../transitions/collapse-transition";
 import menuMixin from "./menu-mixin";
 import Emitter from "../../../mixins/emitter";
 import Popper from "../../../utils/vue-popper";
@@ -21,13 +21,13 @@ const poperMixins = {
 };
 
 export default {
-  name: "ElSubmenu",
+  name: "VenSubmenu",
 
-  componentName: "ElSubmenu",
+  componentName: "VenSubmenu",
 
   mixins: [menuMixin, Emitter, poperMixins],
 
-  components: { ElCollapseTransition },
+  components: { VenCollapseTransition },
 
   props: {
     index: {
@@ -60,8 +60,10 @@ export default {
     };
   },
   watch: {
+    // eslint-disable-next-line no-unused-vars
     opened(val) {
       if (this.isMenuPopup) {
+        // eslint-disable-next-line no-unused-vars
         this.$nextTick((_) => {
           this.updatePopper();
         });
@@ -76,7 +78,7 @@ export default {
         : this.popperAppendToBody;
     },
     menuTransitionName() {
-      return this.rootMenu.collapse ? "el-zoom-in-left" : "el-zoom-in-top";
+      return this.rootMenu.collapse ? "ven-zoom-in-left" : "ven-zoom-in-top";
     },
     opened() {
       return this.rootMenu.openedMenus.indexOf(this.index) > -1;
@@ -138,7 +140,7 @@ export default {
       let parent = this.$parent;
       while (parent && parent !== this.rootMenu) {
         if (
-          ["ElSubmenu", "ElMenuItemGroup"].indexOf(
+          ["VenSubmenu", "VenMenuItemGroup"].indexOf(
             parent.$options.componentName
           ) > -1
         ) {
@@ -180,7 +182,7 @@ export default {
       ) {
         return;
       }
-      this.dispatch("ElMenu", "submenu-click", this);
+      this.dispatch("VenMenu", "submenu-click", this);
     },
     handleMouseenter(event, showTimeout = this.showTimeout) {
       if (
@@ -198,7 +200,7 @@ export default {
       ) {
         return;
       }
-      this.dispatch("ElSubmenu", "mouse-enter-child");
+      this.dispatch("VenSubmenu", "mouse-enter-child");
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.rootMenu.openMenu(this.index, this.indexPath);
@@ -216,14 +218,14 @@ export default {
       ) {
         return;
       }
-      this.dispatch("ElSubmenu", "mouse-leave-child");
+      this.dispatch("VenSubmenu", "mouse-leave-child");
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         !this.mouseInChild && this.rootMenu.closeMenu(this.index);
       }, this.hideTimeout);
 
       if (this.appendToBody && deepDispatch) {
-        if (this.$parent.$options.name === "ElSubmenu") {
+        if (this.$parent.$options.name === "VenSubmenu") {
           this.$parent.handleMouseleave(true);
         }
       }
@@ -271,6 +273,7 @@ export default {
     this.parentMenu.removeSubmenu(this);
     this.rootMenu.removeSubmenu(this);
   },
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     const {
       active,
@@ -293,7 +296,7 @@ export default {
         <div
           ref="menu"
           v-show={opened}
-          class={[`el-menu--${mode}`, popperClass]}
+          class={[`ven-menu--${mode}`, popperClass]}
           on-mouseenter={($event) => this.handleMouseenter($event, 100)}
           on-mouseleave={() => this.handleMouseleave(true)}
           on-focus={($event) => this.handleMouseenter($event, 100)}
@@ -301,8 +304,8 @@ export default {
           <ul
             role="menu"
             class={[
-              "el-menu el-menu--popup",
-              `el-menu--popup-${currentPlacement}`,
+              "ven-menu ven-menu--popup",
+              `ven-menu--popup-${currentPlacement}`,
             ]}
             style={{ backgroundColor: rootMenu.backgroundColor || "" }}
           >
@@ -313,28 +316,28 @@ export default {
     );
 
     const inlineMenu = (
-      <el-collapse-transition>
+      <ven-collapse-transition>
         <ul
           role="menu"
-          class="el-menu el-menu--inline"
+          class="ven-menu ven-menu--inline"
           v-show={opened}
           style={{ backgroundColor: rootMenu.backgroundColor || "" }}
         >
           {$slots.default}
         </ul>
-      </el-collapse-transition>
+      </ven-collapse-transition>
     );
 
     const submenuTitleIcon =
       (rootMenu.mode === "horizontal" && isFirstLevel) ||
       (rootMenu.mode === "vertical" && !rootMenu.collapse)
-        ? "el-icon-arrow-down"
-        : "el-icon-arrow-right";
+        ? "ven-icon-arrow-down"
+        : "ven-icon-arrow-right";
 
     return (
       <li
         class={{
-          "el-submenu": true,
+          "ven-submenu": true,
           "is-active": active,
           "is-opened": opened,
           "is-disabled": disabled,
@@ -347,7 +350,7 @@ export default {
         on-focus={this.handleMouseenter}
       >
         <div
-          class="el-submenu__title"
+          class="ven-submenu__title"
           ref="submenu-title"
           on-click={this.handleClick}
           on-mouseenter={this.handleTitleMouseenter}
@@ -355,7 +358,7 @@ export default {
           style={[paddingStyle, titleStyle, { backgroundColor }]}
         >
           {$slots.title}
-          <i class={["el-submenu__icon-arrow", submenuTitleIcon]}></i>
+          <i class={["ven-submenu__icon-arrow", submenuTitleIcon]}></i>
         </div>
         {this.isMenuPopup ? popupMenu : inlineMenu}
       </li>

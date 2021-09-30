@@ -1,8 +1,8 @@
 @import "../mixins/mixins";
 @import "../common/var";
 @import "../common/popup";
-@import "components/button";
-@import "components/input";
+@import "../components/button";
+@import "../components/input";
 
 @include b(message-box) {
   display: inline-block;
@@ -60,12 +60,12 @@
     font-size: $--message-close-size;
     cursor: pointer;
 
-    .el-message-box__close {
+    .ven-message-box__close {
       color: $--color-info;
     }
 
     &:focus, &:hover {
-      .el-message-box__close {
+      .ven-message-box__close {
         color: $--color-primary;
       }
     }
@@ -104,24 +104,24 @@
       padding-left: 1px;
     }
 
-    + .el-message-box__message {
+    + .ven-message-box__message {
       padding-left: 36px;
       padding-right: 12px;
     }
 
-    &.el-icon-success {
+    &.ven-icon-success {
       color: $--messagebox-success-color;
     }
 
-    &.el-icon-info {
+    &.ven-icon-info {
       color: $--messagebox-info-color;
     }
 
-    &.el-icon-warning {
+    &.ven-icon-warning {
       color: $--messagebox-warning-color;
     }
 
-    &.el-icon-error {
+    &.ven-icon-error {
       color: $--messagebox-danger-color;
     }
   }

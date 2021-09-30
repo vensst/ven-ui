@@ -163,6 +163,7 @@ export default class Color {
     options = options || {};
 
     for (let option in options) {
+      // eslint-disable-next-line no-prototype-builtins
       if (options.hasOwnProperty(option)) {
         this[option] = options[option];
       }
@@ -174,6 +175,7 @@ export default class Color {
   set(prop, value) {
     if (arguments.length === 1 && typeof prop === "object") {
       for (let p in prop) {
+        // eslint-disable-next-line no-prototype-builtins
         if (prop.hasOwnProperty(p)) {
           this.set(p, prop[p]);
         }
@@ -302,6 +304,7 @@ export default class Color {
     if (this.enableAlpha) {
       switch (format) {
         case "hsl":
+          // eslint-disable-next-line no-case-declarations
           const hsl = hsv2hsl(_hue, _saturation / 100, _value / 100);
           this.value = `hsla(${_hue}, ${Math.round(
             hsl[1] * 100
@@ -313,12 +316,14 @@ export default class Color {
           )}%, ${_alpha / 100})`;
           break;
         default:
+          // eslint-disable-next-line no-case-declarations
           const { r, g, b } = hsv2rgb(_hue, _saturation, _value);
           this.value = `rgba(${r}, ${g}, ${b}, ${_alpha / 100})`;
       }
     } else {
       switch (format) {
         case "hsl":
+          // eslint-disable-next-line no-case-declarations
           const hsl = hsv2hsl(_hue, _saturation / 100, _value / 100);
           this.value = `hsl(${_hue}, ${Math.round(hsl[1] * 100)}%, ${Math.round(
             hsl[2] * 100
@@ -330,6 +335,7 @@ export default class Color {
           )}%)`;
           break;
         case "rgb":
+          // eslint-disable-next-line no-case-declarations
           const { r, g, b } = hsv2rgb(_hue, _saturation, _value);
           this.value = `rgb(${r}, ${g}, ${b})`;
           break;

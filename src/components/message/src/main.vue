@@ -1,9 +1,9 @@
 <template>
-  <transition name="el-message-fade" @after-leave="handleAfterLeave">
+  <transition name="ven-message-fade" @after-leave="handleAfterLeave">
     <div
       :class="[
-        'el-message',
-        type && !iconClass ? `el-message--${type}` : '',
+        'ven-message',
+        type && !iconClass ? `ven-message--${type}` : '',
         center ? 'is-center' : '',
         showClose ? 'is-closable' : '',
         customClass,
@@ -17,21 +17,21 @@
       <i :class="iconClass" v-if="iconClass"></i>
       <i :class="typeClass" v-else></i>
       <slot>
-        <p v-if="!dangerouslyUseHTMLString" class="el-message__content">
+        <p v-if="!dangerouslyUseHTMLString" class="ven-message__content">
           {{ message }}
         </p>
-        <p v-else v-html="message" class="el-message__content"></p>
+        <p v-else v-html="message" class="ven-message__content"></p>
       </slot>
       <i
         v-if="showClose"
-        class="el-message__closeBtn el-icon-close"
+        class="ven-message__closeBtn ven-icon-close"
         @click="close"
       ></i>
     </div>
   </transition>
 </template>
 
-<script type="text/babel">
+<script>
 const typeMap = {
   success: "success",
   info: "info",
@@ -61,7 +61,7 @@ export default {
   computed: {
     typeClass() {
       return this.type && !this.iconClass
-        ? `el-message__icon el-icon-${typeMap[this.type]}`
+        ? `ven-message__icon ven-icon-${typeMap[this.type]}`
         : "";
     },
     positionStyle() {

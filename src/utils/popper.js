@@ -28,8 +28,10 @@
 // Supported: Node, AMD, Browser globals
 //
 (function (root, factory) {
+  // eslint-disable-next-line no-undef
   if (typeof define === "function" && define.amd) {
     // AMD. Register as an anonymous module.
+    // eslint-disable-next-line no-undef
     define(factory);
   } else if (typeof module === "object" && module.exports) {
     // Node. Does not work with strict CommonJS, but
@@ -1026,6 +1028,7 @@
 
     var len = isVertical ? "height" : "width";
     var side = isVertical ? "top" : "left";
+    // eslint-disable-next-line no-unused-vars
     var translate = isVertical ? "translateY" : "translateX";
     var altSide = isVertical ? "left" : "top";
     var opSide = isVertical ? "bottom" : "right";
@@ -1079,6 +1082,7 @@
       _visibility = element.style.visibility;
     element.style.display = "block";
     element.style.visibility = "hidden";
+    // eslint-disable-next-line no-unused-vars
     var calcWidthToForceRepaint = element.offsetWidth;
 
     // original method

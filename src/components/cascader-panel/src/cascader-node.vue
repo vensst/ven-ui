@@ -1,6 +1,6 @@
 <script>
-import ElCheckbox from "../../checkbox";
-import ElRadio from "../../radio";
+import VenCheckbox from "../../checkbox";
+import VenRadio from "../../radio";
 import { isEqual } from "../../../utils/util";
 
 const stopPropagation = (e) => e.stopPropagation();
@@ -9,8 +9,8 @@ export default {
   inject: ["panel"],
 
   components: {
-    ElCheckbox,
-    ElRadio,
+    VenCheckbox,
+    VenRadio,
   },
 
   props: {
@@ -119,6 +119,7 @@ export default {
       return null;
     },
 
+    // eslint-disable-next-line no-unused-vars
     renderCheckbox(h) {
       const { node, config, isDisabled } = this;
       const events = {
@@ -132,15 +133,16 @@ export default {
       }
 
       return (
-        <el-checkbox
+        <ven-checkbox
           value={node.checked}
           indeterminate={node.indeterminate}
           disabled={isDisabled}
           {...events}
-        ></el-checkbox>
+        ></ven-checkbox>
       );
     },
 
+    // eslint-disable-next-line no-unused-vars
     renderRadio(h) {
       let { checkedValue, value, isDisabled } = this;
 
@@ -150,7 +152,7 @@ export default {
       }
 
       return (
-        <el-radio
+        <ven-radio
           value={checkedValue}
           label={value}
           disabled={isDisabled}
@@ -159,28 +161,34 @@ export default {
         >
           {/* add an empty element to avoid render label */}
           <span></span>
-        </el-radio>
+        </ven-radio>
       );
     },
 
+    // eslint-disable-next-line no-unused-vars
     renderCheckIcon(h) {
-      return <i class="el-icon-check el-cascader-node__prefix"></i>;
+      return <i class="ven-icon-check ven-cascader-node__prefix"></i>;
     },
 
+    // eslint-disable-next-line no-unused-vars
     renderLoadingIcon(h) {
-      return <i class="el-icon-loading el-cascader-node__postfix"></i>;
+      return <i class="ven-icon-loading ven-cascader-node__postfix"></i>;
     },
 
+    // eslint-disable-next-line no-unused-vars
     renderExpandIcon(h) {
-      return <i class="el-icon-arrow-right el-cascader-node__postfix"></i>;
+      return <i class="ven-icon-arrow-right ven-cascader-node__postfix"></i>;
     },
 
+    // eslint-disable-next-line no-unused-vars
     renderContent(h) {
       const { panel, node } = this;
       const render = panel.renderLabelFn;
       const vnode = render ? render({ node, data: node.data }) : null;
 
-      return <span class="el-cascader-node__label">{vnode || node.label}</span>;
+      return (
+        <span class="ven-cascader-node__label">{vnode || node.label}</span>
+      );
     },
   },
 
@@ -221,7 +229,7 @@ export default {
         aria-expanded={inActivePath}
         tabindex={disabled ? null : -1}
         class={{
-          "el-cascader-node": true,
+          "ven-cascader-node": true,
           "is-selectable": checkStrictly,
           "in-active-path": inActivePath,
           "in-checked-path": inCheckedPath,

@@ -1,8 +1,8 @@
-import ElCarouselItem from "../carousel/src/item";
+import VenCarouselItem from "../carousel/src/item";
 
 /* istanbul ignore next */
-ElCarouselItem.install = function (Vue) {
-  Vue.component(ElCarouselItem.name, ElCarouselItem);
+VenCarouselItem.install = function (Vue) {
+  Vue.component(VenCarouselItem.name, VenCarouselItem);
 };
 
-export default ElCarouselItem;
+export default VenCarouselItem;

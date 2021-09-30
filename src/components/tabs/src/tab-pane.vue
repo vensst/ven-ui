@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-tab-pane"
+    class="ven-tab-pane"
     v-if="!lazy || loaded || active"
     v-show="active"
     role="tabpanel"
@@ -13,9 +13,9 @@
 </template>
 <script>
 export default {
-  name: "ElTabPane",
+  name: "VenTabPane",
 
-  componentName: "ElTabPane",
+  componentName: "VenTabPane",
 
   props: {
     label: String,
@@ -40,6 +40,7 @@ export default {
     active() {
       const active = this.$parent.currentName === (this.name || this.index);
       if (active) {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.loaded = true;
       }
       return active;

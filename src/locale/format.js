@@ -6,6 +6,7 @@ const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
  *  - Inspired:
  *    https://github.com/Matt-Esch/string-template/index.js
  */
+// eslint-disable-next-line no-unused-vars
 export default function (Vue) {
   /**
    * template

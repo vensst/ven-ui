@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { hasClass, addClass, removeClass } from "../../../utils/dom";
-import ElCheckbox from "../../checkbox";
+import VenCheckbox from "../../checkbox";
 import FilterPanel from "./filter-panel.vue";
 import LayoutObserver from "./layout-observer";
 import { mapStates } from "./store/helper";
@@ -64,7 +64,7 @@ const convertToRows = (originColumns) => {
 };
 
 export default {
-  name: "ElTableHeader",
+  name: "VenTableHeader",
 
   mixins: [LayoutObserver],
 
@@ -76,7 +76,7 @@ export default {
     if (isGroup) this.$parent.isGroup = true;
     return (
       <table
-        class="el-table__header"
+        class="ven-table__header"
         cellspacing="0"
         cellpadding="0"
         border="0"
@@ -164,15 +164,15 @@ export default {
                     )}
                     {column.filterable ? (
                       <span
-                        class="el-table__column-filter-trigger"
+                        class="ven-table__column-filter-trigger"
                         on-click={($event) =>
                           this.handleFilterClick($event, column)
                         }
                       >
                         <i
                           class={[
-                            "el-icon-arrow-down",
-                            column.filterOpened ? "el-icon-arrow-up" : "",
+                            "ven-icon-arrow-down",
+                            column.filterOpened ? "ven-icon-arrow-up" : "",
                           ]}
                         ></i>
                       </span>
@@ -208,7 +208,7 @@ export default {
   },
 
   components: {
-    ElCheckbox,
+    VenCheckbox,
   },
 
   computed: {
@@ -247,6 +247,7 @@ export default {
   beforeDestroy() {
     const panels = this.filterPanels;
     for (let prop in panels) {
+      // eslint-disable-next-line no-prototype-builtins
       if (panels.hasOwnProperty(prop) && panels[prop]) {
         panels[prop].$destroy(true);
       }
@@ -354,7 +355,7 @@ export default {
       const target = event.target;
       let cell = target.tagName === "TH" ? target : target.parentNode;
       if (hasClass(cell, "noclick")) return;
-      cell = cell.querySelector(".el-table__column-filter-trigger") || cell;
+      cell = cell.querySelector(".ven-table__column-filter-trigger") || cell;
       const table = this.$parent;
 
       let filterPanel = this.filterPanels[column.id];

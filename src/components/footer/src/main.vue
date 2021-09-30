@@ -1,14 +1,14 @@
 <template>
-  <footer class="el-footer" :style="{ height }">
+  <footer class="ven-footer" :style="{ height }">
     <slot></slot>
   </footer>
 </template>
 
 <script>
 export default {
-  name: "ElFooter",
+  name: "VenFooter",
 
-  componentName: "ElFooter",
+  componentName: "VenFooter",
 
   props: {
     height: {

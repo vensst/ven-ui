@@ -1,7 +1,7 @@
 <template>
   <transition name="msgbox-fade">
     <div
-      class="el-message-box__wrapper"
+      class="ven-message-box__wrapper"
       tabindex="-1"
       v-show="visible"
       @click.self="handleWrapperClick"
@@ -10,20 +10,20 @@
       :aria-label="title || 'dialog'"
     >
       <div
-        class="el-message-box"
-        :class="[customClass, center && 'el-message-box--center']"
+        class="ven-message-box"
+        :class="[customClass, center && 'ven-message-box--center']"
       >
-        <div class="el-message-box__header" v-if="title !== null">
-          <div class="el-message-box__title">
+        <div class="ven-message-box__header" v-if="title !== null">
+          <div class="ven-message-box__title">
             <div
-              :class="['el-message-box__status', icon]"
+              :class="['ven-message-box__status', icon]"
               v-if="icon && center"
             ></div>
             <span>{{ title }}</span>
           </div>
           <button
             type="button"
-            class="el-message-box__headerbtn"
+            class="ven-message-box__headerbtn"
             aria-label="Close"
             v-if="showClose"
             @click="
@@ -33,32 +33,32 @@
               handleAction(distinguishCancelAndClose ? 'close' : 'cancel')
             "
           >
-            <i class="el-message-box__close el-icon-close"></i>
+            <i class="ven-message-box__close ven-icon-close"></i>
           </button>
         </div>
-        <div class="el-message-box__content">
-          <div class="el-message-box__container">
+        <div class="ven-message-box__content">
+          <div class="ven-message-box__container">
             <div
-              :class="['el-message-box__status', icon]"
+              :class="['ven-message-box__status', icon]"
               v-if="icon && !center && message !== ''"
             ></div>
-            <div class="el-message-box__message" v-if="message !== ''">
+            <div class="ven-message-box__message" v-if="message !== ''">
               <slot>
                 <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
                 <p v-else v-html="message"></p>
               </slot>
             </div>
           </div>
-          <div class="el-message-box__input" v-show="showInput">
-            <el-input
+          <div class="ven-message-box__input" v-show="showInput">
+            <ven-input
               v-model="inputValue"
               :type="inputType"
               @keydown.enter.native="handleInputEnter"
               :placeholder="inputPlaceholder"
               ref="input"
-            ></el-input>
+            ></ven-input>
             <div
-              class="el-message-box__errormsg"
+              class="ven-message-box__errormsg"
               :style="{
                 visibility: !!editorErrorMessage ? 'visible' : 'hidden',
               }"
@@ -67,8 +67,8 @@
             </div>
           </div>
         </div>
-        <div class="el-message-box__btns">
-          <el-button
+        <div class="ven-message-box__btns">
+          <ven-button
             :loading="cancelButtonLoading"
             :class="[cancelButtonClasses]"
             v-if="showCancelButton"
@@ -78,8 +78,8 @@
             @keydown.enter="handleAction('cancel')"
           >
             {{ cancelButtonText || t("el.messagebox.cancel") }}
-          </el-button>
-          <el-button
+          </ven-button>
+          <ven-button
             :loading="confirmButtonLoading"
             ref="confirm"
             :class="[confirmButtonClasses]"
@@ -90,18 +90,18 @@
             @keydown.enter="handleAction('confirm')"
           >
             {{ confirmButtonText || t("el.messagebox.confirm") }}
-          </el-button>
+          </ven-button>
         </div>
       </div>
     </div>
   </transition>
 </template>
 
-<script type="text/babel">
+<script>
 import Popup from "../../../utils/popup";
 import Locale from "../../../mixins/locale";
-import ElInput from "../../input";
-import ElButton from "../../button";
+import VenInput from "../../input";
+import VenButton from "../../button";
 import { addClass, removeClass } from "../../../utils/dom";
 import { t } from "../../../locale";
 import Dialog from "../../../utils/aria-dialog";
@@ -148,20 +148,20 @@ export default {
   },
 
   components: {
-    ElInput,
-    ElButton,
+    VenInput,
+    VenButton,
   },
 
   computed: {
     icon() {
       const { type, iconClass } = this;
       return (
-        iconClass || (type && typeMap[type] ? `el-icon-${typeMap[type]}` : "")
+        iconClass || (type && typeMap[type] ? `ven-icon-${typeMap[type]}` : "")
       );
     },
 
     confirmButtonClasses() {
-      return `el-button--primary ${this.confirmButtonClass}`;
+      return `ven-button--primary ${this.confirmButtonClass}`;
     },
     cancelButtonClasses() {
       return `${this.cancelButtonClass}`;
@@ -249,9 +249,9 @@ export default {
       return true;
     },
     getFirstFocus() {
-      const btn = this.$el.querySelector(".el-message-box__btns .el-button");
+      const btn = this.$el.querySelector(".ven-message-box__btns .ven-button");
       const title = this.$el.querySelector(
-        ".el-message-box__btns .el-message-box__title"
+        ".ven-message-box__btns .ven-message-box__title"
       );
       return btn || title;
     },
@@ -268,6 +268,7 @@ export default {
     inputValue: {
       immediate: true,
       handler(val) {
+        // eslint-disable-next-line no-unused-vars
         this.$nextTick((_) => {
           if (this.$type === "prompt" && val !== null) {
             this.validate();

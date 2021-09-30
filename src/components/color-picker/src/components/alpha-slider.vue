@@ -1,7 +1,7 @@
 <template>
-  <div class="el-color-alpha-slider" :class="{ 'is-vertical': vertical }">
+  <div class="ven-color-alpha-slider" :class="{ 'is-vertical': vertical }">
     <div
-      class="el-color-alpha-slider__bar"
+      class="ven-color-alpha-slider__bar"
       @click="handleClick"
       ref="bar"
       :style="{
@@ -9,7 +9,7 @@
       }"
     ></div>
     <div
-      class="el-color-alpha-slider__thumb"
+      class="ven-color-alpha-slider__thumb"
       ref="thumb"
       :style="{
         left: thumbLeft + 'px',
@@ -23,7 +23,7 @@
 import draggable from "../draggable";
 
 export default {
-  name: "el-color-alpha-slider",
+  name: "ven-color-alpha-slider",
 
   props: {
     color: {

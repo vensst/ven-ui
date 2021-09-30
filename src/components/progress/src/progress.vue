@@ -1,12 +1,12 @@
 <template>
   <div
-    class="el-progress"
+    class="ven-progress"
     :class="[
-      'el-progress--' + type,
+      'ven-progress--' + type,
       status ? 'is-' + status : '',
       {
-        'el-progress--without-text': !showText,
-        'el-progress--text-inside': textInside,
+        'ven-progress--without-text': !showText,
+        'ven-progress--text-inside': textInside,
       },
     ]"
     role="progressbar"
@@ -14,26 +14,29 @@
     aria-valuemin="0"
     aria-valuemax="100"
   >
-    <div class="el-progress-bar" v-if="type === 'line'">
+    <div class="ven-progress-bar" v-if="type === 'line'">
       <div
-        class="el-progress-bar__outer"
+        class="ven-progress-bar__outer"
         :style="{ height: strokeWidth + 'px' }"
       >
-        <div class="el-progress-bar__inner" :style="barStyle">
-          <div class="el-progress-bar__innerText" v-if="showText && textInside">
+        <div class="ven-progress-bar__inner" :style="barStyle">
+          <div
+            class="ven-progress-bar__innerText"
+            v-if="showText && textInside"
+          >
             {{ content }}
           </div>
         </div>
       </div>
     </div>
     <div
-      class="el-progress-circle"
+      class="ven-progress-circle"
       :style="{ height: width + 'px', width: width + 'px' }"
       v-else
     >
       <svg viewBox="0 0 100 100">
         <path
-          class="el-progress-circle__track"
+          class="ven-progress-circle__track"
           :d="trackPath"
           stroke="#e5e9f2"
           :stroke-width="relativeStrokeWidth"
@@ -41,7 +44,7 @@
           :style="trailPathStyle"
         ></path>
         <path
-          class="el-progress-circle__path"
+          class="ven-progress-circle__path"
           :d="trackPath"
           :stroke="stroke"
           fill="none"
@@ -52,7 +55,7 @@
       </svg>
     </div>
     <div
-      class="el-progress__text"
+      class="ven-progress__text"
       v-if="showText && !textInside"
       :style="{ fontSize: progressTextSize + 'px' }"
     >
@@ -63,7 +66,7 @@
 </template>
 <script>
 export default {
-  name: "ElProgress",
+  name: "VenProgress",
   props: {
     type: {
       type: String,
@@ -181,14 +184,14 @@ export default {
     },
     iconClass() {
       if (this.status === "warning") {
-        return "el-icon-warning";
+        return "ven-icon-warning";
       }
       if (this.type === "line") {
         return this.status === "success"
-          ? "el-icon-circle-check"
-          : "el-icon-circle-close";
+          ? "ven-icon-circle-check"
+          : "ven-icon-circle-close";
       } else {
-        return this.status === "success" ? "el-icon-check" : "el-icon-close";
+        return this.status === "success" ? "ven-icon-check" : "ven-icon-close";
       }
     },
     progressTextSize() {

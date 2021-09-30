@@ -1,7 +1,7 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="doDestroy">
-    <div class="el-color-dropdown" v-show="showPopper">
-      <div class="el-color-dropdown__main-wrapper">
+  <transition name="ven-zoom-in-top" @after-leave="doDestroy">
+    <div class="ven-color-dropdown" v-show="showPopper">
+      <div class="ven-color-dropdown__main-wrapper">
         <hue-slider
           ref="hue"
           :color="color"
@@ -16,33 +16,33 @@
         :color="color"
         :colors="predefine"
       ></predefine>
-      <div class="el-color-dropdown__btns">
-        <span class="el-color-dropdown__value">
-          <el-input
+      <div class="ven-color-dropdown__btns">
+        <span class="ven-color-dropdown__value">
+          <ven-input
             v-model="customInput"
             @keyup.native.enter="handleConfirm"
             @blur="handleConfirm"
             :validate-event="false"
             size="mini"
           >
-          </el-input>
+          </ven-input>
         </span>
-        <el-button
+        <ven-button
           size="mini"
           type="text"
-          class="el-color-dropdown__link-btn"
+          class="ven-color-dropdown__link-btn"
           @click="$emit('clear')"
         >
           {{ t("el.colorpicker.clear") }}
-        </el-button>
-        <el-button
+        </ven-button>
+        <ven-button
           plain
           size="mini"
-          class="el-color-dropdown__btn"
+          class="ven-color-dropdown__btn"
           @click="confirmValue"
         >
           {{ t("el.colorpicker.confirm") }}
-        </el-button>
+        </ven-button>
       </div>
     </div>
   </transition>
@@ -55,11 +55,11 @@ import AlphaSlider from "./alpha-slider";
 import Predefine from "./predefine";
 import Popper from "../../../../utils/vue-popper";
 import Locale from "../../../../mixins/locale";
-import ElInput from "../../../input";
-import ElButton from "../../../button";
+import VenInput from "../../../input";
+import VenButton from "../../../button";
 
 export default {
-  name: "el-color-picker-dropdown",
+  name: "ven-color-picker-dropdown",
 
   mixins: [Popper, Locale],
 
@@ -67,8 +67,8 @@ export default {
     SvPanel,
     HueSlider,
     AlphaSlider,
-    ElInput,
-    ElButton,
+    VenInput,
+    VenButton,
     Predefine,
   },
 

@@ -1,20 +1,20 @@
 import { arrayFindIndex } from "../../../utils/util";
 import { getCell, getColumnByCell, getRowIdentity } from "./util";
 import { getStyle, hasClass, removeClass, addClass } from "../../../utils/dom";
-import ElCheckbox from "../../checkbox";
-import ElTooltip from "../../tooltip";
+import VenCheckbox from "../../checkbox";
+import VenTooltip from "../../tooltip";
 import debounce from "throttle-debounce/debounce";
 import LayoutObserver from "./layout-observer";
 import { mapStates } from "./store/helper";
 
 export default {
-  name: "ElTableBody",
+  name: "VenTableBody",
 
   mixins: [LayoutObserver],
 
   components: {
-    ElCheckbox,
-    ElTooltip,
+    VenCheckbox,
+    VenTooltip,
   },
 
   props: {
@@ -29,10 +29,11 @@ export default {
     highlight: Boolean,
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     const data = this.data || [];
     return (
-      <table class="el-table__body" cellspacing="0" cellpadding="0" border="0">
+      <table class="ven-table__body" cellspacing="0" cellpadding="0" border="0">
         <colgroup>
           {this.columns.map((column) => (
             <col name={column.id} key={column.id} />
@@ -42,12 +43,12 @@ export default {
           {data.reduce((acc, row) => {
             return acc.concat(this.wrappedRowRender(row, acc.length));
           }, [])}
-          <el-tooltip
+          <ven-tooltip
             effect={this.table.tooltipEffect}
             placement="top"
             ref="tooltip"
             content={this.tooltipContent}
-          ></el-tooltip>
+          ></ven-tooltip>
         </tbody>
       </table>
     );
@@ -86,7 +87,7 @@ export default {
         raf = (fn) => setTimeout(fn, 16);
       }
       raf(() => {
-        const rows = this.$el.querySelectorAll(".el-table__row");
+        const rows = this.$el.querySelectorAll(".ven-table__row");
         const oldRow = rows[oldVal];
         const newRow = rows[newVal];
         if (oldRow) {
@@ -167,7 +168,7 @@ export default {
     },
 
     getRowClass(row, rowIndex) {
-      const classes = ["el-table__row"];
+      const classes = ["ven-table__row"];
       if (
         this.table.highlightCurrentRow &&
         row === this.store.states.currentRow
@@ -176,7 +177,7 @@ export default {
       }
 
       if (this.stripe && rowIndex % 2 === 1) {
-        classes.push("el-table__row--striped");
+        classes.push("ven-table__row--striped");
       }
       const rowClassName = this.table.rowClassName;
       if (typeof rowClassName === "string") {
@@ -262,7 +263,9 @@ export default {
 
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector(".cell");
-      if (!(hasClass(cellChild, "el-tooltip") && cellChild.childNodes.length)) {
+      if (
+        !(hasClass(cellChild, "ven-tooltip") && cellChild.childNodes.length)
+      ) {
         return;
       }
       // use range width instead of scrollWidth to determine whether the text is overflowing
@@ -351,7 +354,7 @@ export default {
       const rowClasses = this.getRowClass(row, $index);
       let display = true;
       if (treeRowData) {
-        rowClasses.push("el-table__row--level-" + treeRowData.level);
+        rowClasses.push("ven-table__row--levven-" + treeRowData.level);
         display = treeRowData.display;
       }
       // 指令 v-show 会覆盖 row-style 中 display
@@ -369,7 +372,7 @@ export default {
           on-dblclick={($event) => this.handleDoubleClick($event, row)}
           on-click={($event) => this.handleClick($event, row)}
           on-contextmenu={($event) => this.handleContextMenu($event, row)}
-          on-mouseenter={(_) => this.handleMouseEnter($index)}
+          on-mouseenter={() => this.handleMouseEnter($index)}
           on-mouseleave={this.handleMouseLeave}
         >
           {columns.map((column, cellIndex) => {
@@ -452,7 +455,7 @@ export default {
           [
             tr,
             <tr key={"expanded-row__" + tr.key}>
-              <td colspan={this.columnsCount} class="el-table__expanded-cell">
+              <td colspan={this.columnsCount} class="ven-table__expanded-cell">
                 {renderExpanded(this.$createElement, {
                   row,
                   $index,

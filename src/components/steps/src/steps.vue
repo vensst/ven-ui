@@ -1,7 +1,10 @@
 <template>
   <div
-    class="el-steps"
-    :class="[!simple && 'el-steps--' + direction, simple && 'el-steps--simple']"
+    class="ven-steps"
+    :class="[
+      !simple && 'ven-steps--' + direction,
+      simple && 'ven-steps--simple',
+    ]"
   >
     <slot></slot>
   </div>
@@ -11,7 +14,7 @@
 import Migrating from "../../../mixins/migrating";
 
 export default {
-  name: "ElSteps",
+  name: "VenSteps",
 
   mixins: [Migrating],
 

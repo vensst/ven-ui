@@ -6,7 +6,7 @@
   >
     <div
       v-show="visible"
-      class="el-dialog__wrapper"
+      class="ven-dialog__wrapper"
       @click.self="handleWrapperClick"
     >
       <div
@@ -15,29 +15,29 @@
         aria-modal="true"
         :aria-label="title || 'dialog'"
         :class="[
-          'el-dialog',
-          { 'is-fullscreen': fullscreen, 'el-dialog--center': center },
+          'ven-dialog',
+          { 'is-fullscreen': fullscreen, 'ven-dialog--center': center },
           customClass,
         ]"
         ref="dialog"
         :style="style"
       >
-        <div class="el-dialog__header">
+        <div class="ven-dialog__header">
           <slot name="title">
-            <span class="el-dialog__title">{{ title }}</span>
+            <span class="ven-dialog__title">{{ title }}</span>
           </slot>
           <button
             type="button"
-            class="el-dialog__headerbtn"
+            class="ven-dialog__headerbtn"
             aria-label="Close"
             v-if="showClose"
             @click="handleClose"
           >
-            <i class="el-dialog__close el-icon el-icon-close"></i>
+            <i class="ven-dialog__close ven-icon ven-icon-close"></i>
           </button>
         </div>
-        <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
-        <div class="el-dialog__footer" v-if="$slots.footer">
+        <div class="ven-dialog__body" v-if="rendered"><slot></slot></div>
+        <div class="ven-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -51,7 +51,7 @@ import Migrating from "../../../mixins/migrating";
 import emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElDialog",
+  name: "VenDialog",
 
   mixins: [Popup, emitter, Migrating],
 
@@ -189,8 +189,8 @@ export default {
       }
     },
     updatePopper() {
-      this.broadcast("ElSelectDropdown", "updatePopper");
-      this.broadcast("ElDropdownMenu", "updatePopper");
+      this.broadcast("VenSelectDropdown", "updatePopper");
+      this.broadcast("VenDropdownMenu", "updatePopper");
     },
     afterEnter() {
       this.$emit("opened");

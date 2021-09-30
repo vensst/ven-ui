@@ -1,10 +1,10 @@
 <template>
   <div
     v-show="ready"
-    class="el-carousel__item"
+    class="ven-carousel__item"
     :class="{
       'is-active': active,
-      'el-carousel__item--card': $parent.type === 'card',
+      'ven-carousel__item--card': $parent.type === 'card',
       'is-in-stage': inStage,
       'is-hover': hover,
       'is-animating': animating,
@@ -15,7 +15,7 @@
     <div
       v-if="$parent.type === 'card'"
       v-show="!active"
-      class="el-carousel__mask"
+      class="ven-carousel__mask"
     ></div>
     <slot></slot>
   </div>
@@ -25,7 +25,7 @@
 import { autoprefixer } from "../../../utils/util";
 const CARD_SCALE = 0.83;
 export default {
-  name: "ElCarouselItem",
+  name: "VenCarouselItem",
 
   props: {
     name: String,

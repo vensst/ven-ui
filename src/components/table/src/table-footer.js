@@ -2,10 +2,11 @@ import LayoutObserver from "./layout-observer";
 import { mapStates } from "./store/helper";
 
 export default {
-  name: "ElTableFooter",
+  name: "VenTableFooter",
 
   mixins: [LayoutObserver],
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     let sums = [];
     if (this.summaryMethod) {
@@ -49,7 +50,7 @@ export default {
 
     return (
       <table
-        class="el-table__footer"
+        class="ven-table__footer"
         cellspacing="0"
         cellpadding="0"
         border="0"

@@ -197,7 +197,7 @@ const install = function (Vue, opts = {}) {
   Vue.prototype.$message = Message;
 };
 
-/* istanbul ignore if */
+/* 检测到 Vue 才执行 */
 if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }

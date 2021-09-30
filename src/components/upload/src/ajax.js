@@ -76,6 +76,7 @@ export default function upload(option) {
   const headers = option.headers || {};
 
   for (let item in headers) {
+    // eslint-disable-next-line no-prototype-builtins
     if (headers.hasOwnProperty(item) && headers[item] !== null) {
       xhr.setRequestHeader(item, headers[item]);
     }

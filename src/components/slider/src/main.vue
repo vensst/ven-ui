@@ -1,17 +1,17 @@
 <template>
   <div
-    class="el-slider"
-    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+    class="ven-slider"
+    :class="{ 'is-vertical': vertical, 'ven-slider--with-input': showInput }"
     role="slider"
     :aria-valuemin="min"
     :aria-valuemax="max"
     :aria-orientation="vertical ? 'vertical' : 'horizontal'"
     :aria-disabled="sliderDisabled"
   >
-    <el-input-number
+    <ven-input-number
       v-model="firstValue"
       v-if="showInput && !range"
-      class="el-slider__input"
+      class="ven-slider__input"
       ref="input"
       @change="emitChange"
       :step="step"
@@ -22,15 +22,15 @@
       :debounce="debounce"
       :size="inputSize"
     >
-    </el-input-number>
+    </ven-input-number>
     <div
-      class="el-slider__runway"
+      class="ven-slider__runway"
       :class="{ 'show-input': showInput, disabled: sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
       ref="slider"
     >
-      <div class="el-slider__bar" :style="barStyle"></div>
+      <div class="ven-slider__bar" :style="barStyle"></div>
       <slider-button
         :vertical="vertical"
         v-model="firstValue"
@@ -46,23 +46,24 @@
         v-if="range"
       >
       </slider-button>
-      <div
-        class="el-slider__stop"
-        v-for="(item, key) in stops"
-        :key="key"
-        :style="getStopStyle(item)"
-        v-if="showStops"
-      ></div>
+      <template v-if="showStops">
+        <div
+          class="ven-slider__stop"
+          v-for="(item, key) in stops"
+          :key="key"
+          :style="getStopStyle(item)"
+        ></div>
+      </template>
       <template v-if="markList.length > 0">
         <div>
           <div
             v-for="(item, key) in markList"
             :style="getStopStyle(item.position)"
-            class="el-slider__stop el-slider__marks-stop"
+            class="ven-slider__stop ven-slider__marks-stop"
             :key="key"
           ></div>
         </div>
-        <div class="el-slider__marks">
+        <div class="ven-slider__marks">
           <slider-marker
             :mark="item.mark"
             v-for="(item, key) in markList"
@@ -76,14 +77,14 @@
   </div>
 </template>
 
-<script type="text/babel">
-import ElInputNumber from "../../input-number";
+<script>
+import VenInputNumber from "../../input-number";
 import SliderButton from "./button.vue";
 import SliderMarker from "./marker";
 import Emitter from "../../../mixins/emitter";
 
 export default {
-  name: "ElSlider",
+  name: "VenSlider",
 
   mixins: [Emitter],
 
@@ -158,7 +159,7 @@ export default {
   },
 
   components: {
-    ElInputNumber,
+    VenInputNumber,
     SliderButton,
     SliderMarker,
   },
@@ -246,7 +247,7 @@ export default {
           this.firstValue = val[0];
           this.secondValue = val[1];
           if (this.valueChanged()) {
-            this.dispatch("ElFormItem", "el.form.change", [
+            this.dispatch("VenFormItem", "el.form.change", [
               this.minValue,
               this.maxValue,
             ]);
@@ -261,7 +262,7 @@ export default {
         } else {
           this.firstValue = val;
           if (this.valueChanged()) {
-            this.dispatch("ElFormItem", "el.form.change", val);
+            this.dispatch("VenFormItem", "el.form.change", val);
             this.oldValue = val;
           }
         }

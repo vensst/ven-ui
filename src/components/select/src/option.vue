@@ -2,7 +2,7 @@
   <li
     @mouseenter="hoverItem"
     @click.stop="selectOptionClick"
-    class="el-select-dropdown__item"
+    class="ven-select-dropdown__item"
     v-show="visible"
     :class="{
       selected: itemSelected,
@@ -16,16 +16,16 @@
   </li>
 </template>
 
-<script type="text/babel">
+<script>
 import Emitter from "../../../mixins/emitter";
 import { getValueByPath, escapeRegexpString } from "../../../utils/util";
 
 export default {
   mixins: [Emitter],
 
-  name: "ElOption",
+  name: "VenOption",
 
-  componentName: "ElOption",
+  componentName: "VenOption",
 
   inject: ["select"],
 
@@ -91,7 +91,7 @@ export default {
   watch: {
     currentLabel() {
       if (!this.created && !this.select.remote)
-        this.dispatch("ElSelect", "setSelected");
+        this.dispatch("VenSelect", "setSelected");
     },
     value(val, oldVal) {
       const { remote, valueKey } = this.select;
@@ -104,7 +104,7 @@ export default {
         ) {
           return;
         }
-        this.dispatch("ElSelect", "setSelected");
+        this.dispatch("VenSelect", "setSelected");
       }
     },
   },
@@ -148,7 +148,7 @@ export default {
 
     selectOptionClick() {
       if (this.disabled !== true && this.groupDisabled !== true) {
-        this.dispatch("ElSelect", "handleOptionClick", [this, true]);
+        this.dispatch("VenSelect", "handleOptionClick", [this, true]);
       }
     },
 

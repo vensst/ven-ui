@@ -1,18 +1,18 @@
 <script>
 import UploadList from "./upload-list";
 import Upload from "./upload";
-import ElProgress from "../../progress";
+import VenProgress from "../../progress";
 import Migrating from "../../../mixins/migrating";
 
 function noop() {}
 
 export default {
-  name: "ElUpload",
+  name: "VenUpload",
 
   mixins: [Migrating],
 
   components: {
-    ElProgress,
+    VenProgress,
     UploadList,
     Upload,
   },
@@ -266,6 +266,7 @@ export default {
     });
   },
 
+  // eslint-disable-next-line no-unused-vars
   render(h) {
     let uploadList;
 

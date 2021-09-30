@@ -7,6 +7,7 @@ export default class TreeStore {
     this.currentNodeKey = null;
 
     for (let option in options) {
+      // eslint-disable-next-line no-prototype-builtins
       if (options.hasOwnProperty(option)) {
         this[option] = options[option];
       }
@@ -205,6 +206,7 @@ export default class TreeStore {
     const allNodes = [];
     const nodesMap = this.nodesMap;
     for (let nodeKey in nodesMap) {
+      // eslint-disable-next-line no-prototype-builtins
       if (nodesMap.hasOwnProperty(nodeKey)) {
         allNodes.push(nodesMap[nodeKey]);
       }

@@ -90,6 +90,7 @@ const showNextMsg = () => {
 
       let options = currentMsg.options;
       for (let prop in options) {
+        // eslint-disable-next-line no-prototype-builtins
         if (options.hasOwnProperty(prop)) {
           instance[prop] = options[prop];
         }

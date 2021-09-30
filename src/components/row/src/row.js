@@ -1,7 +1,7 @@
 export default {
-  name: "ElRow",
+  name: "VenRow",
 
-  componentName: "ElRow",
+  componentName: "VenRow",
 
   props: {
     tag: {
@@ -35,10 +35,10 @@ export default {
       this.tag,
       {
         class: [
-          "el-row",
+          "ven-row",
           this.justify !== "start" ? `is-justify-${this.justify}` : "",
           this.align ? `is-align-${this.align}` : "",
-          { "el-row--flex": this.type === "flex" },
+          { "ven-row--flex": this.type === "flex" },
         ],
         style: this.style,
       },

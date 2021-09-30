@@ -5,12 +5,12 @@ import {
   treeCellPrefix,
 } from "./config";
 import { mergeOptions, parseWidth, parseMinWidth, compose } from "./util";
-import ElCheckbox from "../../checkbox";
+import VenCheckbox from "../../checkbox";
 
 let columnIdSeed = 1;
 
 export default {
-  name: "ElTableColumn",
+  name: "VenTableColumn",
 
   props: {
     type: {
@@ -193,7 +193,7 @@ export default {
             style: {},
           };
           if (column.showOverflowTooltip) {
-            props.class += " el-tooltip";
+            props.class += " ven-tooltip";
             props.style = {
               width: (data.column.realWidth || data.column.width) - 1 + "px",
             };
@@ -267,7 +267,7 @@ export default {
   },
 
   components: {
-    ElCheckbox,
+    VenCheckbox,
   },
 
   beforeCreate() {

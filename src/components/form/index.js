@@ -1,8 +1,8 @@
-import ElForm from "./src/form";
+import VenForm from "./src/form";
 
 /* istanbul ignore next */
-ElForm.install = function (Vue) {
-  Vue.component(ElForm.name, ElForm);
+VenForm.install = function (Vue) {
+  Vue.component(VenForm.name, VenForm);
 };
 
-export default ElForm;
+export default VenForm;
