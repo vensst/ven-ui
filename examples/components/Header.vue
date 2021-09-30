@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="logo">ven-ui</div>
+    <router-link to="/" class="logo">ven-ui</router-link>
     <div class="menu">
       <ven-menu
         :default-active="activeRoutePath"

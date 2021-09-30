@@ -11,6 +11,8 @@ import "highlight.js/styles/color-brewer.css"; //高亮样式
 import "./assets/styles/common.scss"; //公共样式
 import "./demo-styles/index.scss"; //文档样式
 import "../lib/index.css"; //组件样式
+// import "./assets/styles/fonts/style.css";
+// import icon from "./icon.json";
 
 Vue.component("DemoBlock", DemoBlock);
 Vue.use(VenUi);
@@ -22,6 +24,8 @@ router.afterEach((route) => {
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);
   });
 });
+
+// Vue.prototype.$icon = icon; // Icon 列表页用
 
 Vue.config.productionTip = false;
 

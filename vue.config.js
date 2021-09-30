@@ -10,9 +10,9 @@ const path = require("path");
 
 module.exports = {
   //部署应用包时的基本 URL
-  // publicPath: process.env.NODE_ENV === "production" ? "./" : "./",
+  publicPath: process.env.NODE_ENV === "production" ? "/ven-ui/" : "/",
   //输出路劲
-  outputDir: "ven-ui",
+  // outputDir: "ven-ui",
   //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
   // assetsDir: "",
   //指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径
