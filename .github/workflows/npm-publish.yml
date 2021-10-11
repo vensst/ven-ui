@@ -1,0 +1,40 @@
+# name字段是 workflow 的名称。如果省略该字段，默认为当前 workflow 的文件名。
+name: npm-publish
+
+# on字段指定触发 workflow 的条件，通常是某些事件。
+on:
+  push:
+    tags:
+      - v*
+# 工作流程运行,表示要执行的一项或多项任务
+jobs:
+  # <job_id>名称 必须以字母或 _ 开头，并且只能包含字母数字字符、- 或 _。
+  build-and-publish-npm:
+    # name字段是任务的说明
+    name: 编译并部署npm
+    # runs-on字段指定运行所需要的虚拟机环境。它是必填字段
+    runs-on: ubuntu-latest
+
+    # steps字段指定每个 Job 的运行步骤，可以包含一个或多个步骤。每个步骤都可以指定以下三个字段 name：步骤名称，run：该步骤运行的命令或者 action，env：该步骤所需的环境变量。
+    steps:
+      # 步骤名称
+      - name: Checkout
+        #使用的操作 actions，可以使用公共仓库，本地仓库，别人的仓库的action
+        # 拉取代码
+        uses: actions/checkout@master
+
+      # 打包构建
+      - name: Build
+        uses: actions/setup-node@master
+      - run: npm install
+      - run: npm run lib
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      # npm ERR! 402 Payment Required - PUT https://registry.npmjs.org/@vensst/vue-widget - You must sign up for private packages
+      # @xxx/xxxx   npm会认为要发布私包，私包需要收费，需将发布命令改成： npm publish --access public
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
